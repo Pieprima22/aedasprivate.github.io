@@ -1,0 +1,932 @@
+/* General Styling */
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    font-family: 'AkkuratStd', sans-serif; /* Replace Arial with AkkuratStd */
+
+}
+
+/* Main Container */
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 90vw;
+    padding-bottom: 20px;
+}
+.tooltip {
+    position: absolute;
+    padding: 8px 12px;
+    background-color: rgba(0, 0, 0, 0.8);
+    color: #fff;
+    border-radius: 5px;
+    font-size: 0.9rem;
+    display: none;
+    pointer-events: none;
+    white-space: nowrap;
+    z-index: 1000;
+}
+
+.info-tab {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    background-color: #ffffff;
+    padding: 10px 20px;
+    z-index: 1000;
+    cursor: pointer;
+}
+
+.info-tab .info-link {
+    text-decoration: none;
+    color: black;
+    font-size: 1.1rem;
+    font-weight: bold;
+}
+
+.info-tab .info-link:focus {
+    color: red; /* Change text color to red when clicked */
+}
+.timeline-header {
+    display: grid;
+    grid-template-columns: repeat(10, 1fr); /* Adjusted to 10 years */
+    justify-content: center;
+    width: 100%;
+    text-align: center;
+    font-weight: 800;
+    color: black;
+    font-size: .8rem;
+    margin-bottom: 20px; /* Adjust this value */
+}
+
+/* Alphabetical Header */
+.alphabetical-header {
+    display: flex;
+    justify-content: center;
+    width: 85%;
+}
+
+.alphabetic-projects {
+    display: grid;
+    grid-template-columns: repeat(26, 1fr);
+    gap: 5px; /* Horizontal gap */
+    text-align: center;
+    
+}
+
+.alphabet-label .project-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 5px;
+    position: relative;
+    top: -10px;
+}
+.alphabet-label {
+    display: flex;
+    font-weight: 800;
+    color: rgb(18, 18, 18);
+    font-size: 0.8rem;
+    flex-direction: column-reverse;
+    align-items: center;
+    gap: 1px; /* This is the gap between items inside the label */
+    padding: 10px 0; /* Adjust the top and bottom padding for vertical spacing */
+    box-sizing: border-box;
+    margin-bottom: 10px; /* Add spacing between each label vertically */
+}
+
+.programmatic-header {
+    display: flex;
+    flex-direction: column; /* Stack projects and labels vertically */
+    gap: 10px;
+    padding: 20px;
+}
+
+.programmatic-projects {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr); /* One column per programmatic category */
+    gap: 1px;
+    justify-content: center;
+}
+
+.programmatic-label {
+    display: grid;
+    align-self: flex-end;
+    grid-template-columns: repeat(3, 1fr); /* Three subcolumns per category */
+    gap: 5px;
+    font-weight: bold;
+    justify-content: center;
+    padding: 2px;
+
+}
+
+.programmatic-label-container {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr); /* One column per programmatic label */
+    gap: 20px;
+    justify-content: center;
+    text-align: center;
+    font-weight: bold;
+    font-size: 1rem;
+    padding: 5px;
+}
+
+.programmatic-label-text {
+    text-transform: uppercase;
+    font-weight: 800;
+    color: black;
+    font-size: .8rem;
+
+}
+
+.programmatic-label .project-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 5px;
+    position: relative;
+    top: -1px;
+}
+
+.scale-header {
+    display: flex;
+    flex-direction: column; /* Stack the projects and labels vertically */
+    gap: 5px;
+    padding: 20px;
+}
+
+.scale-projects {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* One column per scale (S, M, L, XL) */
+
+    justify-content: center;
+}
+
+.scale-label {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* Three subcolumns per scale */
+    gap: 5px;
+    justify-content: center;
+    padding: 3px;
+
+}
+
+.scale-label-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* One column per scale label */
+    gap: 10px;
+    justify-content: center;
+    text-align: center;
+    font-weight: 800;
+    color: black;
+    font-size: .8rem;
+    padding: 5px;
+}
+
+.scale-label-text {
+    text-transform: uppercase;
+    color: #333;
+}
+
+.scale-label .project-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: px;
+    position: relative;
+    top: -10px;
+}
+
+.project-box {
+    width: 40px;
+    height: 40px;
+    margin-bottom: 5px; /* Reduce this value for closer alignment */
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center-align items vertically */
+    justify-content: center; /* Center-align items horizontally */
+    gap: 0; /* Remove any additional spacing */
+}
+.epoch-header {
+    display: flex;
+    flex-direction: column; /* Stack the projects and labels vertically */
+    gap: 10px;
+    padding: 25px;
+}
+
+.epoch-projects {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* One column per epoch */
+    justify-content: center;
+}
+
+.epoch-label {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* Three subcolumns per epoch */
+    gap: 5px;
+    justify-content: center;
+    padding: 3px;
+}
+
+.epoch-label-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* One column per epoch label */
+    justify-content: center;
+    text-align: center;
+    font-weight: bold;
+    font-weight: 800;
+    color: black;
+    font-size: .8rem;    
+    padding: 1px;
+}
+
+.epoch-label-text {
+    text-transform: uppercase;
+    color: #333;
+}
+
+.epoch-label .project-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 5px;
+    position: relative;
+    top: -10px;
+}
+
+.symbol-grid {
+    display: grid;
+    grid-template-columns: repeat(10, 1fr); /* Adjusted to 10 years */
+    align-items: end;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.year-column {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    justify-content: center;
+    margin-left: -2px;    
+    gap: 5px; /*Space between sub-columns */
+}
+
+.sub-column {
+    display: flex;
+    flex-direction: column-reverse; /* Stack projects vertically */
+    gap: 1px; /* Space between projects */
+    align-items: start; /* Align projects to the start of the column */
+    max-height: none; /* Remove height limit */
+}
+.project-box {
+    width: 40px;
+    height: 40px;
+    margin-bottom: 5px;
+    position: relative;
+}
+
+.symbol-image {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Hover Image */
+.hover-image {
+    display: none;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 200%;
+    height: 200%;
+    object-fit: cover;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+}
+
+/* Hover Image on hover */
+.project-box:hover .symbol-image {
+    display: none;
+}
+.project-box:hover .hover-image {
+    display: block;
+}
+
+.project-box:hover .tooltip {
+    display: block;
+}
+
+.symbol-name {
+    display: none; /* Ensure it is not taking up space */
+    margin: 0; /* Reset margin to ensure no extra space */
+    padding: 0; /* Reset padding */
+}
+
+/* Sorting Bar */
+.sorting-bar {
+    text-align: center;   
+    margin-top: 20px;
+    z-index: 10;
+
+}
+
+.sorting-bar button {
+    padding: 8px 12px;
+    text-transform: uppercase;
+    margin: 0 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    border: none;
+    background: none;
+    color: black;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+.sorting-bar button.active {
+    color: red;
+    font-weight: bold;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #ffffff;
+    z-index: 1000;
+    overflow-y: auto; /* Allow vertical scrolling */
+}
+
+
+.modal-content {
+    margin: auto;
+    display: block;
+    width: 80%;
+    max-width: 700px;
+}
+
+#caption {
+    text-align: center;
+    color: white;
+    font-size: 1.2rem;
+    margin-top: 15px;
+}
+
+.close {
+    position: absolute;
+    top: 15px;
+    right: 35px;
+    color: white;
+    font-size: 40px;
+    font-weight: bold;
+    cursor: pointer;
+}
+.container-box {
+    display: flex;
+    width: 100%;
+    flex-wrap: wrap;
+    gap: 50px; /* Adjust spacing between sections */
+    justify-content: center; /* Align sections horizontally in the center */
+    align-items: flex-start; /* Align sections vertically at the top */
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+/* Project Detail Content */
+.project-detail-content {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    background-color: white;
+    width: 100%;
+    height: 100%;
+    padding: 30px;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+/* Right-Aligned Text Section */
+.text-section {
+    display: flex;
+    flex-direction: column;
+    margin-left: 80px;
+    align-items: flex-end; /* Align items to the right */
+    text-align: right; /* Text alignment */
+    width: 30%;
+    height: 50%;
+    gap: 8px;
+    position: relative; /* Makes this section the reference point */
+    box-sizing: border-box;
+    word-wrap: break-word; /* Break long words */
+    overflow-wrap: break-word; /* Ensure text wraps within boundaries */
+    white-space: normal; /* Allow text to wrap */
+}
+
+@media (max-width: 768px) { /* Adjust for tablets and smaller screens */
+    .text-section {
+        font-size: 14px; /* Slightly smaller on tablets */
+    }
+}
+
+@media (max-width: 480px) { /* Adjust for mobile devices */
+    .text-section {
+        font-size: 12px; /* Fixed smaller size on mobile */
+    }
+}
+/* Top Section - Project Icon and Title */
+#projectIcon {
+    width: 45px;
+    height: 45px;
+    margin-bottom: 20px;
+}
+
+#projectTitle {
+    font-size: 1.6rem;
+    white-space: normal;        /* Allow text to wrap */
+    font-weight: bold;
+    overflow: hidden;           /* Hide any overflow */
+    text-overflow: ellipsis;    /* Add '...' for overflowed text */
+    color: #333;
+    margin-bottom: 3px;
+}
+#projectLocation{
+    color: #888;
+    font-size: 1.2rem;
+}
+#projectDate {
+    font-size: 1.2rem;
+}
+
+#projectLocation,
+#projectDate {
+    color: #888;
+    margin: 0;
+}
+
+#projectDate {
+    margin-bottom: 40px;
+}
+
+/* Middle Section - Client, Typology, Size, Status */
+.project-info {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end; /* Right-aligns the info section */
+    gap: 8px;
+}
+
+.project-info p {
+    margin: 0;
+    font-size: 1rem;
+    color: #777;
+}
+#projectCLientLabel{
+    color: #777;
+    font-size: 1rem;
+}
+
+#projectTypologyLabel {
+    color: #777;
+    font-size: 1rem;
+}
+
+#projectClient{
+    font-size: 1rem;
+    color: #333;
+    margin-bottom: 20px;
+
+}
+#projectTypology {
+    font-size: 1rem;
+    color: #333;
+}
+.title-wrapper {
+    position: fixed;
+    z-index: 10;
+    top: 50px; /* Adjust this for initial position */
+    left: 20px;
+    transform: rotate(270deg) translate(-100%, 0); /* Rotate and then shift it to fit inside */
+    transform-origin: top left; /* Rotation starts from the top-left corner */
+    flex-direction: row-reverse;
+    width: 620px;
+    height: max-content;
+    font-size: 1rem;
+
+}
+/* More Info Text */
+.more-info-text {
+    margin: 0; /* Removes default margin for close alignment */
+    text-align: right;
+    color: #9e9e9e;
+    font-size: .75rem;
+    font-weight: 600; /* Keeps .title-wrapper text bold */
+}
+
+/* Project Links Container */
+.project-links {
+    display: flex;
+    justify-content: flex-end; /* Ensures even spacing between links */
+    align-items: flex-start; /* Align links to the top */
+    gap: 10px; /* Adds consistent spacing between links */
+    margin-top: 10px;
+    height: 80px;
+    position: relative; /* Allows alignment with .more-info-text */
+}
+
+/* Home Link */
+.home-link {
+    position: absolute; /* Position independently of other links */
+    top: 0; /* Align to the top border */
+    left: 2%; /* Align to the left border */
+    transform: rotate(45deg); /* Rotate the element */
+    transform-origin: top left; /* Ensure rotation starts from top-left corner */
+    font-weight: bold;
+    font-size: 1.1rem;
+    display: inline-block; /* Maintain proper dimensions */
+    color: black; /* Set text color */
+    text-decoration: none; /* Remove underline */
+    margin: 0; /* Ensure no additional margins */
+}
+.home-link:hover {
+    color: rgb(255, 0, 0); /* Keep text black on hover */
+    text-decoration: none; /* Prevent underline on hover */
+}
+
+.other-links {
+    display: flex;
+    gap: 10px; /* Space between the other links */
+    justify-content: flex-end; /* Align other links to the right */
+}
+/* Individual Project Link */
+.project-links a {
+    text-align: center;
+    min-width: 5px;
+}
+
+/* Project Link Images */
+.project-links img {
+    width: 35px;
+    height: 35px;
+    cursor: pointer;
+}
+
+/* Adjust for Alignment */
+.more-info-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; /* Aligns to the left of the container */
+    position: relative;
+    margin-top: 10px;
+    gap: 0px;
+}
+
+.more-info-container .project-links {
+    width: 100%; /* Ensures full alignment with the container */
+}
+
+.more-info-container .more-info-text {
+    width: 100%; /* Keeps alignment consistent */
+}
+
+.image-section {
+    display: flex;
+    background-color: #fff;
+    justify-content: center; /* Center the image horizontally */
+    align-items: center;    /* Center the image vertically */
+    width: 100%;            /* Allow the container to take full width */
+    height: auto;           /* Adjust height to the content */
+    box-sizing: border-box;
+    margin-left: 50px;
+    margin-right: 170px;       /* Optional: Adjust horizontal offset */
+    overflow: hidden;       /* Prevent overflow of the container */
+}
+
+.image-section img {
+    max-width: 100%;        /* Scale the image within the container */
+    max-height: 100%;       /* Scale the image within the container */
+    width: auto;            /* Ensure proportional scaling */
+    height: auto;           /* Ensure proportional scaling */
+    background-color: #fff;
+    object-fit: contain;    /* Prevent cropping */
+}
+
+.new-page-content {
+    width: 72%;
+    height: 100%;
+    display: flex;
+    padding-top: 20px;
+    padding-bottom: 10px;
+    flex-direction: row; /* Stack items horizontally */
+    align-items: center; /* Align items to the top */
+    justify-content: center; /* Center items horizontally */
+    gap: 30px; /* Space between items */
+    background-color: #ffffff;
+    margin: auto; /* Center the container */
+}
+
+.new-page-image {
+    width: 680px; /* Set the width */
+    height: 650px; /* Match the height to the width */
+    object-fit: cover; /* Ensures the image remains square and fills the area */
+}
+
+.text-container {
+    align-self: flex-start; /* Align the text container to the top of the parent */
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.text-container p {
+    font-size: 15px;
+    font-family: AkkuratStd Light;    
+    line-height: 1.4; /* Optional: Adjust line spacing within paragraphs */
+    color: #333;
+    text-align: justify; /* Justify paragraph text */
+    margin: 0; /* Remove default margins */
+    padding-left: 10px;
+}
+
+
+/* Adjust Gallery Styles */
+#imageGallery {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    width: 80%; /* Adjust width if necessary */
+    height: auto; /* Adjust height based on content */
+    margin: auto; /* Center the gallery within its container */
+    background-color: #ffffff; /* Optional: Gallery background */
+    box-sizing: border-box; /* Include padding in the size */
+}
+
+#imageGallery img {
+    max-width: 90%;
+    max-height: 90%;
+    margin: 40px; /* Adjust space between images */
+    object-fit: cover; /* Ensure images maintain aspect ratio */
+}
+#teamSection {
+    margin-top: 20px;
+    padding: 20px;
+    background-color: #f7f7f7; /* Light gray background for separation */
+    border-top: 1px solid #ddd; /* Optional: Border to distinguish sections */
+    text-align: center; /* Center align the content */
+}
+
+#projectTeam {
+    height: 650px;
+    width: 72%;
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
+}
+
+#teamLabel {
+    font-size: 1rem; /* Match the font size to #teamMemberNames */
+    color: #777;
+    font-weight: 500; /* Keeps .title-wrapper text bold */
+    margin: 0 0 10px 0; /* Add 10px space below the label */
+    text-transform: uppercase; /* Keep it consistent with #teamMemberNames */
+    padding: 0; /* Ensure no padding */
+}
+#teamMemberNames {
+    font-size: 1rem; /* Adjust as needed */
+    font-weight: 500; /* Keeps .title-wrapper text bold */
+    color: #333;
+    margin: 0;
+    text-align: justify; /* Justify team member names */
+
+    text-transform: uppercase;
+    padding: 0;
+}
+
+/* Project Details List */
+.project-details-list {
+    list-style-type: none;
+    padding: 0;
+    text-align: right;
+}
+
+.project-details-list a {
+    color: black;
+    text-decoration: none;
+    font-size: 1.2rem;
+    display: block;
+}
+
+.project-details-list a:hover {
+    text-decoration: underline;
+}
+
+.modal .close {
+    position: fixed; /* Keeps the close button in a fixed position relative to the viewport */
+    top: 20px; /* Distance from the top of the viewport */
+    right: 30px; /* Distance from the right of the viewport */
+    font-size: 35px; /* Adjust the font size */
+    color: black; /* Button color */
+    cursor: pointer; /* Indicates the button is clickable */
+    z-index: 1001; /* Ensures it stays above other elements */
+    padding: 10px; /* Optional: Add padding for better clickability */
+    transition: transform 0.2s ease-in-out; /* Optional: Smooth hover effect */
+}
+
+/* Hover Effect */
+.modal .close:hover {
+    transform: scale(1.1); /* Slightly enlarge on hover */
+    background: #ffffff; /* Optional: Change background color on hover */
+}
+
+.project-box:hover .symbol-name {
+    display: block;
+}
+#globe-container {
+    pointer-events: auto; /* Prevent blocking clicks */
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 0;
+    background-color: #333;
+}
+
+body {
+    opacity: 0; /* Start with the page fully hidden */
+    transition: opacity 1s ease-in-out; /* Smooth fade-in effect */
+}
+
+body.loaded {
+    opacity: 1; /* Fully visible when loading is complete */
+}
+
+#preloader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #777; /* Adjust the color as needed */
+    z-index: 9999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+#preloader.hidden {
+    opacity: 0;
+    pointer-events: none; /* Prevent interaction while fading out */
+}
+
+
+#preloader.active {
+    opacity: 1; /* Make it visible */
+    visibility: visible; /* Allow interaction */
+}
+
+body.loading {
+    overflow: hidden; /* Prevent scrolling */
+}
+/* Full-page Modal Styling */
+.full-page-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #ffffff;
+    z-index: 1000;
+    overflow-y: auto;
+}
+
+/* Close Button Styling */
+.close-button {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    font-size: 30px;
+    font-weight: bold;
+    color: #333;
+    cursor: pointer;
+    z-index: 1100;
+}
+
+.close-button:hover {
+    color: red;
+    text-decoration: none;
+}
+
+/* Modal Content Layout */
+.modal-content {
+    display: flex;
+    flex-direction: row; /* Left tab and content side by side */
+    width: 100%;
+    height: 100%;
+}
+.info-tab {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    background-color: #ffffff;
+    padding: 10px 20px;
+    z-index: 1000;
+    cursor: pointer;
+}
+/* Left Tab Styling (fixed to the left of the modal) */
+.left-tab {
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    background-color: #ffffff;
+    height: 100%;
+    width: 200px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 20px;
+    box-sizing: border-box;
+    z-index: 1100;
+}
+
+.left-tab-link {
+    text-decoration: none;
+    color: black;
+    font-weight: bold;
+
+    font-size: 1.1rem;
+    margin-bottom: 5px;
+    display: block;
+    width: 100%;
+    text-align: left;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+
+.left-tab-link:hover,
+.left-tab-link.active {
+    color: red;
+}
+
+/* Ensure padding at the bottom of the content container */
+.info-main-content {
+    padding: 30px;
+    padding-bottom: 50px; /* Ensure space at the bottom of the entire container */
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    text-align: center;
+}
+/* Project Section Styling */
+.project {
+    margin-bottom: 20px;
+    padding-bottom: 40px;
+    text-align: center;
+
+}
+.project-image {
+    width: 100%;
+    height: auto; /* Maintain aspect ratio */
+}
+
+
+.project h3 {
+    text-align: left;
+    color: #777;
+    font-size: 1rem;
+    margin-bottom: 5px;
+}
+
+.project p {
+    font-size: 0.8rem;
+    margin: 1px 0;
+    text-align: left;
+    color: #333;
+    text-align: justify; /* Justify paragraph text */
+    line-height: 1.5;
+    
+}
+.info-main-content {
+    padding-bottom: 50px !important;
+}
+
+.location-icon {
+    position: absolute;
+    transform-origin: center bottom;
+    pointer-events: auto;
+    transition: transform 0.2s ease-out;
+    /* Add height of your icon */
+    height: 30px;
+    /* If using an image */
+    object-fit: contain;
+}
