@@ -682,7 +682,7 @@ const projects = [
         id: 10, 
         title: 'MODON CALA IRIS ', 
         abbr: 'MOR', 
-        image: "./ICON/MOR.png",
+        image: "https://hips.hearstapps.com/hmg-prod/images/dog-puppy-on-garden-royalty-free-image-1586966191.jpg?crop=0.752xw:1.00xh;0.175xw,0&resize=1200:*",
         coverImage: 'https://aedasme.egnyte.com/opendocument.do?entryId=c9bdad2f-b266-4834-af53-5bd383057e19&forceDownload=false&thumbNail=true&w=1200&h=1200&type=proportional&preview=true&prefetch=true',
         imageUrl: 'https://aedasme.egnyte.com/opendocument.do?entryId=ac894b5a-4921-476e-bc40-7dc26352b6b1&forceDownload=false&thumbNail=true&w=1200&h=1200&type=proportional&preview=true&prefetch=true',
         year: 2024, 
