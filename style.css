@@ -325,53 +325,49 @@ body {
     line-height: 1.4;
     font-family: 'AkkuratStd', sans-serif; /* Font family for all text */
 }
-/* Project Links Container - Fixed Position */
 .project-links-container {
-    position: fixed; /* Change to fixed position */
-    top: 37%;
+    position: fixed;
+    z-index: 10;
+    top: 50px; /* Adjust this for initial position */
     left: 20px;
-    transform: translateY(-50%) rotate(-90deg);
-    transform-origin: top left;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    justify-content: center;
-    z-index: 1100;
-    background-color: white; /* Add background to prevent content showing through */
-    padding: 10px; /* Add some padding around the links */
+    transform: rotate(270deg) translate(-100%, 0); /* Rotate and then shift it to fit inside */
+    transform-origin: top left; /* Rotation starts from the top-left corner */
+    flex-direction: row-reverse;
+    width: 646px;
+    height: max-content;
+    font-size: 1rem;
 }
 
 .project-links-container .more-info {
     font-size: 12px;
     font-weight: 600;
     color: rgb(169, 169, 169);
-    text-align: left;
+    text-align: right;
     font-family: 'AkkuratStd', sans-serif;
     margin: 0;
+    white-space: nowrap;
 }
+
 .project-links {
-    display: flex; /* Align the links horizontally */
-    gap: 10px; /* Add minimal space between each link */
-    justify-content: flex-start; /* Align links to the start */
-    align-items: center; /* Center align links vertically */
-    width: 100%; /* Fit container width */
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    justify-content: flex-end;
     margin: 0;
-    
 }
 
 .project-links img {
-    width: 35px; /* Ensure consistent size for link images */
+    width: 35px;
     height: 35px;
-    object-fit: contain; /* Prevent cropping */
-    border-radius: 6px; /* Add subtle rounded corners */
-    cursor: pointer; /* Indicate clickable links */
-    transition: transform 0.2s ease; /* Add hover effect */
+    object-fit: contain;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: transform 0.2s ease;
 }
 
 .project-links img:hover {
-    transform: scale(1.2); /* Enlarge slightly on hover */
+    transform: scale(1.2);
 }
-
 /* Second Section Styles */
 .description-section {
     padding: 80px;
@@ -687,4 +683,39 @@ body {
     right: 50px;
     font-family: 'Montserrat', sans-serif;
 
+}
+/* Add these styles to your existing CSS */
+.grid-container.globe-view {
+    height: calc(100vh - 200px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+}
+/* Update container styles */
+.container {
+    height: 100vh;
+    width: 100vw;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Update content-area styles */
+.content-area {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 0 2rem;
+    margin-bottom: 2rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.marker-hover {
+    transform: scale(1.1); /* Scale up by 10% */
+    transition: transform 0.2s ease, opacity 0.2s ease;
 }

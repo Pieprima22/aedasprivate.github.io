@@ -1,177 +1,338 @@
-
-// Import Three.js from CDN in your HTML file
-// <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-
 function createGlobe() {
-    // Set up scene
     const scene = new THREE.Scene();
     
-    // Set up camera
-    const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 1000);
-    camera.position.z = 500;
+ // Modified size calculation for rectangular shape
+ const width = window.innerWidth * 0.9;  // 90% of window width
+ const height = window.innerHeight * 0.7; // 70% of window height
     
-    // Set up renderer
-    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
-    renderer.setSize(window.innerWidth, window.innerHeight);
-    renderer.setClearColor(0xffffff, 1);
     
-    // Create sphere geometry
-    const sphereGeometry = new THREE.SphereGeometry(200, 50, 50);
-    
-    // Create basic material
-    const sphereMaterial = new THREE.MeshPhongMaterial({
-        map: new THREE.TextureLoader().load('/path-to-your-texture.jpg'),
-        bumpScale: 0.05,
-        specular: new THREE.Color('grey'),
-        shininess: 5
+ const camera = new THREE.PerspectiveCamera(75, width / height, 0.1, 1000);
+ const renderer = new THREE.WebGLRenderer({ antialias: true });
+ 
+ renderer.setSize(width, height);  // Set actual width and height
+ renderer.setClearColor(0xffffff);
+
+    // Create the globe
+    const GLOBE_RADIUS = 5;
+    const sphereGeometry = new THREE.SphereGeometry(GLOBE_RADIUS, 32, 32);
+    const sphereMaterial = new THREE.MeshBasicMaterial({
+        map: new THREE.TextureLoader().load('Map_lighten.png'),
     });
-    
-    // Create globe mesh
     const globe = new THREE.Mesh(sphereGeometry, sphereMaterial);
     scene.add(globe);
-    
-    // Add ambient light
-    const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
-    scene.add(ambientLight);
-    
-    // Add point light
-    const pointLight = new THREE.PointLight(0xffffff, 1);
-    pointLight.position.set(100, 100, 100);
-    scene.add(pointLight);
-    
-    // Add hemisphere light
-    const hemisphereLight = new THREE.HemisphereLight(0xffffff, 0x444444, 0.5);
-    scene.add(hemisphereLight);
-    
-    // Auto-rotate animation
-    let rotationSpeed = 0.001;
-    
-    function animate() {
-        requestAnimationFrame(animate);
-        globe.rotation.y += rotationSpeed;
-        renderer.render(scene, camera);
-    }
-    
-    // Handle window resize
-    function handleResize() {
-        camera.aspect = window.innerWidth / window.innerHeight;
-        camera.updateProjectionMatrix();
-        renderer.setSize(window.innerWidth, window.innerHeight);
-    }
-    
-    // Add mouse interaction
+
+    // Initial camera position
+    camera.position.z = 12;
+
+    // Raycaster for click detection
+    const raycaster = new THREE.Raycaster();
+    const mouse = new THREE.Vector2();
+
+    // State variables for rotation
+    let isMouseDown = false;
     let isDragging = false;
     let previousMousePosition = { x: 0, y: 0 };
+    let rotationVelocity = { x: 0, y: 0 };
+    let targetRotation = { x: globe.rotation.x, y: globe.rotation.y };
     
-    document.addEventListener('mousedown', (e) => {
-        isDragging = true;
-        previousMousePosition = {
-            x: e.clientX,
-            y: e.clientY
-        };
-    });
+    // Enhanced zoom state with faster transition
+    let currentZoom = camera.position.z;
+    let targetZoom = currentZoom;
+    const ZOOM_SPEED = 1; // Increased for faster zoom
+    const MIN_ZOOM = 9;
+    const MAX_ZOOM = 12;
+    const ZOOM_SMOOTHING = 0.15; // Increased for faster zoom
     
-    document.addEventListener('mousemove', (e) => {
-        if (!isDragging) return;
-        
-        const deltaMove = {
-            x: e.clientX - previousMousePosition.x,
-            y: e.clientY - previousMousePosition.y
-        };
-        
-        globe.rotation.y += deltaMove.x * 0.005;
-        globe.rotation.x += deltaMove.y * 0.005;
-        
-        previousMousePosition = {
-            x: e.clientX,
-            y: e.clientY
-        };
-    });
-    
-    document.addEventListener('mouseup', () => {
-        isDragging = false;
-    });
-    
-    // Add touch interaction for mobile devices
-    document.addEventListener('touchstart', (e) => {
-        isDragging = true;
-        previousMousePosition = {
-            x: e.touches[0].clientX,
-            y: e.touches[0].clientY
-        };
-    });
-    
-    document.addEventListener('touchmove', (e) => {
-        if (!isDragging) return;
-        
-        const deltaMove = {
-            x: e.touches[0].clientX - previousMousePosition.x,
-            y: e.touches[0].clientY - previousMousePosition.y
-        };
-        
-        globe.rotation.y += deltaMove.x * 0.005;
-        globe.rotation.x += deltaMove.y * 0.005;
-        
-        previousMousePosition = {
-            x: e.touches[0].clientX,
-            y: e.touches[0].clientY
-        };
-    });
-    
-    document.addEventListener('touchend', () => {
-        isDragging = false;
-    });
+    // Damping and inertia settings
+    const DAMPING = 0.95;
+    const INERTIA = 0.92;
+    const ROTATION_SPEED = 0.002;
 
-    // Add markers for project locations
-    function addLocationMarker(lat, lng, projectData) {
-        const radius = 200; // Same as sphere radius
-        const phi = (90 - lat) * (Math.PI / 180);
-        const theta = (lng + 180) * (Math.PI / 180);
-        
-        const markerGeometry = new THREE.SphereGeometry(4, 8, 8);
-        const markerMaterial = new THREE.MeshBasicMaterial({ color: 0xff0000 });
-        const marker = new THREE.Mesh(markerGeometry, markerMaterial);
-        
-        marker.position.x = radius * Math.sin(phi) * Math.cos(theta);
-        marker.position.y = radius * Math.cos(phi);
-        marker.position.z = radius * Math.sin(phi) * Math.sin(theta);
-        
-        marker.userData.projectData = projectData;
-        globe.add(marker);
+    // Store all markers for raycasting
+    const markerObjects = [];
+    const hoverText = document.createElement('div');
+    hoverText.style.cssText = `
+        position: fixed;
+        display: none;
+        background: white;
+        padding: 8px 12px;
+        border-radius: 4px;
+        font-size: 14px;
+        pointer-events: none;
+        z-index: 1000;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    `;
+    document.body.appendChild(hoverText);
+
+    // Create hover image overlay
+    const hoverImage = document.createElement('div');
+    hoverImage.style.cssText = `
+        position: fixed;
+        display: none;
+        width: 200px;
+        height: 200px;
+        pointer-events: none;
+        z-index: 999;
+        background-size: cover;
+        background-position: center;
+        transition: opacity 0.2s ease;
+    `;
+    document.body.appendChild(hoverImage);
+
+
+    function addLocationMarkers() {
+        function latLngToVector3(lat, lng, radius) {
+            const latRad = (lat * Math.PI) / 180;
+            const lngRad = (-lng * Math.PI) / 180;
+            
+            const x = radius * Math.cos(latRad) * Math.cos(lngRad);
+            const y = radius * Math.sin(latRad);
+            const z = radius * Math.cos(latRad) * Math.sin(lngRad);
+            
+            return new THREE.Vector3(x, y, z);
+        }
+
+        // Group projects by location
+        const projectsByLocation = {};
+        projects.forEach(project => {
+            if (!projectsByLocation[project.location]) {
+                projectsByLocation[project.location] = [];
+            }
+            projectsByLocation[project.location].push(project);
+        });
+
+        const locationCoords = {
+            'DUBAI, UAE': { lat: 25.2048, lng: 55.2708 },
+            'ABU DHABI': { lat: 24.4539, lng: 54.3773 },
+            'MOROCCO': { lat: 31.7917, lng: -7.0926 },
+            'QATAR': { lat: 25.3548, lng: 51.1839 },
+            'KSA, SAUDI ARABIA': { lat: 23.8859, lng: 45.0792 }
+        };
+
+         Object.entries(projectsByLocation).forEach(([location, locationProjects]) => {
+            const coords = locationCoords[location];
+            if (!coords) return;
+
+            const basePosition = latLngToVector3(coords.lat, coords.lng, GLOBE_RADIUS);
+
+            locationProjects.forEach((project, index) => {
+                const markerSize = 0.5;
+                const geometry = new THREE.PlaneGeometry(markerSize, markerSize);
+                const texture = new THREE.TextureLoader().load(project.image);
+                const hoverTexture = project.coverImage ? new THREE.TextureLoader().load(project.coverImage) : texture;
+                
+                const material = new THREE.MeshBasicMaterial({
+                    map: texture,
+                    transparent: true,
+                    side: THREE.DoubleSide
+                });
+
+                const marker = new THREE.Mesh(geometry, material);
+                
+                // Store both textures in userData
+                marker.userData.defaultTexture = texture;
+                marker.userData.hoverTexture = hoverTexture;
+                
+                const verticalOffset = index * (markerSize * 0.2);
+                const offsetPosition = basePosition.clone();
+                const up = offsetPosition.clone().normalize();
+                offsetPosition.addScaledVector(up, verticalOffset);
+
+                marker.position.copy(offsetPosition);
+                marker.lookAt(offsetPosition.clone().multiplyScalar(2));
+                
+                const normalizedPosition = offsetPosition.clone().normalize();
+                marker.position.addScaledVector(normalizedPosition, 0.01);
+
+                marker.userData.project = project;
+                markerObjects.push(marker);
+                globe.add(marker);
+            });
+        });
     }
-    
-    return {
-        renderer,
-        animate,
-        resizeHandler: handleResize,
-        addLocationMarker
-    };
-}
 
-// Add this to your existing script.js updateGrid function
-function initializeGlobeView() {
-    const { renderer, animate, resizeHandler, addLocationMarker } = createGlobe();
-    
-    // Add the renderer to your container
-    const container = document.getElementById('projectGrid');
-    container.innerHTML = '';
-    container.appendChild(renderer.domElement);
-    
-    // Start animation
-    animate();
-    
-    // Add window resize handler
-    window.addEventListener('resize', resizeHandler);
-    
-    // Add markers for each project location
-    projects.forEach(project => {
-        // You'll need to add latitude and longitude data to your projects
-        if (project.latitude && project.longitude) {
-            addLocationMarker(project.latitude, project.longitude, project);
+    // Add hover effects
+    let hoveredMarker = null;
+
+    function updateHoverEffects(event) {
+        const rect = renderer.domElement.getBoundingClientRect();
+        mouse.x = ((event.clientX - rect.left) / rect.width) * 2 - 1;
+        mouse.y = -((event.clientY - rect.top) / rect.height) * 2 + 1;
+
+        raycaster.setFromCamera(mouse, camera);
+        const intersects = raycaster.intersectObjects(markerObjects);
+
+        renderer.domElement.style.cursor = intersects.length > 0 ? 'pointer' : 'grab';
+
+        if (intersects.length > 0) {
+            const marker = intersects[0].object;
+            const project = marker.userData.project;
+
+            // Show hover text
+            hoverText.style.display = 'block';
+            hoverText.textContent = project.title;
+            hoverText.style.left = event.clientX + 15 + 'px';
+            hoverText.style.top = event.clientY + 'px';
+
+            if (project.coverImage || project.imageUrl) {
+                hoverImage.style.display = 'block';
+                hoverImage.style.backgroundImage = `url(${project.coverImage || project.imageUrl})`;
+            
+                // Adjust positioning to overlay directly on the marker
+                const markerPosition = intersects[0].point; // Get the 3D position of the marker
+                const vector = markerPosition.project(camera); // Project it to 2D screen space
+            
+                // Convert normalized coordinates to screen pixels
+                const widthHalf = rect.width / 2;
+                const heightHalf = rect.height / 2;
+                hoverImage.style.left = `${(vector.x * widthHalf) + widthHalf}px`;
+                hoverImage.style.top = `${-(vector.y * heightHalf) + heightHalf}px`;
+            
+                hoverImage.style.opacity = '1'; // Ensure it's fully visible
+            }
+            
+            // Scale up the marker slightly
+            if (hoveredMarker !== marker) {
+                if (hoveredMarker) {
+                    hoveredMarker.scale.setScalar(1);
+                }
+                marker.scale.setScalar(1.2);
+                hoveredMarker = marker;
+            }
+        } else {
+            hoverText.style.display = 'none';
+            hoverImage.style.display = 'none';
+
+            if (hoveredMarker) {
+                hoveredMarker.scale.setScalar(1);
+                hoveredMarker = null;
+            }
+        }
+    }
+
+    renderer.domElement.addEventListener('mousemove', updateHoverEffects);
+
+    addLocationMarkers();
+
+    function handleClick(event) {
+        if (isDragging) return;
+
+        const rect = renderer.domElement.getBoundingClientRect();
+        mouse.x = ((event.clientX - rect.left) / rect.width) * 2 - 1;
+        mouse.y = -((event.clientY - rect.top) / rect.height) * 2 + 1;
+
+        raycaster.setFromCamera(mouse, camera);
+        const intersects = raycaster.intersectObjects(markerObjects);
+
+        if (intersects.length > 0) {
+            const project = intersects[0].object.userData.project;
+            if (project) {
+                openProjectModal(project);
+            }
+        }
+    }
+    renderer.domElement.addEventListener('mousedown', (event) => {
+        isMouseDown = true;
+        isDragging = false;
+        previousMousePosition = {
+            x: event.offsetX,
+            y: event.offsetY
+        };
+        renderer.domElement.style.cursor = 'grabbing';
+    });
+
+    renderer.domElement.addEventListener('mousemove', (event) => {
+        if (!isMouseDown) return;
+
+        const deltaMove = {
+            x: event.offsetX - previousMousePosition.x,
+            y: event.offsetY - previousMousePosition.y
+        };
+
+        if (Math.abs(deltaMove.x) > 3 || Math.abs(deltaMove.y) > 3) {
+            isDragging = true;
+        }
+
+        if (isDragging) {
+            rotationVelocity = {
+                x: deltaMove.y * ROTATION_SPEED,
+                y: deltaMove.x * ROTATION_SPEED
+            };
+
+            targetRotation = {
+                x: globe.rotation.x + rotationVelocity.x,
+                y: globe.rotation.y + rotationVelocity.y
+            };
+        }
+
+        previousMousePosition = {
+            x: event.offsetX,
+            y: event.offsetY
+        };
+    });
+
+    renderer.domElement.addEventListener('mouseup', (event) => {
+        renderer.domElement.style.cursor = 'grab';
+        if (!isDragging) {
+            handleClick(event);
+        }
+        isMouseDown = false;
+        isDragging = false;
+    });
+
+    renderer.domElement.addEventListener('mouseleave', () => {
+        isMouseDown = false;
+        isDragging = false;
+        hoverText.style.display = 'none';
+        hoverImage.style.display = 'none';
+        if (hoveredMarker) {
+            hoveredMarker.scale.setScalar(1);
+            hoveredMarker = null;
         }
     });
-}
+    renderer.domElement.addEventListener('wheel', (event) => {
+        event.preventDefault();
+        
+        const zoomDelta = event.deltaY * 0.001;
+        targetZoom = Math.max(MIN_ZOOM, Math.min(MAX_ZOOM, targetZoom + zoomDelta * ZOOM_SPEED));
+    }, { passive: false });
 
+    function animate() {
+        requestAnimationFrame(animate);
+
+        if (!isMouseDown) {
+            rotationVelocity.x *= DAMPING;
+            rotationVelocity.y *= DAMPING;
+
+            targetRotation.x += rotationVelocity.x;
+            targetRotation.y += rotationVelocity.y;
+        }
+
+        globe.rotation.x += (targetRotation.x - globe.rotation.x) * INERTIA;
+        globe.rotation.y += (targetRotation.y - globe.rotation.y) * INERTIA;
+
+        // Faster zoom transition
+        currentZoom += (targetZoom - currentZoom) * ZOOM_SMOOTHING;
+        camera.position.z = currentZoom;
+
+        renderer.render(scene, camera);
+    }
+
+    function resizeHandler() {
+        const width = window.innerWidth * 0.9;
+        const height = window.innerHeight * 0.7;
+        renderer.setSize(width, height);
+        camera.aspect = width / height;  // Set proper aspect ratio
+        camera.updateProjectionMatrix();
+    }
+
+    function cleanup() {
+        document.body.removeChild(hoverText);
+        document.body.removeChild(hoverImage);
+    }
+
+    return { renderer, animate, resizeHandler, cleanup };
+}
 const projects = [
     { 
         id: 1, 
@@ -181,15 +342,15 @@ const projects = [
         coverImage: 'https://aedasme.egnyte.com/opendocument.do?entryId=b6964d2f-924b-44d0-903d-f6a28fdab2fa&forceDownload=false&thumbNail=true&w=1200&h=1200&type=proportional&preview=true&prefetch=true',
         imageUrl: 'https://aedasme.egnyte.com/opendocument.do?entryId=25b91620-9d48-4ffe-a6fb-e5ce74d0d56f&forceDownload=false&thumbNail=true&w=1200&h=1200&type=proportional&preview=true&prefetch=true',
         year: 2015, 
-        latitude: 25.2048, // Dubai's coordinates
-        longitude: 55.2708,
         client: 'WOW INVEST. LIMITED',
         program: 'HOSPITALITY', 
         location: 'DUBAI, UAE',
+        scale: 'M', 
+        epoch: 'PRESENT', 
         presentationLink: 'https://aedasme.egnyte.com/app/index.do#storage/file/df0dc95d-f747-4f2b-ae30-7ba50421d813',
-        visualLink: 'https://aedasme.egnyte.com/app/index.do#storage/file/dc703231-65cf-4e88-a864-e390ea13297ee',
-        drawingLink: 'https://aedasme.egnyte.com/app/index.do#storage/search/?type=file&location=%2FShared%2FDesign%20Index%2F2.%20Hospitality%2F2B.%20Branded%20Hotel%20Apartment%2FDrawing&metadata=W3sibmFtZXNwYWNlIjoibGlicmFyeSByZXNvdXJjZSIsImtleSI6InByb2plY3QgbmFtZSIsIm9wZXJhdG9yIjoiSU4iLCJ2YWx1ZXMiOlsiU0xTIFdPVyBIb3RlbCBBcGFydG1lbnQiXX0seyJuYW1lc3BhY2UiOiJsaWJyYXJ5IHJlc291cmNlIiwia2V5IjoiZmlsdGUgdHlwZSIsIm9wZXJhdG9yIjoiSU4iLCJ2YWx1ZXMiOlsiLkRXRyJdfV0%3De',
-        threeDLink: 'https://aedasme.egnyte.com/app/index.do#storage/file/12d2d573-3fcb-4322-ad93-23950fccdedf',
+        visualLink: 'https://aedasme.egnyte.com/app/index.do#storage/file/dc703231-65cf-4e88-a864-e390ea13297e',
+        drawingLink: 'https://aedasme.egnyte.com/app/index.do#storage/search/?type=file&location=%2FShared%2FDesign%20Index%2F2.%20Hospitality%2F2B.%20Branded%20Hotel%20Apartment%2FDrawing&metadata=W3sibmFtZXNwYWNlIjoibGlicmFyeSByZXNvdXJjZSIsImtleSI6InByb2plY3QgbmFtZSIsIm9wZXJhdG9yIjoiSU4iLCJ2YWx1ZXMiOlsiU0xTIFdPVyBIb3RlbCBBcGFydG1lbnQiXX0seyJuYW1lc3BhY2UiOiJsaWJyYXJ5IHJlc291cmNlIiwia2V5IjoiZmlsdGUgdHlwZSIsIm9wZXJhdG9yIjoiSU4iLCJ2YWx1ZXMiOlsiLkRXRyJdfV0%3D',
+        threeDLink: 'https://aedasme.egnyte.com/navigate/file/12d2d573-3fcb-4322-ad93-23950fccdedf',
         linkImages: {
             presentation: 'https://aedasme.egnyte.com/opendocument.do?entryId=f339273d-0467-474d-a996-4e8b7360dc3e&forceDownload=false&thumbNail=true&w=1200&h=1200&type=proportional&preview=true&prefetch=true',
             visual: 'https://aedasme.egnyte.com/opendocument.do?entryId=d349d403-6b9e-474d-a14a-e224b80bd9e8&forceDownload=false&thumbNail=true&w=1200&h=1200&type=proportional&preview=true&prefetch=true',
@@ -215,15 +376,41 @@ const projects = [
     },
     { 
         id: 2, 
-        title: 'BBB', 
+        title: 'RADISSON BLU HOTEL APARTMENT', 
         abbr: 'RAD', 
-        year: 2016, 
         image: "/ICON/RAD.png",
-        epoch: 'PRESENT', 
+        coverImage: 'https://aedasme.egnyte.com/opendocument.do?entryId=6a92700b-869b-421d-b104-9f30d88488f6&forceDownload=false&thumbNail=true&w=1200&h=1200&type=proportional&preview=true&prefetch=true',
+        imageUrl: 'https://aedasme.egnyte.com/opendocument.do?entryId=e3e8dddb-eb6e-409d-938d-a8eb1e3eafd6&forceDownload=false&thumbNail=true&w=1200&h=1200&type=proportional&preview=true&prefetch=true',
+        year: 2016, 
+        client: 'AL REEM REAL ESTATE DEVELOPMENT EST',
         program: 'HOSPITALITY', 
-        scale: 'M', 
         location: 'DUBAI, UAE',
-        imageUrl: 'https://aedasme.egnyte.com/opendocument.do?entryId=e3e8dddb-eb6e-409d-938d-a8eb1e3eafd6&forceDownload=false&thumbNail=true&w=1200&h=1200&type=proportional&preview=true&prefetch=true'
+        scale: 'M', 
+        epoch: 'PRESENT', 
+        presentationLink: 'https://aedasme.egnyte.com/app/index.do#storage/file/e4d1ebef-5ef6-488b-8032-9d860ba10da5',
+        visualLink: 'https://aedasme.egnyte.com/app/index.do#storage/file/e2c9f501-ef4c-46d0-810c-ce9b80d4f317',
+        drawingLink: 'https://aedasme.egnyte.com/app/index.do#storage/search/?type=file&location=%2FShared%2FDesign%20Index&metadata=W3sibmFtZXNwYWNlIjoibGlicmFyeSByZXNvdXJjZSIsImtleSI6InByb2plY3QgbmFtZSIsIm9wZXJhdG9yIjoiSU4iLCJ2YWx1ZXMiOlsiUmFkaXNzb24gQmx1IEhvdGVsIEFwYXJ0bWVudCJdfSx7Im5hbWVzcGFjZSI6ImxpYnJhcnkgcmVzb3VyY2UiLCJrZXkiOiJmaWx0ZSB0eXBlIiwib3BlcmF0b3IiOiJJTiIsInZhbHVlcyI6WyIuRFdHIl19XQ%3D%3D',
+        linkImages: {
+            presentation: 'https://aedasme.egnyte.com/opendocument.do?entryId=f339273d-0467-474d-a996-4e8b7360dc3e&forceDownload=false&thumbNail=true&w=1200&h=1200&type=proportional&preview=true&prefetch=true',
+            visual: 'https://aedasme.egnyte.com/opendocument.do?entryId=d349d403-6b9e-474d-a14a-e224b80bd9e8&forceDownload=false&thumbNail=true&w=1200&h=1200&type=proportional&preview=true&prefetch=true',
+            drawing: 'https://aedasme.egnyte.com/opendocument.do?entryId=d235bc93-b53a-4741-9b80-56a46fdc50f2&forceDownload=false&thumbNail=true&w=1200&h=1200&type=proportional&preview=true&prefetch=true'
+        },
+        // New fields for the description section
+        descriptionImage: 'https://aedasme.egnyte.com/opendocument.do?entryId=984f3406-3ecd-478b-9fde-d44a05f862c8&forceDownload=false&thumbNail=true&w=1200&h=1200&type=proportional&preview=true&prefetch=true', // You can use one of your existing images or add a new one
+        description: {
+            paragraph1: "Nabr is a new type of consumer-first housing company. Founded by Roni Bahar, Bjarke Ingels, and Nick Chim - combining their experience in real estate, architecture, and technology, respectively - Nabr is the result of a shared vision for an improved way of urban living, defined by quality, sustainability, and attainability.",
+            paragraph2: "Nabr uses technology and productization to increase the production of apartments available for sale in major cities, starting with SOFA One in San Jose which is co-designed by BIG and slated to break ground in late 2022.",
+            paragraph3: "Located at 98 E San Salvador, residents will be at the heart of SOFA, downtown San Jose's arts district, in close proximity to dining and local entertainment. The development is roughly a mile from Diridon Caltrain Station, one block from San Jose State University, and centrally located near all major tech employers, offering residents abundant access to commuting options."
+        },
+        teamMembers: "AFDAFDSFA, AFSDFADFSAF, AFSDFADSFAFD, BOB SMITH, ADRIAN SMITH, BOB SMITH, SKI VILLAGE, AFDAFDSFA, AFSDFADFSAF, AFDAFDSFA, AFSDFADFSAF, AFDAFDSFA, AFSDFADFSAF, AFSDFADSFAFD, BOB SMITH, ADRIAN SMITH, BOB SMITH, SKI VILLAGE, AFDAFDSFA, AFSDFADFSAF, AFDAFDSFA, AFSDFADFSAF",
+
+        galleryImages: [
+            "https://aedasme.egnyte.com/opendocument.do?entryId=1aaa817a-24b3-44db-b0e7-63cba5afdc93&forceDownload=false&thumbNail=true&w=1200&h=1200&type=proportional&preview=true&prefetch=true",
+            "https://aedasme.egnyte.com/opendocument.do?entryId=5fca849d-65c2-4a93-a182-1909509488b4&forceDownload=false&thumbNail=true&w=1200&h=1200&type=proportional&preview=true&prefetch=true",
+            "https://aedasme.egnyte.com/opendocument.do?entryId=dd927d95-b41a-4dd4-a7d6-23b104b84edd&forceDownload=false&thumbNail=true&w=1200&h=1200&type=proportional&preview=true&prefetch=true",
+            "https://aedasme.egnyte.com/opendocument.do?entryId=fa60d4cb-a4d9-4575-a2a1-c3128259f2af&forceDownload=false&thumbNail=true&w=1200&h=1200&type=proportional&preview=true&prefetch=true"
+        ]
+
     },
     { 
         id: 3, 
@@ -231,7 +418,6 @@ const projects = [
         abbr: 'LMS', 
         year: 2017, 
         image: "/ICON/LMS.png",
-
         epoch: 'FUTURE', 
         program: 'OTHERS', 
         scale: 'L', 
@@ -590,28 +776,30 @@ function updateGrid(activeFilter) {
         });
     });
     if (activeFilter === 'LOCATION') {
-        console.log('Location filter active');
         grid.innerHTML = '';
-        grid.classList.add('globe-view'); // Add this line
-        
+        grid.style.width = '90vw';
+        grid.style.height = '70vh';
+        grid.style.position = 'relative';
+        grid.style.overflow = 'hidden';
+        grid.style.margin = '0 auto';
+        grid.style.marginTop = '20px';
+    
         try {
-            const { renderer, animate, resizeHandler } = createGlobe();
-            console.log('Globe created successfully:', renderer);
-            
+            const { renderer, animate, resizeHandler, cleanup } = createGlobe();
             if (renderer && renderer.domElement) {
                 grid.appendChild(renderer.domElement);
-                console.log('Renderer appended to grid');
                 animate();
                 window.addEventListener('resize', resizeHandler);
-            } else {
-                console.error('Renderer or domElement is undefined');
+                // Add cleanup on filter change
+                return () => {
+                    cleanup();
+                    window.removeEventListener('resize', resizeHandler);
+                };
             }
         } catch (error) {
             console.error('Error setting up globe:', error);
         }
         return;
-    } else {
-        grid.classList.remove('globe-view'); // Add this line
     }
     // Reset styles for other views
     grid.style.width = '';
