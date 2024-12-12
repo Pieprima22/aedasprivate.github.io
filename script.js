@@ -1,990 +1,838 @@
-// Import Three.js
-import * as THREE from "https://cdn.skypack.dev/three@0.136.0";
-import { OrbitControls } from "https://cdn.skypack.dev/three@0.136.0/examples/jsm/controls/OrbitControls";
 
+// Import Three.js from CDN in your HTML file
+// <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 
-// Get modal elements
-var projectDetailModal = document.getElementById("projectDetailModal");
-var projectIcon = document.getElementById("projectIcon");
-var projectTitle = document.getElementById("projectTitle");
-var projectLocation = document.getElementById("projectLocation");
-var projectDate = document.getElementById("projectDate");
-var projectClient = document.getElementById("projectClient");
-var projectTypology = document.getElementById("projectTypology");
-var projectImage = document.getElementById("projectImage");
-
-// Get link elements in the modal
-var presentationLink = document.getElementById("presentationLink");
-var visualsLink = document.getElementById("visualsLink");
-var animationLink = document.getElementById("animationLink");
-var drawingsLink = document.getElementById("drawingsLink");
-var threeDModelLink = document.getElementById("3DModelLink");
-var homePageLink = document.getElementById("homePageLink");
-// Function to update project links
-function updateProjectLinks(projectBox) {
-    // Get project links container
-    const projectLinksContainer = document.querySelector('.project-links');
-    if (!projectLinksContainer) return;
-
-    // Clear existing links
-    projectLinksContainer.innerHTML = '';
-
-    // Create containers for home link and other links
-    const homeLinkContainer = document.createElement('div');
-    homeLinkContainer.className = 'home-link';
-    const otherLinksContainer = document.createElement('div');
-    otherLinksContainer.className = 'other-links';
-
-    // Define the links array dynamically from the current project box
-    const links = [
-        { url: "javascript:void(0)", icon: "images.png", action: "close", isHome: true },
-        { url: projectBox.getAttribute('data-3dmodel-link'), icon: projectBox.getAttribute('data-3dmodel-icon') || 'default-3dmodel-icon.png', isHome: false },
-        { url: projectBox.getAttribute('data-drawings-link'), icon: projectBox.getAttribute('data-drawings-icon') || 'default-drawings-icon.png', isHome: false },
-        { url: projectBox.getAttribute('data-animation-link'), icon: projectBox.getAttribute('data-animation-icon') || 'default-animation-icon.png', isHome: false },
-        { url: projectBox.getAttribute('data-visuals-link'), icon: projectBox.getAttribute('data-visuals-icon') || 'default-visuals-icon.png', isHome: false },
-        { url: projectBox.getAttribute('data-presentation-link'), icon: projectBox.getAttribute('data-presentation-icon') || 'default-presentation-icon.png', isHome: false }
-    ];
-
-    // Create and append links
-    links.forEach(({ url, icon, action, isHome }) => {
-        if (url || action === "close") {
-            const linkElement = document.createElement('a');
-            linkElement.href = url || 'javascript:void(0)';
-            linkElement.target = action === "close" ? "" : "_blank";
-
-            if (isHome) {
-                linkElement.textContent = 'HOME';
-                linkElement.onclick = closeProjectDetail;
-                linkElement.classList.add('home-link');
-                homeLinkContainer.appendChild(linkElement);
-            } else {
-                if (url) {
-                    linkElement.innerHTML = `<img src="${icon}" alt="Link Icon">`;
-                    otherLinksContainer.appendChild(linkElement);
-                }
-            }
-        }
-    });
-
-    // Append containers
-    projectLinksContainer.appendChild(homeLinkContainer);
-    projectLinksContainer.appendChild(otherLinksContainer);
-    projectLinksContainer.style.display = projectLinksContainer.childElementCount > 0 ? 'flex' : 'none';
-}
-
-document.querySelectorAll('.project-box').forEach((box) => {
-    box.addEventListener('click', function () {
-        // Retrieve project-specific data
-        const title = this.getAttribute('data-title');
-        const location = this.getAttribute('data-location');
-        const date = this.getAttribute('data-date');
-        const client = this.getAttribute('data-client');
-        const typology = this.getAttribute('data-typology');
-
-
-        // Set the basic project information
-        projectTitle.textContent = title || 'Untitled Project';
-        projectLocation.textContent = location || 'Unknown Location';
-        projectDate.textContent = date || 'No Date Provided';
-        projectClient.textContent = client || 'No Client Specified';
-        projectTypology.textContent = typology || 'Unknown Typology';
-
-        // Set the project icon and main image
-        projectIcon.src = this.getAttribute('data-icon') || 'default-icon.png';
-        projectImage.src = this.querySelector('.hover-image')?.src || 'default-image.png';
-
-// MODIFICATION: Ensure links are correctly set for ALL project types
-        const projectLinksContainer = document.querySelector('.project-links');
-        projectLinksContainer.innerHTML = ''; // Clear any previous links
-
-        const homeLinkContainer = document.createElement('div');
-        homeLinkContainer.className = 'home-link';
-        const otherLinksContainer = document.createElement('div');
-        otherLinksContainer.className = 'other-links';
-
-        // Define the links array dynamically from the current project box
-        const links = [
-            { url: "javascript:void(0)", icon: "images.png", action: "close", isHome: true }, // Homepage
-            { url: this.getAttribute('data-3dmodel-link'), icon: this.getAttribute('data-3dmodel-icon') || 'default-3dmodel-icon.png', isHome: false }, // 3D Model
-            { url: this.getAttribute('data-drawings-link'), icon: this.getAttribute('data-drawings-icon') || 'default-drawings-icon.png', isHome: false }, // Drawings
-            { url: this.getAttribute('data-animation-link'), icon: this.getAttribute('data-animation-icon') || 'default-animation-icon.png', isHome: false }, // Animation
-            { url: this.getAttribute('data-visuals-link'), icon: this.getAttribute('data-visuals-icon') || 'default-visuals-icon.png', isHome: false }, // Visuals
-            { url: this.getAttribute('data-presentation-link'), icon: this.getAttribute('data-presentation-icon') || 'default-presentation-icon.png', isHome: false } // Presentation
-        ];
-
-        // UPDATED: Ensure links are filtered and added correctly
-        links.forEach(({ url, icon, action, isHome }) => {
-            if (url || action === "close") {
-                const linkElement = document.createElement('a');
-                linkElement.href = url || 'javascript:void(0)';
-                linkElement.target = action === "close" ? "" : "_blank";
-
-                if (isHome) {
-                    linkElement.textContent = 'HOME';
-                    linkElement.onclick = closeProjectDetail;
-                    linkElement.classList.add('home-link');
-                    homeLinkContainer.appendChild(linkElement);
-                } else {
-                    // Ensure the icon is added only if a URL exists
-                    if (url) {
-                        linkElement.innerHTML = `<img src="${icon}" alt="Link Icon">`;
-                        otherLinksContainer.appendChild(linkElement);
-                    }
-                }
-            }
-        });
-
-        // Append containers and handle display
-        projectLinksContainer.appendChild(homeLinkContainer);
-        projectLinksContainer.appendChild(otherLinksContainer);
-        projectLinksContainer.style.display = projectLinksContainer.childElementCount > 0 ? 'flex' : 'none';
-
-
-        // Load gallery images
-        const imageGallery = document.getElementById('imageGallery');
-        imageGallery.innerHTML = ''; // Clear previous images
-        const images = JSON.parse(this.getAttribute('data-images') || '[]');
-        images.forEach(imageUrl => {
-            const img = document.createElement('img');
-            img.src = imageUrl;
-            img.alt = "Project Image";
-            imageGallery.appendChild(img);
-        });
-
-       // Get the team member data
-       const team = JSON.parse(this.getAttribute('data-team') || '[]');
-        
-       // Create a single string with all team members separated by commas
-       const teamMemberNames = team.join(', ');
-
-       // Set the content of the paragraph
-       const teamMemberParagraph = document.getElementById('teamMemberNames');
-       teamMemberParagraph.textContent = teamMemberNames;
-
-       // Show or hide the team section based on whether there are team members
-
-        // Retrieve project-specific data for new-page-content
-        const projectNewImage = this.getAttribute('data-new-image') || 'default-image.png';
-        const paragraph1 = this.getAttribute('data-paragraph1') || 'Default project description.';
-        const paragraph2 = this.getAttribute('data-paragraph2') || 'Default project description.';
-        const paragraph3 = this.getAttribute('data-paragraph3') || 'Default project description.';
-
-
-        const projectNewText = this.getAttribute('data-new-text') || 'Default project description.';
-
-        // Update the new-page-content section
-        const newPageContent = document.querySelector('.new-page-content');
-        const newPageImage = newPageContent.querySelector('.new-page-image');
-        const newPageText = newPageContent.querySelector('.text-container');
-
-        // Set the new image and new text
-        newPageImage.src = projectNewImage;
-        newPageText.textContent = projectNewText;
-        // Dynamically create and insert the paragraphs
-        newPageText.innerHTML = `
-                <p>${paragraph1}</p>
-                <p>${paragraph2}</p>
-                <p>${paragraph3}</p>
-                `;
-        // Display the modal
-        projectDetailModal.style.display = "block";
+function createGlobe() {
+    // Set up scene
+    const scene = new THREE.Scene();
+    
+    // Set up camera
+    const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 1000);
+    camera.position.z = 500;
+    
+    // Set up renderer
+    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.setClearColor(0xffffff, 1);
+    
+    // Create sphere geometry
+    const sphereGeometry = new THREE.SphereGeometry(200, 50, 50);
+    
+    // Create basic material
+    const sphereMaterial = new THREE.MeshPhongMaterial({
+        map: new THREE.TextureLoader().load('/path-to-your-texture.jpg'),
+        bumpScale: 0.05,
+        specular: new THREE.Color('grey'),
+        shininess: 5
     });
     
-});
+    // Create globe mesh
+    const globe = new THREE.Mesh(sphereGeometry, sphereMaterial);
+    scene.add(globe);
+    
+    // Add ambient light
+    const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
+    scene.add(ambientLight);
+    
+    // Add point light
+    const pointLight = new THREE.PointLight(0xffffff, 1);
+    pointLight.position.set(100, 100, 100);
+    scene.add(pointLight);
+    
+    // Add hemisphere light
+    const hemisphereLight = new THREE.HemisphereLight(0xffffff, 0x444444, 0.5);
+    scene.add(hemisphereLight);
+    
+    // Auto-rotate animation
+    let rotationSpeed = 0.001;
+    
+    function animate() {
+        requestAnimationFrame(animate);
+        globe.rotation.y += rotationSpeed;
+        renderer.render(scene, camera);
+    }
+    
+    // Handle window resize
+    function handleResize() {
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+    }
+    
+    // Add mouse interaction
+    let isDragging = false;
+    let previousMousePosition = { x: 0, y: 0 };
+    
+    document.addEventListener('mousedown', (e) => {
+        isDragging = true;
+        previousMousePosition = {
+            x: e.clientX,
+            y: e.clientY
+        };
+    });
+    
+    document.addEventListener('mousemove', (e) => {
+        if (!isDragging) return;
+        
+        const deltaMove = {
+            x: e.clientX - previousMousePosition.x,
+            y: e.clientY - previousMousePosition.y
+        };
+        
+        globe.rotation.y += deltaMove.x * 0.005;
+        globe.rotation.x += deltaMove.y * 0.005;
+        
+        previousMousePosition = {
+            x: e.clientX,
+            y: e.clientY
+        };
+    });
+    
+    document.addEventListener('mouseup', () => {
+        isDragging = false;
+    });
+    
+    // Add touch interaction for mobile devices
+    document.addEventListener('touchstart', (e) => {
+        isDragging = true;
+        previousMousePosition = {
+            x: e.touches[0].clientX,
+            y: e.touches[0].clientY
+        };
+    });
+    
+    document.addEventListener('touchmove', (e) => {
+        if (!isDragging) return;
+        
+        const deltaMove = {
+            x: e.touches[0].clientX - previousMousePosition.x,
+            y: e.touches[0].clientY - previousMousePosition.y
+        };
+        
+        globe.rotation.y += deltaMove.x * 0.005;
+        globe.rotation.x += deltaMove.y * 0.005;
+        
+        previousMousePosition = {
+            x: e.touches[0].clientX,
+            y: e.touches[0].clientY
+        };
+    });
+    
+    document.addEventListener('touchend', () => {
+        isDragging = false;
+    });
 
-window.closeProjectDetail = function() {
-    const projectDetailModal = document.getElementById("projectDetailModal");
-    if (projectDetailModal) {
-        // Reset the scroll position to the top
-        projectDetailModal.scrollTop = 0;
-        projectDetailModal.style.display = "none";
-    } else {
-        console.error("Project Detail Modal not found.");
+    // Add markers for project locations
+    function addLocationMarker(lat, lng, projectData) {
+        const radius = 200; // Same as sphere radius
+        const phi = (90 - lat) * (Math.PI / 180);
+        const theta = (lng + 180) * (Math.PI / 180);
+        
+        const markerGeometry = new THREE.SphereGeometry(4, 8, 8);
+        const markerMaterial = new THREE.MeshBasicMaterial({ color: 0xff0000 });
+        const marker = new THREE.Mesh(markerGeometry, markerMaterial);
+        
+        marker.position.x = radius * Math.sin(phi) * Math.cos(theta);
+        marker.position.y = radius * Math.cos(phi);
+        marker.position.z = radius * Math.sin(phi) * Math.sin(theta);
+        
+        marker.userData.projectData = projectData;
+        globe.add(marker);
+    }
+    
+    return {
+        renderer,
+        animate,
+        resizeHandler: handleResize,
+        addLocationMarker
+    };
+}
+
+// Add this to your existing script.js updateGrid function
+function initializeGlobeView() {
+    const { renderer, animate, resizeHandler, addLocationMarker } = createGlobe();
+    
+    // Add the renderer to your container
+    const container = document.getElementById('projectGrid');
+    container.innerHTML = '';
+    container.appendChild(renderer.domElement);
+    
+    // Start animation
+    animate();
+    
+    // Add window resize handler
+    window.addEventListener('resize', resizeHandler);
+    
+    // Add markers for each project location
+    projects.forEach(project => {
+        // You'll need to add latitude and longitude data to your projects
+        if (project.latitude && project.longitude) {
+            addLocationMarker(project.latitude, project.longitude, project);
+        }
+    });
+}
+
+const projects = [
+    { 
+        id: 1, 
+        title: 'SLS WOW HOTEL APARTMENT', 
+        abbr: 'SLS', 
+        image: "/ICON/SLS.png",
+        coverImage: 'https://aedasme.egnyte.com/opendocument.do?entryId=b6964d2f-924b-44d0-903d-f6a28fdab2fa&forceDownload=false&thumbNail=true&w=1200&h=1200&type=proportional&preview=true&prefetch=true',
+        imageUrl: 'https://aedasme.egnyte.com/opendocument.do?entryId=25b91620-9d48-4ffe-a6fb-e5ce74d0d56f&forceDownload=false&thumbNail=true&w=1200&h=1200&type=proportional&preview=true&prefetch=true',
+        year: 2015, 
+        latitude: 25.2048, // Dubai's coordinates
+        longitude: 55.2708,
+        client: 'WOW INVEST. LIMITED',
+        program: 'HOSPITALITY', 
+        location: 'DUBAI, UAE',
+        presentationLink: 'https://aedasme.egnyte.com/app/index.do#storage/file/df0dc95d-f747-4f2b-ae30-7ba50421d813',
+        visualLink: 'https://aedasme.egnyte.com/app/index.do#storage/file/dc703231-65cf-4e88-a864-e390ea13297ee',
+        drawingLink: 'https://aedasme.egnyte.com/app/index.do#storage/search/?type=file&location=%2FShared%2FDesign%20Index%2F2.%20Hospitality%2F2B.%20Branded%20Hotel%20Apartment%2FDrawing&metadata=W3sibmFtZXNwYWNlIjoibGlicmFyeSByZXNvdXJjZSIsImtleSI6InByb2plY3QgbmFtZSIsIm9wZXJhdG9yIjoiSU4iLCJ2YWx1ZXMiOlsiU0xTIFdPVyBIb3RlbCBBcGFydG1lbnQiXX0seyJuYW1lc3BhY2UiOiJsaWJyYXJ5IHJlc291cmNlIiwia2V5IjoiZmlsdGUgdHlwZSIsIm9wZXJhdG9yIjoiSU4iLCJ2YWx1ZXMiOlsiLkRXRyJdfV0%3De',
+        threeDLink: 'https://aedasme.egnyte.com/app/index.do#storage/file/12d2d573-3fcb-4322-ad93-23950fccdedf',
+        linkImages: {
+            presentation: 'https://aedasme.egnyte.com/opendocument.do?entryId=f339273d-0467-474d-a996-4e8b7360dc3e&forceDownload=false&thumbNail=true&w=1200&h=1200&type=proportional&preview=true&prefetch=true',
+            visual: 'https://aedasme.egnyte.com/opendocument.do?entryId=d349d403-6b9e-474d-a14a-e224b80bd9e8&forceDownload=false&thumbNail=true&w=1200&h=1200&type=proportional&preview=true&prefetch=true',
+            drawing: 'https://aedasme.egnyte.com/opendocument.do?entryId=d235bc93-b53a-4741-9b80-56a46fdc50f2&forceDownload=false&thumbNail=true&w=1200&h=1200&type=proportional&preview=true&prefetch=true',
+            threeD: 'https://aedasme.egnyte.com/opendocument.do?entryId=73b9cc45-a7c6-422e-aa36-01b3744bb3f1&forceDownload=false&thumbNail=true&w=1200&h=1200&type=proportional&preview=true&prefetch=true'
+        },
+        // New fields for the description section
+        descriptionImage: 'https://aedasme.egnyte.com/opendocument.do?entryId=ff6a656d-b0de-48cc-b510-2d6124a61fe1&forceDownload=false&thumbNail=true&w=1200&h=1200&type=proportional&preview=true&prefetch=true', // You can use one of your existing images or add a new one
+        description: {
+            paragraph1: "The SLS WOW Hotel Apartment project in Dubai represents a pinnacle of luxury hospitality design. Completed in 2015, this ambitious development seamlessly integrates contemporary architectural elements with the sophistication expected of the SLS brand. The project's location in Dubai, UAE, serves as a strategic point for both business and leisure travelers.",
+            paragraph2: "The architectural design emphasizes vertical elegance while maintaining a strong connection to its urban context. Each apartment is meticulously crafted to meet the high standards of modern luxury living, featuring premium finishes and state-of-the-art amenities. The building's facade incorporates innovative design elements that respond to the local climate while creating a distinctive visual identity.",
+            paragraph3: "Sustainability and user comfort were key considerations throughout the design process. The project incorporates advanced environmental systems and smart building technologies, setting new standards for hospitality developments in the region. The result is a harmonious blend of luxury, functionality, and sustainable design that caters to the demanding requirements of modern urban living."
+        },
+        teamMembers: "AFDAFDSFA, AFSDFADFSAF, AFSDFADSFAFD, BOB SMITH, ADRIAN SMITH, BOB SMITH, SKI VILLAGE, AFDAFDSFA, AFSDFADFSAF, AFDAFDSFA, AFSDFADFSAF, AFDAFDSFA, AFSDFADFSAF, AFSDFADSFAFD, BOB SMITH, ADRIAN SMITH, BOB SMITH, SKI VILLAGE, AFDAFDSFA, AFSDFADFSAF, AFDAFDSFA, AFSDFADFSAF",
+
+        galleryImages: [
+            "https://aedasme.egnyte.com/opendocument.do?entryId=cf9ac38d-346b-4c55-97a2-e6bf94ffb890&forceDownload=false&thumbNail=true&w=1200&h=1200&type=proportional&preview=true&prefetch=true",
+            "https://aedasme.egnyte.com/opendocument.do?entryId=0b09bed9-dcb4-473b-ae25-60495cd28674&forceDownload=false&thumbNail=true&w=1200&h=1200&type=proportional&preview=true&prefetch=true",
+            "https://aedasme.egnyte.com/opendocument.do?entryId=bf67a79e-4fda-43db-9186-f77216b9e4af&forceDownload=false&thumbNail=true&w=1200&h=1200&type=proportional&preview=true&prefetch=true",
+            "https://aedasme.egnyte.com/opendocument.do?entryId=ffd8d234-dba6-48a5-bed1-6bbe08f46897&forceDownload=false&thumbNail=true&w=1200&h=1200&type=proportional&preview=true&prefetch=true"
+        ]
+
+    },
+    { 
+        id: 2, 
+        title: 'BBB', 
+        abbr: 'RAD', 
+        year: 2016, 
+        image: "/ICON/RAD.png",
+        epoch: 'PRESENT', 
+        program: 'HOSPITALITY', 
+        scale: 'M', 
+        location: 'DUBAI, UAE',
+        imageUrl: 'https://aedasme.egnyte.com/opendocument.do?entryId=e3e8dddb-eb6e-409d-938d-a8eb1e3eafd6&forceDownload=false&thumbNail=true&w=1200&h=1200&type=proportional&preview=true&prefetch=true'
+    },
+    { 
+        id: 3, 
+        title: 'CCC', 
+        abbr: 'LMS', 
+        year: 2017, 
+        image: "/ICON/LMS.png",
+
+        epoch: 'FUTURE', 
+        program: 'OTHERS', 
+        scale: 'L', 
+        location: 'ABU DHABI',
+        imageUrl: 'https://aedasme.egnyte.com/opendocument.do?entryId=0d1a0857-53c2-4b38-81eb-80431f594574&forceDownload=false&thumbNail=true&w=1200&h=1200&type=proportional&preview=true&prefetch=true'
+    },
+    { 
+        id: 4, 
+        title: 'DDD', 
+        abbr: 'CGA', 
+        year: 2018, 
+        image: "/ICON/CGA.png",
+        epoch: 'PAST', 
+        program: 'TRANSPORTATION', 
+        scale: 'S', 
+        location: 'MOROCCO',
+        imageUrl: 'https://aedasme.egnyte.com/opendocument.do?entryId=1b2b58cc-e601-4417-a184-9ca8769a590e&forceDownload=false&thumbNail=true&w=1200&h=1200&type=proportional&preview=true&prefetch=true'
+    },
+    { 
+        id: 5, 
+        title: 'EEE', 
+        abbr: 'SVB', 
+        year: 2019, 
+        image: "/ICON/SVB.png",
+        epoch: 'PRESENT', 
+        program: 'RESIDENTIAL', 
+        scale: 'M', 
+        location: 'QATAR',
+        imageUrl: 'https://aedasme.egnyte.com/opendocument.do?entryId=e40fd062-1c02-4602-af89-588a1386b413&forceDownload=false&thumbNail=true&w=1200&h=1200&type=proportional&preview=true&prefetch=true'
+    },
+    { 
+        id: 6, 
+        title: 'FFF', 
+        abbr: 'RUH', 
+        year: 2020, 
+        image: "/ICON/RUH.png",
+        epoch: 'FUTURE', 
+        program: 'OFFICE', 
+        scale: 'S', 
+        location: 'KSA, SAUDI ARABIA',
+        imageUrl: 'https://aedasme.egnyte.com/opendocument.do?entryId=e727b7fb-8b8f-40de-b2a3-b57adffcd25b&forceDownload=false&thumbNail=true&w=1200&h=1200&type=proportional&preview=true&prefetch=true'
+    },
+    { 
+        id: 7, 
+        title: 'GGG', 
+        abbr: 'SKI', 
+        year: 2021, 
+        image: "/ICON/SKI.png",
+        epoch: 'PAST', 
+        program: 'MASTERPLAN', 
+        scale: 'L', 
+        location: 'KSA, SAUDI ARABIA',
+        imageUrl: 'https://aedasme.egnyte.com/opendocument.do?entryId=bc030824-0fbc-4242-80f1-b91854ec6d1e&forceDownload=false&thumbNail=true&w=1200&h=1200&type=proportional&preview=true&prefetch=true'
+    },
+    { 
+        id: 8, 
+        title: 'HHH', 
+        abbr: 'MNZ', 
+        year: 2022, 
+        image: "/ICON/MNZ.png",
+
+        epoch: 'FUTURE', 
+        program: 'HOSPITALITY', 
+        scale: 'S', 
+        location: 'DUBAI, UAE',
+        imageUrl: 'https://aedasme.egnyte.com/opendocument.do?entryId=b9a04c15-f1bc-401b-a0a7-81f7f052061a&forceDownload=false&thumbNail=true&w=1200&h=1200&type=proportional&preview=true&prefetch=true'
+    },
+    { 
+        id: 9, 
+        title: 'III', 
+        abbr: 'ELP', 
+        year: 2023, 
+        image: "/ICON/ELP.png",
+        epoch: 'PAST', 
+        program: 'HOSPITALITY', 
+        scale: 'M', 
+        location: 'DUBAI, UAE',
+        imageUrl: 'https://aedasme.egnyte.com/opendocument.do?entryId=87623eed-e4aa-4f0b-bb9c-1e93d4336f64&forceDownload=false&thumbNail=true&w=1200&h=1200&type=proportional&preview=true&prefetch=true'
+    },
+    { 
+        id: 10, 
+        title: 'LLL', 
+        abbr: 'MOR', 
+        year: 2024, 
+        image: "/ICON/MOR.png",
+        epoch: 'FUTURE', 
+        program: 'RESIDENTIAL', 
+        scale: 'L', 
+        location: 'DUBAI, UAE',
+        imageUrl: 'https://aedasme.egnyte.com/opendocument.do?entryId=ac894b5a-4921-476e-bc40-7dc26352b6b1&forceDownload=false&thumbNail=true&w=1200&h=1200&type=proportional&preview=true&prefetch=true'
+    }
+];
+
+const filterConfigs = {
+    CHRONOLOGICAL: {
+        headers: Array.from({ length: 10 }, (_, i) => (2015 + i).toString()),
+        getHeader: project => project.year.toString()
+    },
+    EPOCH: {
+        headers: ['PAST', 'PRESENT', 'FUTURE'],
+        getHeader: project => project.epoch
+    },
+    ALPHABETICAL: {
+        headers: Array.from('ABCDEFGHIJKLMNOPQRSTUVWXYZ'),
+        getHeader: project => project.title[0]
+    },
+    PROGRAMMATIC: {
+        headers: ['MASTERPLAN', 'HOSPITALITY', 'OTHERS', 'TRANSPORTATION', 'RESIDENTIAL', 'OFFICE'],
+        getHeader: project => project.program
+    },
+    SCALE: {
+        headers: ['S', 'M', 'L', 'XL'],
+        getHeader: project => project.scale
+    },
+    LOCATION: {
+        headers: [...new Set(projects.map(p => p.location))],
+        getHeader: project => project.location
     }
 };
 
-
-function addClickEventToProjectBox(projectBox) {
-    projectBox.addEventListener('click', function () {
-        // Retrieve project-specific data
-        const title = this.getAttribute('data-title') || 'Untitled Project';
-        const location = this.getAttribute('data-location') || 'Unknown Location';
-        const date = this.getAttribute('data-date') || 'No Date Provided';
-        const client = this.getAttribute('data-client') || 'No Client Specified';
-        const typology = this.getAttribute('data-typology') || 'Unknown Typology';
-        
-        // Set Project Title and Details
-        document.getElementById('projectTitle').textContent = title;
-        document.getElementById('projectLocation').textContent = location;
-        document.getElementById('projectDate').textContent = date;
-        document.getElementById('projectClient').textContent = client;
-        document.getElementById('projectTypology').textContent = typology;
-
-        // Project Icon
-        const projectSymbol = document.getElementById('projectIcon');
-        const iconURL = this.getAttribute('data-icon') || 'default-icon.png';
-        if (projectSymbol) {
-            projectSymbol.src = iconURL;
-            projectSymbol.style.display = 'block';
-        }
-
-        // Project Image in Description
-        const hoverImage = this.querySelector('.hover-image');
-        const projectImageSection = document.getElementById('projectImage');
-        if (hoverImage && projectImageSection) {
-            projectImageSection.src = hoverImage.src;
-            projectImageSection.style.display = 'block';
-        }
-
-        // New Page Image
-        const newImage = this.getAttribute('data-new-image') || 'default-new-image.png';
-        const newPageImage = document.querySelector('.new-page-image');
-        if (newPageImage) {
-            newPageImage.src = newImage;
-            newPageImage.style.display = 'block';
-        }
-
-        // New Page Text
-        const paragraph1 = this.getAttribute('data-paragraph1') || '';
-        const paragraph2 = this.getAttribute('data-paragraph2') || '';
-        const paragraph3 = this.getAttribute('data-paragraph3') || '';
-        const newPageText = document.querySelector('.text-container');
-        if (newPageText) {
-            newPageText.innerHTML = `
-                <p>${paragraph1}</p>
-                <p>${paragraph2}</p>
-                <p>${paragraph3}</p>
-            `;
-        }
-
-        // Team Names
-        const teamData = JSON.parse(this.getAttribute('data-team') || '[]');
-        const teamSection = document.getElementById('teamMemberNames');
-        if (teamSection) {
-            teamSection.textContent = teamData.length
-                ? teamData.join(', ')
-                : 'No team members available.';
-        }
-
-        // Update Project Links
-        const projectLinksContainer = document.querySelector('.project-links');
-        if (projectLinksContainer) {
-            // Clear existing links
-            projectLinksContainer.innerHTML = '';
-
-            // Create containers
-            const homeLinkContainer = document.createElement('div');
-            homeLinkContainer.className = 'home-link';
-            const otherLinksContainer = document.createElement('div');
-            otherLinksContainer.className = 'other-links';
-
-            // Define links configuration
-            const links = [
-                { url: "javascript:void(0)", icon: "images.png", action: "close", isHome: true },
-                { url: this.getAttribute('data-3dmodel-link'), icon: this.getAttribute('data-3dmodel-icon'), type: "3D Model" },
-                { url: this.getAttribute('data-drawings-link'), icon: this.getAttribute('data-drawings-icon'), type: "Drawings" },
-                { url: this.getAttribute('data-animation-link'), icon: this.getAttribute('data-animation-icon'), type: "Animation" },
-                { url: this.getAttribute('data-visuals-link'), icon: this.getAttribute('data-visuals-icon'), type: "Visuals" },
-                { url: this.getAttribute('data-presentation-link'), icon: this.getAttribute('data-presentation-icon'), type: "Presentation" }
-            ];
-
-            // Create and append links
-            links.forEach(({ url, icon, action, isHome, type }) => {
-                if (url || action === "close") {
-                    const linkElement = document.createElement('a');
-                    linkElement.href = url || 'javascript:void(0)';
-                    linkElement.target = action === "close" ? "" : "_blank";
-
-                    if (isHome) {
-                        linkElement.textContent = 'HOME';
-                        linkElement.onclick = closeProjectDetail;
-                        linkElement.classList.add('home-link');
-                        homeLinkContainer.appendChild(linkElement);
-                    } else if (url) {
-                        linkElement.innerHTML = `<img src="${icon || `default-${type.toLowerCase()}-icon.png`}" alt="${type} Icon">`;
-                        otherLinksContainer.appendChild(linkElement);
-                    }
-                }
-            });
-
-            // Append containers
-            projectLinksContainer.appendChild(homeLinkContainer);
-            projectLinksContainer.appendChild(otherLinksContainer);
-        }
-
-        // Load gallery images
-        const imageGallery = document.getElementById('imageGallery');
-        imageGallery.innerHTML = '';
-        const images = JSON.parse(this.getAttribute('data-images') || '[]');
-        images.forEach(imageUrl => {
-            const img = document.createElement('img');
-            img.src = imageUrl;
-            img.alt = "Project Image";
-            imageGallery.appendChild(img);
-        });
-
-        // Show the modal
-        const projectDetailModal = document.getElementById('projectDetailModal');
-        if (projectDetailModal) {
-            projectDetailModal.style.display = "block";
-        }
-    });
+function getColumnWidth(totalHeaders) {
+    const minWidth = 60;
+    const maxWidth = 100;
+    const padding = 64;
+    const availableWidth = window.innerWidth - padding;
+    const calculatedWidth = Math.floor(availableWidth / totalHeaders);
+    
+    return Math.min(Math.max(calculatedWidth, minWidth), maxWidth);
 }
 
 
-function sortProjects(criteria) {
-    const gallery = document.querySelector('.symbol-grid');
-    const yearColumns = Array.from(gallery.getElementsByClassName('year-column'));
-    const epochHeader = document.getElementById('epochTimeline'); // Add epoch header reference
-    const timelineHeader = document.querySelector('.timeline-header');
-    const alphabeticalHeader = document.querySelector('.alphabetical-header');
-    const programmaticHeader = document.querySelector('.programmatic-header');
-    const scaleHeader = document.querySelector('.scale-header'); // Added scale header reference
-    const globeContainerId = 'globe-container';
-
-        // Enhanced clearDynamicElements function
-        function clearDynamicElements() {
-            // Remove all project markers
-            document.querySelectorAll('.project-globe-marker').forEach(marker => marker.remove());
-            
-            // Remove existing globe container
-            const existingGlobeContainer = document.getElementById('globe-container');
-            if (existingGlobeContainer) {
-                existingGlobeContainer.remove();
-            }
-
-            // Clear the locations array
-            if (window.locations) {
-                window.locations.forEach(location => {
-                    location.projects = []; // Reset projects array for each location
-                });
-            }
-        }
-            
-    if (criteria === 'alphabetical') {
-        // Hide the timeline header and show the alphabetical header
-        timelineHeader.style.display = 'none';
-        alphabeticalHeader.style.display = 'grid';
-        programmaticHeader.style.display = 'none';
-        scaleHeader.style.display = 'none';
-        epochHeader.style.display = 'none';  // Hide epoch
-        // Hide or remove the globe container
-        const globeContainer = document.getElementById('globe-container');
-        if (globeContainer) {
-            globeContainer.style.display = 'none'; // Hide the globe
-        }
-
-
-        // Hide the year columns but keep them in the DOM for later restoration
-        yearColumns.forEach(yearColumn => yearColumn.style.display = 'none');
-
-        // Clear previous content in each alphabetical section
-        alphabeticalHeader.querySelectorAll('.alphabet-label').forEach(label => {
-            label.innerHTML = label.getAttribute('data-letter'); // Reset to just the letter
-        });
-
-        // Collect and sort all project boxes by alphabetical order of the symbol name
-        let projectBoxes = [];
-        yearColumns.forEach(yearColumn => {
-            yearColumn.querySelectorAll('.project-box').forEach(projectBox => {
-                const clonedProject = projectBox.cloneNode(true);
-                projectBoxes.push(clonedProject); // Clone each project box for alphabetical
-                addClickEventToProjectBox(clonedProject); // Attach click event to each cloned project box
-            });
-        });
-
-        // Sort project boxes alphabetically by symbol name
-        projectBoxes.sort((a, b) => {
-            const nameA = a.querySelector('.symbol-name')?.textContent.trim().toUpperCase();
-            const nameB = b.querySelector('.symbol-name')?.textContent.trim().toUpperCase();
-            return nameA.localeCompare(nameB);
-        });
-        projectBoxes.forEach(projectBox => {
-            const firstLetter = projectBox.querySelector('.symbol-name')?.textContent.trim().charAt(0).toUpperCase();
-            const alphabetSection = alphabeticalHeader.querySelector(`.alphabet-label[data-letter="${firstLetter}"]`);
-            if (alphabetSection) {
-                const clonedProject = projectBox.cloneNode(true);
-        
-                // Copy all data attributes explicitly
-                Array.from(projectBox.attributes).forEach(attr => {
-                    clonedProject.setAttribute(attr.name, attr.value);
-                });
-        
-                addClickEventToProjectBox(clonedProject); // Attach click event
-                alphabetSection.appendChild(clonedProject);
-            }
-        });
-
-        reattachTooltipEvents(); // Ensure tooltips and other events are correctly reattached
-
-    } else if (criteria === 'location') {
-        // Clear everything first
-        clearDynamicElements();
-
-        // Step 2: Hide other views
-        timelineHeader.style.display = 'none';
-        alphabeticalHeader.style.display = 'none';
-        scaleHeader.style.display = 'none';
-        epochHeader.style.display = 'none';
-        programmaticHeader.style.display = 'none';
-        yearColumns.forEach(yearColumn => yearColumn.style.display = 'none');
-    
-          // Step 3: Remove existing globe container
-        let existingGlobeContainer = document.getElementById('globe-container');
-        if (existingGlobeContainer) {
-            existingGlobeContainer.remove();
-        }
-        // Step 4: Create a new globe container
-        const main = document.querySelector('main');
-        const globeContainer = document.createElement('div');
-        globeContainer.id = 'globe-container';
-        main.appendChild(globeContainer);
-
-        // Style the globe container
-        globeContainer.style.position = 'absolute';
-        globeContainer.style.top = '50%';
-        globeContainer.style.left = '50%';
-        globeContainer.style.bottom = '50%';
-        globeContainer.style.transform = 'translate(-50%, -50%)';
-        globeContainer.style.width = '960px';
-        globeContainer.style.height = '800px';
-        globeContainer.style.background = 'white';
-        globeContainer.style.overflow = 'hidden';
-    
-  
-        // Step 5: Initialize Three.js globe
-        const scene = new THREE.Scene();
-        const camera = new THREE.PerspectiveCamera(75, globeContainer.clientWidth / globeContainer.clientHeight, 0.1, 1000);
-        camera.position.z =  18;
-
-        const renderer = new THREE.WebGLRenderer({ alpha: true });
-        renderer.setSize(globeContainer.clientWidth, globeContainer.clientHeight);
-        globeContainer.appendChild(renderer.domElement);
-    
-        // Create globe geometry and material
-        const geometry = new THREE.SphereGeometry(7, 49, 49);
-        const textureLoader = new THREE.TextureLoader();
-        const globeTexture = textureLoader.load('./fs-globe-image-10.jpg');
-        const material = new THREE.MeshBasicMaterial({ map: globeTexture });
-        const globe = new THREE.Mesh(geometry, material);
-        scene.add(globe);
-    
-        // Add OrbitControls
-        const controls = new OrbitControls(camera, renderer.domElement);
-        controls.enableDamping = true;
-        controls.dampingFactor = 0.008;
-        controls.enableZoom = true;
-        // Restrict zoom to allow only a little zoom in and out
-        controls.enableZoom = true;
-        controls.minDistance = 15; // Set this to a value slightly closer than the initial camera distance
-        controls.maxDistance = 20; // Set this to a value slightly farther than the initial camera distance
-            
-        window.locations = [
-            { name: "KSA, SAUDI ARABIA", lat: 23.8859, lon: 45.0792, projects: [] },
-            { name: "DUBAI, UAE", lat: 25.276987, lon: 55.296249, projects: [] },
-            { name: "ABU DHABI, UAE", lat: 24.453884, lon: 54.377343, projects: [] },
-            { name: "QATAR", lat: 25.276987, lon: 51.520008, projects: [] },
-            { name: "MOROCCO", lat: 31.7917, lon: -7.0926, projects: [] },
-            { name: "BAHRAIN", lat: 26.0667, lon: 50.5577, projects: [] } // Added Bahrain
-        ];
-    
-      // Create a Set to track processed projects
-      const processedProjects = new Set();
-
-      // Process projects only once
-      document.querySelectorAll('.project-box').forEach(projectBox => {
-          const projectId = projectBox.getAttribute('data-project'); // Unique identifier
-          const projectLocation = projectBox.getAttribute('data-location');
-
-          // Skip if already processed
-          if (processedProjects.has(projectId)) return;
-
-          const matchingLocation = window.locations.find(loc => 
-              loc.name.toLowerCase() === projectLocation.toLowerCase()
-          );
-
-          if (matchingLocation) {
-              matchingLocation.projects.push(projectBox);
-              processedProjects.add(projectId);
-          }
-      });
-    
-        // Convert latitude and longitude to Cartesian coordinates
-        function latLonToCartesian(lat, lon, radius) {
-            const phi = (90 - lat) * (Math.PI / 180);
-            const theta = (lon + 180) * (Math.PI / 180);    
-            const x = -(radius * Math.sin(phi) * Math.cos(theta));
-            const z = radius * Math.sin(phi) * Math.sin(theta);
-            const y = radius * Math.cos(phi);
-    
-            return { x, y, z };
-        }
-    
-            // Step 7: Add markers and icons for projects
-            const markerGeometry = new THREE.SphereGeometry(0.1, 15, 15);
-            const markerMaterial = new THREE.MeshBasicMaterial({ color: 'red' });
-        
-            window.locations.forEach(location => {
-            const { x, y, z } = latLonToCartesian(location.lat, location.lon, 7);
-    
-            // Add a base marker for the location
-            const marker = new THREE.Mesh(markerGeometry, markerMaterial);
-            marker.position.set(x, y, z);
-            globe.add(marker);
-    
-            // Add icons for each project
-            location.projects.forEach((projectBox, index) => {
-                const iconDiv = document.createElement('div');
-                iconDiv.classList.add('project-globe-marker');
-                iconDiv.style.position = 'absolute';
-                iconDiv.style.width = '30px';
-                iconDiv.style.height = '30px';
-                iconDiv.style.backgroundImage = `url(${projectBox.getAttribute('data-icon')})`;
-                iconDiv.style.backgroundSize = 'cover';
-                iconDiv.style.cursor = 'pointer';
-    
-                // Offset icons slightly for stacking
-                iconDiv.style.zIndex = 1000 + index;
-                iconDiv.addEventListener('click', () => {
-                    projectBox.click();
-                });
-                globeContainer.appendChild(iconDiv);
-    
-                function updateIconPosition() {
-                    // Get the marker's world position
-                    const markerPosition = marker.getWorldPosition(new THREE.Vector3());
-                    
-                    // Get the camera's position
-                    const cameraPosition = camera.position.clone();
-                    
-                    // Calculate the vector normal to the globe's surface (at the marker's position)
-                    const markerNormal = markerPosition.clone().normalize();
-                    
-                    // Calculate the vector from the globe center to the camera
-                    const cameraVector = cameraPosition.clone().normalize();
-                    
-                    // Calculate dot product to determine if marker is facing the camera
-                    const dotProduct = markerNormal.dot(cameraVector);
-                    
-                    // Hide the icon if it's on the far side of the globe (dot product < 0)
-                    if (dotProduct < 0) {
-                        iconDiv.style.display = 'none';
-                        return;
-                    }
-                    
-                    // Apply stacking offset based on index
-                    const stackedPosition = markerPosition.clone().add(markerNormal.clone().multiplyScalar(index * 0.15)); // Adjust stacking distance as needed
-                    
-                    // Project the stacked position to screen coordinates
-                    const screenPosition = stackedPosition.project(camera);
-                    
-                    // Check if the icon is outside the view frustum
-                    if (screenPosition.z < -1 || screenPosition.z > 1 ||  // Behind the camera or too far
-                        screenPosition.x < -1 || screenPosition.x > 1 ||  // Outside left/right bounds
-                        screenPosition.y < -1 || screenPosition.y > 1) {  // Outside top/bottom bounds
-                        iconDiv.style.display = 'none';
-                        return;
-                    }
-                    
-                    // Show and position the icon
-                    iconDiv.style.display = 'block';
-                    
-                    // Convert normalized screen coordinates to pixel coordinates
-                    const x = (screenPosition.x * 0.5 + 0.5) * globeContainer.clientWidth;
-                    const y = (-screenPosition.y * 0.5 + 0.5) * globeContainer.clientHeight;
-                    
-                    // Base size for the icon
-                    const baseSize = 1;
-                    
-                    // Optional: Scale based on distance but maintain minimum size
-                    const distance = stackedPosition.distanceTo(cameraPosition);
-                    const scale = Math.max(baseSize, Math.min(baseSize * 1.5, baseSize / (distance * 0.1)));
-                    
-                    // Position and scale the icon
-                    iconDiv.style.transform = `translate(-50%, -50%) scale(${scale})`;
-                    iconDiv.style.left = `${x}px`;
-                    iconDiv.style.top = `${y}px`;
-                }
-                
-                
-    
-                function animateIcons() {
-                    requestAnimationFrame(animateIcons);
-                    updateIconPosition();
-                }
-                animateIcons();
-            });
-        });
-    
-        function animate() {
-            requestAnimationFrame(animate);
-            globe.rotation.y -= 0.0005;
-            controls.update();
-            renderer.render(scene, camera);
-        }
-        animate();
-    
-        window.addEventListener('resize', () => {
-            const newWidth = globeContainer.clientWidth;
-            const newHeight = globeContainer.clientHeight;
-            camera.aspect = newWidth / newHeight;
-            camera.updateProjectionMatrix();
-            renderer.setSize(newWidth, newHeight);
-        });
-    }
-
-    else if (criteria === 'epoch') {
-            // Hide other headers
-            timelineHeader.style.display = 'none';
-            alphabeticalHeader.style.display = 'none';
-            programmaticHeader.style.display = 'none';
-            scaleHeader.style.display = 'none';
-
-        
-            // Show the epoch view
-            epochHeader.style.display = 'flex';
-        
-               // Hide or remove the globe container
-            const globeContainer = document.getElementById('globe-container');
-            if (globeContainer) {
-                globeContainer.style.display = 'none'; // Hide the globe
-            }
-            // Clear all content in the project subcolumns
-            const epochProjects = document.querySelector('.epoch-projects');
-            epochProjects.querySelectorAll('.epoch-label').forEach(label => {
-                label.querySelectorAll('.sub-column').forEach(subColumn => {
-                    subColumn.innerHTML = ''; // Clear existing projects
-                });
-            });
-        
-            // Create a Set to track added projects
-            const addedProjects = new Set();
-        
-            // Distribute projects into epoch subcolumns
-            document.querySelectorAll('.project-box').forEach(projectBox => {
-                const projectId = projectBox.getAttribute('data-project'); // Unique identifier
-                const projectEpoch = projectBox.getAttribute('data-epoch');
-                const epochLabel = epochProjects.querySelector(`.epoch-label[data-epoch="${projectEpoch}"]`);
-        
-                // Skip if the project has already been added
-                if (!epochLabel || addedProjects.has(projectId)) return;
-        
-                const subColumns = epochLabel.querySelectorAll('.sub-column');
-                const leastFilledColumn = Array.from(subColumns).reduce(
-                    (minCol, col) =>
-                        col.children.length < minCol.children.length ? col : minCol,
-                    subColumns[0]
-                );
-        
-                // Clone project box and add click events
-                const clonedProject = projectBox.cloneNode(true);
-                leastFilledColumn.appendChild(clonedProject);
-                addClickEventToProjectBox(clonedProject);
-        
-                // Mark the project as added
-                addedProjects.add(projectId);
-            });
-        
-            // Hide all year columns initially
-            yearColumns.forEach(yearColumn => {
-                yearColumn.style.display = 'none';
-            });
-            
-        
-            reattachTooltipEvents(); // Reattach tooltips after sorting
-    }
-  
-    else if (criteria === 'programmatic') {
-            // Show the programmatic header and hide others
-            timelineHeader.style.display = 'none';
-            alphabeticalHeader.style.display = 'none';
-            scaleHeader.style.display = 'none';
-            epochHeader.style.display = 'none';
-            programmaticHeader.style.display = 'flex';
-                      // Hide or remove the globe container
-            const globeContainer = document.getElementById('globe-container');
-            if (globeContainer) {
-                globeContainer.style.display = 'none'; // Hide the globe
-            }
-            // Hide the year columns
-            const yearColumns = document.querySelectorAll('.year-column');
-            yearColumns.forEach(yearColumn => {
-                yearColumn.style.display = 'none';  // Hide the year columns completely
-            });
-        
-            // Clear all content in the programmatic section
-            const programmaticProjects = document.querySelector('.programmatic-projects');
-            programmaticProjects.querySelectorAll('.programmatic-label').forEach(label => {
-                label.querySelectorAll('.sub-column').forEach(subColumn => {
-                    subColumn.innerHTML = ''; // Clear existing content
-                });
-            });
-
-            // Use a Set to track added projects
-            const addedProjects = new Set();
-
-            // Group projects by category
-            document.querySelectorAll('.project-box').forEach(projectBox => {
-                const projectId = projectBox.getAttribute('data-project'); // Unique identifier
-                const projectCategory = projectBox.getAttribute('data-tags');
-                const categoryLabel = programmaticProjects.querySelector(`.programmatic-label[data-category="${projectCategory}"]`);
-
-                if (!categoryLabel || addedProjects.has(projectId)) return; // Skip duplicates
-
-                const subColumns = categoryLabel.querySelectorAll('.sub-column');
-                const projectsInColumns = Array.from(subColumns).map(subColumn => subColumn.children.length);
-
-                // Find the sub-column with the fewest projects
-                const targetSubColumn = subColumns[projectsInColumns.indexOf(Math.min(...projectsInColumns))];
-
-                if (targetSubColumn) {
-                    // Clone the project box and append it
-                    const clonedProject = projectBox.cloneNode(true);
-                    targetSubColumn.appendChild(clonedProject);
-
-                    // Add to Set to prevent duplication
-                    addedProjects.add(projectId);
-
-                    // Reattach hover and click events
-                    addClickEventToProjectBox(clonedProject);
-                }
-            });
-
-        // Reattach tooltips or any additional events
-        reattachTooltipEvents();
-
-    }
-        
-     else if (criteria === 'scale') {
-        // Hide other headers
-        timelineHeader.style.display = 'none';
-        alphabeticalHeader.style.display = 'none';
-        programmaticHeader.style.display = 'none';
-        epochHeader.style.display = 'none';
-        scaleHeader.style.display = 'flex'; // Show scale header
-
-       // Hide or remove the globe container
-       const globeContainer = document.getElementById('globe-container');
-       if (globeContainer) {
-           globeContainer.style.display = 'none'; // Hide the globe
-       }
-        // Clear all content in the project subcolumns
-        const scaleProjects = document.querySelector('.scale-projects');
-        scaleProjects.querySelectorAll('.scale-label').forEach(label => {
-            label.querySelectorAll('.sub-column').forEach(subColumn => {
-                subColumn.innerHTML = ''; // Clear existing projects
-            });
-        });
-    
-        // Create a Set to track added projects
-        const addedProjects = new Set();
-    
-        // Distribute projects into scale subcolumns
-        document.querySelectorAll('.project-box').forEach(projectBox => {
-            const projectId = projectBox.getAttribute('data-project'); // Unique identifier
-            const projectScale = projectBox.getAttribute('data-scale');
-            const scaleLabel = scaleProjects.querySelector(`.scale-label[data-scale="${projectScale}"]`);
-    
-            // Skip if the project has already been added
-            if (!scaleLabel || addedProjects.has(projectId)) return;
-    
-            const subColumns = scaleLabel.querySelectorAll('.sub-column');
-            const leastFilledColumn = Array.from(subColumns).reduce(
-                (minCol, col) =>
-                    col.children.length < minCol.children.length ? col : minCol,
-                subColumns[0]
-            );
-    
-            // Clone project box and add click events
-            const clonedProject = projectBox.cloneNode(true);
-            leastFilledColumn.appendChild(clonedProject);
-            addClickEventToProjectBox(clonedProject);
-    
-            // Mark the project as added
-            addedProjects.add(projectId);
-        });
-    
-        // Hide all year columns initially
-        yearColumns.forEach(yearColumn => {
-            yearColumn.style.display = 'none';
-        });
-    
-        reattachTooltipEvents(); // Reattach tooltips after sorting
-    
-    }
-    
-    else {
-            // Show only the timeline header
-            timelineHeader.style.display = 'grid';
-            alphabeticalHeader.style.display = 'none';
-            programmaticHeader.style.display = 'none';
-            scaleHeader.style.display = 'none';
-            epochHeader.style.display = 'none'; // Ensure epoch header is hidden
-        
-            // Restore year columns for chronological view
-            yearColumns.forEach(yearColumn => {
-                yearColumn.style.display = 'flex';
-                gallery.appendChild(yearColumn); // Restore original order in the DOM
-            });
-        
-            // Hide the globe container if it exists
-            const globeContainer = document.getElementById('globe-container');
-            if (globeContainer) {
-                globeContainer.style.display = 'none';
-            }
-    }
-        
-     };
-
-
-function setActiveButton(button) {
-    const buttons = document.querySelectorAll('.sorting-bar button');
-    buttons.forEach(btn => btn.classList.remove('active')); // Remove 'active' from all buttons
-    button.classList.add('active'); // Add 'active' to the clicked button
+function getProjectKey(project, filter) {
+    return `project-${project.id}-${filterConfigs[filter].getHeader(project)}`;
 }
 
-document.addEventListener("DOMContentLoaded", function () {
-    // Show preloader initially
-    const preloader = document.getElementById("preloader");
-    document.body.classList.add("loading"); // Prevent scrolling during load
+function createProjectIcon(project, filter) {
+    const projectIcon = document.createElement('div');
+    projectIcon.className = 'project-icon';
+    projectIcon.title = project.title;
+    projectIcon.dataset.layoutId = `project-${project.id}`;
+    
+    // Create and set up the main image
+    const img = document.createElement('img');
+    img.src = project.imageUrl;
+    img.alt = project.title;
+    img.className = 'project-icon-image';
+    img.loading = 'lazy';
+    
+    // Create the hover cover image
+    const hoverImg = document.createElement('img');
+    hoverImg.src = project.coverImage || project.imageUrl;
+    hoverImg.alt = project.title;
+    hoverImg.className = 'project-icon-hover';
+    hoverImg.loading = 'lazy';
+    
+    // Error handling
+    img.onerror = () => {
+        img.src = '/placeholder.png';
+        console.warn(`Failed to load image for project: ${project.title}`);
+    };
+    
+    hoverImg.onerror = () => {
+        hoverImg.src = project.imageUrl;
+    };
+    
+    projectIcon.appendChild(img);
+    projectIcon.appendChild(hoverImg);
+    return projectIcon;
+}
+function openProjectModal(project) {
+    const modal = document.getElementById('projectModal');
+    
+    // Force display and scroll reset
+    modal.style.display = 'block';
+    modal.scrollTo({
+        top: 0,
+        left: 0,
+        behavior: 'instant'
+    });
+    
+    window.scrollTo({
+        top: 0,
+        left: 0,
+        behavior: 'instant'
+    });
+    
+    modal.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
+    document.body.scrollTop = 0;
 
-    // Select all sorting buttons
-    const buttons = document.querySelectorAll(".sorting-bar button");
+    // Set the cover image
+    document.getElementById('projectCoverImage').src = project.coverImage;
+    document.getElementById('projectIconImage').src = project.imageUrl;
 
-    // Ensure the chronological button is active by default
-    const chronologicalButton = document.querySelector(".sorting-bar button:nth-child(1)");
-    if (chronologicalButton) {
-        setActiveButton(chronologicalButton);
-        sortProjects('chronological'); // Initialize with chronological sorting
+    // Set project details
+    document.getElementById('projectTitle').textContent = project.title;
+    document.getElementById('projectLocation').textContent = project.location || 'N/A';
+    document.getElementById('projectDate').textContent = project.year || 'N/A';
+    document.getElementById('projectClientValue').textContent = project.client || 'N/A';
+    document.getElementById('projectTypologyValue').textContent = project.program || 'N/A';
 
-        // Hide other headers explicitly
-        const alphabeticalHeader = document.querySelector('.alphabetical-header');
-        const programmaticHeader = document.querySelector('.programmatic-header');
-        const scaleHeader = document.querySelector('.scale-header');
-        const epochHeader = document.getElementById('epochTimeline');
-        const globeContainer = document.getElementById('globe-container');
+    // Set description section
+    document.getElementById('projectDescriptionImage').src = project.descriptionImage || '';
+    document.getElementById('descriptionParagraph1').textContent = project.description?.paragraph1 || 
+        "The project's first conceptual framework emphasizes innovative design solutions that respond to both environmental and social contexts.";
+    document.getElementById('descriptionParagraph2').textContent = project.description?.paragraph2 || 
+        "Our approach integrates sustainable practices with modern functionality, resulting in spaces that are both environmentally conscious and aesthetically striking.";
+    document.getElementById('descriptionParagraph3').textContent = project.description?.paragraph3 || 
+        "The final outcome represents a harmonious blend of form and function, where each design element serves a purpose while contributing to the overall architectural narrative.";
 
-        if (alphabeticalHeader) alphabeticalHeader.style.display = 'none';
-        if (programmaticHeader) programmaticHeader.style.display = 'none';
-        if (scaleHeader) scaleHeader.style.display = 'none';
-        if (epochHeader) epochHeader.style.display = 'none';
-        if (globeContainer) globeContainer.style.display = 'none';
-    } else {
-        console.error("Chronological button not found.");
-    }
+    // Set team members section
+    document.getElementById('teamLabel').textContent = "TEAM:";
+    document.getElementById('teamMembers').textContent = project.teamMembers || 
+        "Team members information not available";
 
-    // Add click event listeners to all sorting buttons
-    buttons.forEach((button) => {
-        button.addEventListener("click", function () {
-            const criteria = this.textContent.toLowerCase(); // Derive criteria from button text
-            setActiveButton(this); // Highlight the active button
-            sortProjects(criteria); // Sort projects based on the clicked button
-        });
+    // Update project links
+    const linksContainer = document.querySelector('.project-links');
+    linksContainer.innerHTML = ''; // Clear existing links
+
+    const projectLinks = [
+        { href: project.threeDLink, src: project.linkImages?.threeD, alt: '3D View' },
+        { href: project.animationLink, src: project.linkImages?.animation, alt: 'Animation' },
+        { href: project.drawingLink, src: project.linkImages?.drawing, alt: 'Drawings' },
+        { href: project.visualLink, src: project.linkImages?.visual, alt: 'Visuals' },
+        { href: project.presentationLink, src: project.linkImages?.presentation, alt: 'Presentation' }
+    ];
+
+    projectLinks.filter(link => link.href && link.src).forEach(link => {
+        const anchor = document.createElement('a');
+        anchor.href = link.href;
+        anchor.target = '_blank';
+
+        const image = document.createElement('img');
+        image.src = link.src;
+        image.alt = link.alt;
+
+        anchor.appendChild(image);
+        linksContainer.appendChild(anchor);
     });
 
-    // Automatically hide the preloader and fade in the page
+    // Add Gallery Images
+    const galleryContainer = document.querySelector('.gallery-container');
+    galleryContainer.innerHTML = ''; // Clear existing images
+
+    // Check if project.galleryImages exists and is an array
+    if (project.galleryImages && Array.isArray(project.galleryImages)) {
+        project.galleryImages.forEach(imageUrl => {
+            const imageContainer = document.createElement('div');
+            imageContainer.className = 'gallery-image-container';
+
+            const image = document.createElement('img');
+            image.src = imageUrl;
+            image.className = 'gallery-image';
+            image.alt = 'Project Gallery Image';
+
+            // Add loading state
+            image.onload = () => {
+                imageContainer.classList.add('loaded');
+            };
+            image.onerror = () => {
+                imageContainer.classList.add('error');
+            };
+
+            imageContainer.appendChild(image);
+            galleryContainer.appendChild(imageContainer);
+        });
+    }
+
+    // Remove any existing event listeners
+    const closeButton = modal.querySelector('.close-modal');
+    const homeButton = modal.querySelector('.home-modal');
+    const oldKeydownHandler = modal.keydownHandler;
+    if (oldKeydownHandler) {
+        document.removeEventListener('keydown', oldKeydownHandler);
+    }
+
+    const closeModalAndReset = () => {
+        modal.style.display = 'none';
+        modal.scrollTo({
+            top: 0,
+            left: 0,
+            behavior: 'instant'
+        });
+        window.scrollTo({
+            top: 0,
+            left: 0,
+            behavior: 'instant'
+        });
+        modal.scrollTop = 0;
+        document.documentElement.scrollTop = 0;
+        document.body.scrollTop = 0;
+        document.body.style.overflow = 'auto';
+        document.documentElement.style.scrollBehavior = 'auto';
+    };
+
+    closeButton.onclick = closeModalAndReset;
+    homeButton.onclick = closeModalAndReset;
+
+    // Add keyboard navigation for closing modal
+    const keydownHandler = function(event) {
+        if (event.key === 'Escape') {
+            closeModalAndReset();
+            document.removeEventListener('keydown', keydownHandler);
+        }
+    };
+    modal.keydownHandler = keydownHandler;
+    document.addEventListener('keydown', keydownHandler);
+
+    // Prevent body scrolling when modal is open
+    document.body.style.overflow = 'hidden';
+
+    // Add smooth scrolling after initial position is set
     setTimeout(() => {
-        if (preloader) {
-            preloader.style.display = "none";
-        }
-        document.body.classList.add("loaded"); // Trigger fade-in effect
-        document.body.classList.remove("loading"); // Allow scrolling after load
-    }, 200); // 2 seconds delay
-});
+        document.documentElement.style.scrollBehavior = 'smooth';
+    }, 100);
 
-
-
-// Create the tooltip element
-const tooltip = document.createElement("div");
-tooltip.className = "tooltip";
-document.body.appendChild(tooltip);
-
-// Handle mouse hover and move for project symbols
-document.querySelectorAll('.project-box').forEach((box) => {
-    box.addEventListener('mouseenter', function () {
-        const title = this.getAttribute('data-title') || 'Untitled Project';
-        tooltip.textContent = title;
-        tooltip.style.display = "block";
-    });
-
-    box.addEventListener('mousemove', function (event) {
-        tooltip.style.left = `${event.pageX + 10}px`;
-        tooltip.style.top = `${event.pageY + 10}px`;
-    });
-
-    box.addEventListener('mouseleave', function () {
-        tooltip.style.display = "none";
-    });
-});
-function reattachTooltipEvents() {
-    const tooltip = document.querySelector(".tooltip");
-
-    document.querySelectorAll('.project-box').forEach((box) => {
-        box.addEventListener('mouseenter', function () {
-            const title = this.getAttribute('data-title') || 'Untitled Project';
-            tooltip.textContent = title;
-            tooltip.style.display = "block";
+    // Force one final scroll to top after a slight delay
+    setTimeout(() => {
+        modal.scrollTo({
+            top: 0,
+            left: 0,
+            behavior: 'instant'
         });
-
-        box.addEventListener('mousemove', function (event) {
-            tooltip.style.left = `${event.pageX + 10}px`;
-            tooltip.style.top = `${event.pageY + 10}px`;
-        });
-
-        box.addEventListener('mouseleave', function () {
-            tooltip.style.display = "none";
-        });
-    });
+    }, 50);
 }
-function updateModal(projectBox) {
-    const newImage = projectBox.getAttribute('data-new-image');
-    if (newImage) {
-        projectImage.src = newImage;
-        console.log('Modal image updated to:', newImage);
-    } else {
-        console.error('Missing data-new-image for project:', projectBox);
+
+
+function closeProjectModal() {
+    const modal = document.getElementById('projectModal');
+    modal.style.display = 'none';
+}
+
+document.querySelector('.close-modal').addEventListener('click', closeProjectModal);
+
+document.getElementById('projectGrid').addEventListener('click', event => {
+    if (event.target.closest('.project-icon')) {
+        const projectId = event.target.closest('.project-icon').dataset.layoutId.split('-')[1];
+        const project = projects.find(p => p.id === parseInt(projectId, 10));
+        openProjectModal(project);
     }
-}
-document.addEventListener("DOMContentLoaded", function () {
-    // Get tab and content elements
-    const infoSectionLink = document.getElementById("infoSectionLink"); // Main INFO button
-    const newsTabLink = document.getElementById("newsTabLink"); // Modal NEWS tab
-    const aboutTabLink = document.getElementById("aboutTabLink"); // Modal ABOUT tab
-    const newsContent = document.getElementById("newsContent");
-    const aboutContent = document.getElementById("aboutContent");
-    const closeInfoModal = document.getElementById("closeInfoSectionModal");
-    const infoSectionModal = document.getElementById("infoSectionModal");
-
-    // Main INFO button click handler
-    infoSectionLink.addEventListener("click", function (event) {
-        event.preventDefault();
-        infoSectionModal.style.display = "block"; // Show the modal
-        // Switch to NEWS content
-        newsContent.style.display = "block";
-        aboutContent.style.display = "none";
-        newsTabLink.classList.add("active");
-        aboutTabLink.classList.remove("active");
-    });
-
-    // Tab switching logic
-    newsTabLink.addEventListener("click", function (event) {
-        event.preventDefault();
-        newsContent.style.display = "block";
-        aboutContent.style.display = "none";
-        newsTabLink.classList.add("active");
-        aboutTabLink.classList.remove("active");
-    });
-
-    aboutTabLink.addEventListener("click", function (event) {
-        event.preventDefault();
-        newsContent.style.display = "none";
-        aboutContent.style.display = "block";
-        aboutTabLink.classList.add("active");
-        newsTabLink.classList.remove("active");
-    });
-
-    // Close modal logic
-    closeInfoModal.addEventListener("click", function () {
-        infoSectionModal.style.display = "none";
-    });
 });
+
+function updateGrid(activeFilter) {
+    const grid = document.getElementById('projectGrid');
+    const oldIcons = Array.from(grid.querySelectorAll('.project-icon'));
+    const oldPositions = new Map();
+
+    // Store old positions
+    oldIcons.forEach(icon => {
+        const rect = icon.getBoundingClientRect();
+        oldPositions.set(icon.dataset.layoutId, {
+            left: rect.left,
+            top: rect.top,
+            width: rect.width,
+            height: rect.height,
+        });
+    });
+    if (activeFilter === 'LOCATION') {
+        console.log('Location filter active');
+        grid.innerHTML = '';
+        grid.classList.add('globe-view'); // Add this line
+        
+        try {
+            const { renderer, animate, resizeHandler } = createGlobe();
+            console.log('Globe created successfully:', renderer);
+            
+            if (renderer && renderer.domElement) {
+                grid.appendChild(renderer.domElement);
+                console.log('Renderer appended to grid');
+                animate();
+                window.addEventListener('resize', resizeHandler);
+            } else {
+                console.error('Renderer or domElement is undefined');
+            }
+        } catch (error) {
+            console.error('Error setting up globe:', error);
+        }
+        return;
+    } else {
+        grid.classList.remove('globe-view'); // Add this line
+    }
+    // Reset styles for other views
+    grid.style.width = '';
+    grid.style.height = '';
+    grid.style.position = '';
+    grid.style.overflow = '';
+    grid.style.margin = '';
+    grid.style.marginTop = '';
+
+    // Clear current grid content
+    grid.innerHTML = '';
+
+    // Generate new layout
+    const newIcons = [];
+    filterConfigs[activeFilter].headers.forEach(header => {
+        const column = document.createElement('div');
+        column.className = 'column';
+        column.style.width = `${getColumnWidth(filterConfigs[activeFilter].headers.length)}px`;
+
+        const projectStack = document.createElement('div');
+        projectStack.className = 'project-stack';
+
+        const filteredProjects = projects.filter(
+            project => filterConfigs[activeFilter].getHeader(project) === header
+        );
+
+        filteredProjects.forEach(project => {
+            const projectIcon = createProjectIcon(project, activeFilter);
+            projectStack.appendChild(projectIcon);
+            newIcons.push(projectIcon);
+        });
+
+        const headerDiv = document.createElement('div');
+        headerDiv.className = 'header';
+        headerDiv.textContent = header;
+
+        column.appendChild(projectStack);
+        column.appendChild(headerDiv); // Add header to column
+        grid.appendChild(column); // Add column to grid
+    });
+
+    // Store new positions and animate
+    newIcons.forEach(icon => {
+        const layoutId = icon.dataset.layoutId;
+        const rect = icon.getBoundingClientRect();
+        const oldPos = oldPositions.get(layoutId);
+
+        if (oldPos) {
+            // Set initial transform for animation
+            const deltaX = oldPos.left - rect.left;
+            const deltaY = oldPos.top - rect.top;
+            const scaleX = oldPos.width / rect.width;
+            const scaleY = oldPos.height / rect.height;
+
+            icon.style.transform = `translate(${deltaX}px, ${deltaY}px) scale(${scaleX}, ${scaleY})`;
+            icon.style.opacity = '0';
+
+            // Force reflow
+            icon.offsetHeight;
+
+            // Transition to new position
+            requestAnimationFrame(() => {
+                icon.style.transform = 'translate(0, 0) scale(1, 1)';
+                icon.style.opacity = '1';
+                icon.classList.add('transitioning');
+            });
+        } else {
+            // New icons fade in
+            icon.style.opacity = '0';
+            icon.style.transform = 'scale(0.8)';
+            icon.classList.add('transitioning');
+            requestAnimationFrame(() => {
+                icon.style.opacity = '1';
+                icon.style.transform = 'scale(1)';
+            });
+        }
+    });
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    const filterButtons = document.querySelectorAll('.filter-btn');
+    const projectGrid = document.getElementById('projectGrid');    
+    let activeHoverArea = null;
+    const tabButtons = document.querySelectorAll('.tab-button');
+    const tabContents = document.querySelectorAll('.tab-content');
+    const resetTabs = () => {
+        // Remove active class from all buttons and contents
+        tabButtons.forEach(btn => btn.classList.remove('active'));
+        tabContents.forEach(content => content.classList.remove('active'));
+        
+        // Set the first tab as active (assuming you want the first tab as default)
+        if (tabButtons.length > 0 && tabContents.length > 0) {
+            tabButtons[0].classList.add('active');
+            const firstTabId = tabButtons[0].dataset.tab;
+            document.getElementById(firstTabId).classList.add('active');
+        }
+    };
+    tabButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            // Remove active class from all buttons and contents
+            tabButtons.forEach(btn => btn.classList.remove('active'));
+            tabContents.forEach(content => content.classList.remove('active'));
+
+            // Add active class to clicked button and corresponding content
+            button.classList.add('active');
+            const tabId = button.dataset.tab;
+            document.getElementById(tabId).classList.add('active');
+        });
+    });
+
+    const infoTab = document.querySelector('.info-tab');
+    const infoModal = document.getElementById('infoModal');
+    const infoHomeButton = infoModal.querySelector('.home-modal');
+    const infoCloseButton = infoModal.querySelector('.info-close');
+
+        // Info Modal Open
+        infoTab.addEventListener('click', () => {
+            resetTabs(); // Reset tabs when opening the modal
+            infoModal.style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+        });
+        infoHomeButton.onclick = () => {
+            infoModal.style.display = 'none';
+            window.scrollTo(0, 0);
+            document.body.style.overflow = 'auto';
+            resetTabs();
+        };
+        infoCloseButton.addEventListener('click', () => {
+            infoModal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+            resetTabs();
+        });
+
+        document.addEventListener('keydown', (event) => {
+            if (event.key === 'Escape' && infoModal.style.display === 'flex') {
+                infoModal.style.display = 'none';
+                document.body.style.overflow = 'auto';
+                resetTabs();
+            }
+        });
+
+        projectGrid.addEventListener('mousemove', (event) => {
+            const hoverText = document.querySelector('.hover-text');
+            const projectIcon = event.target.closest('.project-icon');
+            
+            if (hoverText && projectIcon) {
+                // Changed to use projectIcon bounds instead of hover image
+                const iconRect = projectIcon.getBoundingClientRect();
+                
+                const isWithinHoverArea = (
+                    event.clientX >= iconRect.left &&
+                    event.clientX <= iconRect.right &&
+                    event.clientY >= iconRect.top &&
+                    event.clientY <= iconRect.bottom
+                );
+                
+                if (isWithinHoverArea) {
+                    hoverText.style.left = `${event.pageX + 15}px`;
+                    hoverText.style.top = `${event.pageY - 10}px`;
+                    hoverText.style.opacity = '1';
+                } else {
+                    hoverText.style.opacity = '0';
+                }
+            }
+        });
+    // Existing Project Grid Mouse Over Handler
+    projectGrid.addEventListener('mouseover', (event) => {
+        const projectIcon = event.target.closest('.project-icon');
+        
+        if (projectIcon && !activeHoverArea) {
+            activeHoverArea = projectIcon;
+            const hoverText = document.createElement('div');
+            hoverText.classList.add('hover-text');
+            hoverText.innerText = projectIcon.getAttribute('title');
+            document.body.appendChild(hoverText);
+
+            projectIcon.dataset.originalTitle = projectIcon.getAttribute('title');
+            projectIcon.removeAttribute('title');
+
+            projectIcon.classList.add('hover-active');
+        }
+    });
+
+    // Existing Project Grid Mouse Out Handler
+    projectGrid.addEventListener('mouseout', (event) => {
+        const projectIcon = event.target.closest('.project-icon');
+        const relatedTarget = event.relatedTarget;
+        
+        if (projectIcon && 
+            !projectIcon.contains(relatedTarget) && 
+            !relatedTarget?.closest('.project-icon-hover')) {
+            
+            const hoverText = document.querySelector('.hover-text');
+            if (hoverText) {
+                hoverText.remove();
+            }
+
+            if (activeHoverArea) {
+                if (activeHoverArea.dataset.originalTitle) {
+                    activeHoverArea.setAttribute('title', activeHoverArea.dataset.originalTitle);
+                    delete activeHoverArea.dataset.originalTitle;
+                }
+                activeHoverArea.classList.remove('hover-active');
+                activeHoverArea = null;
+            }
+        }
+    });
+
+    // Existing Filter Buttons Handler
+    filterButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            filterButtons.forEach(btn => btn.classList.remove('active'));
+            button.classList.add('active');
+            updateGrid(button.dataset.filter);
+        });
+    });
+
+    updateGrid('CHRONOLOGICAL');
+});
+window.addEventListener('resize', () => {
+    const activeFilter = document.querySelector('.filter-btn.active').dataset.filter;
+    updateGrid(activeFilter);
+});
+
