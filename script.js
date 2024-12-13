@@ -1653,7 +1653,7 @@ const projects = [
 { 
     id: 32,
     title: 'RIXOS BRANDED RESIDENCE',  
-    abbr: 'Rix', 
+    abbr: 'RIX', 
     image: "./ICON/RIX.svg",
     coverImage: 'https://aedasme.egnyte.com/opendocument.do?entryId=47345831-0b04-4495-b0db-1a099c4aab27&forceDownload=false&thumbNail=true&w=1200&h=1200&type=proportional&preview=true&prefetch=true',
     imageUrl : 'https://aedasme.egnyte.com/opendocument.do?entryId=ad18a64c-2b96-4761-9e29-2764e082c03f&forceDownload=false&thumbNail=true&w=1200&h=1200&type=proportional&preview=true&prefetch=true',
@@ -1693,12 +1693,12 @@ const projects = [
 
 },
 { 
-    id: 34,
+    id: 33,
     title: 'LIWA CAMPSITE',  
     abbr: 'LIW', 
     image: "./ICON/LIW.svg",
     coverImage: 'https://aedasme.egnyte.com/opendocument.do?entryId=d7b6a4cf-d5da-4a85-991c-0b8b544e4a93&forceDownload=false&thumbNail=true&w=1200&h=1200&type=proportional&preview=true&prefetch=true',
-    imageUrl : 'https://aedasme.egnyte.com/opendocument.do?entryId=d7b6a4cf-d5da-4a85-991c-0b8b544e4a93&forceDownload=false&thumbNail=true&w=1200&h=1200&type=proportional&preview=true&prefetch=true',
+    imageUrl : 'https://aedasme.egnyte.com/opendocument.do?entryId=f436e721-85b6-43d3-bc02-fdbc9c9e393c&forceDownload=false&thumbNail=true&w=1200&h=1200&type=proportional&preview=true&prefetch=true',
     year: 2022, 
     client: 'MODON',
     program: 'HOSPITALITY', 
@@ -1733,8 +1733,395 @@ const projects = [
 
 },
 
+{ 
+    id: 34,
+    title: 'THE NOOK (WASL GATE PHASE 4)',  
+    abbr: 'NOK', 
+    image: "./ICON/NOK.svg",
+    coverImage: 'https://aedasme.egnyte.com/opendocument.do?entryId=419d8a25-b964-4b60-8215-909ba96846c8&forceDownload=false&thumbNail=true&w=1200&h=1200&type=proportional&preview=true&prefetch=true',
+    imageUrl : 'https://aedasme.egnyte.com/opendocument.do?entryId=ca73f420-cca2-4155-abe8-c7dd4608b01a&forceDownload=false&thumbNail=true&w=1200&h=1200&type=proportional&preview=true&prefetch=true',
+    year: 2018,
+    client: 'WASL',
+    program: 'RESIDENTIAL', 
+    typology: 'RESIDENTIAL', 
+    location: 'DUBAI, UAE',
+    scale: 'M', 
+    epoch: 'PRESENT', 
+    hoverImage: "./hover/NOK.png",
+    presentationLink: 'https://aedasme.egnyte.com/app/index.do#storage/file/df0dc95d-f747-4f2b-ae30-7ba50421d813',
+    drawingLink: 'https://aedasme.egnyte.com/app/index.do#storage/search/?type=file&location=%2FShared%2FDesign%20Index%2F2.%20Hospitality%2F2B.%20Branded%20Hotel%20Apartment%2FDrawing&metadata=W3sibmFtZXNwYWNlIjoibGlicmFyeSByZXNvdXJjZSIsImtleSI6InByb2plY3QgbmFtZSIsIm9wZXJhdG9yIjoiSU4iLCJ2YWx1ZXMiOlsiU0xTIFdPVyBIb3RlbCBBcGFydG1lbnQiXX0seyJuYW1lc3BhY2UiOiJsaWJyYXJ5IHJlc291cmNlIiwia2V5IjoiZmlsdGUgdHlwZSIsIm9wZXJhdG9yIjoiSU4iLCJ2YWx1ZXMiOlsiLkRXRyJdfV0%3D',
+    visualLink: 'https://aedasme.egnyte.com/app/index.do#storage/file/dc703231-65cf-4e88-a864-e390ea13297e',
+    linkImages : {
+        presentation: 'https://aedasme.egnyte.com/opendocument.do?entryId=f339273d-0467-474d-a996-4e8b7360dc3e&forceDownload=false&thumbNail=true&w=1200&h=1200&type=proportional&preview=true&prefetch=true',
+        drawing: 'https://aedasme.egnyte.com/opendocument.do?entryId=d235bc93-b53a-4741-9b80-56a46fdc50f2&forceDownload=false&thumbNail=true&w=1200&h=1200&type=proportional&preview=true&prefetch=true',
+        visual: 'https://aedasme.egnyte.com/opendocument.do?entryId=d349d403-6b9e-474d-a14a-e224b80bd9e8&forceDownload=false&thumbNail=true&w=1200&h=1200&type=proportional&preview=true&prefetch=true',
+    },
+    // New fields for the description section
+    descriptionImage : 'https://aedasme.egnyte.com/opendocument.do?entryId=aebec6fe-12f6-4e8c-9bac-9ef7a4b9b62f&forceDownload=false&thumbNail=true&w=1200&h=1200&type=proportional&preview=true&prefetch=true', 
+    description: {
+        paragraph1: "The Rixos Financial Centre Road Residences, redefines Dubai’s skyline as the second tallest residential tower in the city, standing 329 meters tall. As the world’s first standalone Rixos-branded residences, this landmark development offers an architectural experience that fuses urban sophistication with luxury living.",
+        paragraph2: "Occupying a corner plot in Downtown Dubai, the tower offers breathtaking views towards Burj Khalifa and Dubai Canal. The tower is divided into three distinct volumes, offering a mix of one-to-four-bedroom apartments and luxurious penthouses. Residents enjoy upscale amenities like rooftop leisure spaces, fitness centers, and world-class entertainment."
+    },
+    teamMembers: "AFDAFDSFA, AFSDFADFSAF, AFSDFADSFAFD, BOB SMITH, ADRIAN SMITH, BOB SMITH, SKI VILLAGE, AFDAFDSFA, AFSDFADFSAF, AFDAFDSFA, AFSDFADFSAF, AFDAFDSFA, AFSDFADFSAF, AFSDFADSFAFD, BOB SMITH, ADRIAN SMITH, BOB SMITH, SKI VILLAGE, AFDAFDSFA, AFSDFADFSAF, AFDAFDSFA, AFSDFADFSAF",
+
+    galleryImages: [
+        "https://aedasme.egnyte.com/opendocument.do?entryId=2d0f04c6-7a73-427c-9d3f-7c2e50040b19&forceDownload=false&thumbNail=true&w=1200&h=1200&type=proportional&preview=true&prefetch=true"
+    ]
+
+},
+{ 
+    id: 35,
+    title: 'SIX SENSE FALCON NEST',  
+    abbr: 'Six', 
+    image: "./ICON/SIX.svg",
+    coverImage: 'https://aedasme.egnyte.com/opendocument.do?entryId=f2ada69d-e5e1-4258-84de-bc9b1becf8fa&forceDownload=false&thumbNail=true&w=1200&h=1200&type=proportional&preview=true&prefetch=true',
+    imageUrl : 'https://aedasme.egnyte.com/opendocument.do?entryId=272eb7d0-5cff-4afd-a343-8634a2530d56&forceDownload=false&thumbNail=true&w=1200&h=1200&type=proportional&preview=true&prefetch=true',
+    year: 2023, 
+    client: 'DGCL',
+    program: 'HOSPITALITY', 
+    typology: 'HOSPITALITY', 
+    location: 'KSA, SAUDI ARABIA',
+    scale: 'L', 
+    epoch: 'PAST', 
+    hoverImage: "./hover/SIX.png",
+    presentationLink: 'https://aedasme.egnyte.com/navigate/file/cdbf8753-a84e-4889-8d88-27d1bff01492',
+    visualLink: 'https://aedasme.egnyte.com/navigate/file/0cf8ba56-7d0f-4a7d-9651-aa9b4ada226f',
+    drawingLink: 'https://aedasme.egnyte.com/app/index.do#storage/search/?type=file&location=%2FShared%2FDesign%20Index&metadata=W3sibmFtZXNwYWNlIjoibGlicmFyeSByZXNvdXJjZSIsImtleSI6InByb2plY3QgbmFtZSIsIm9wZXJhdG9yIjoiSU4iLCJ2YWx1ZXMiOlsiRmFsY29ucyBOZXN0IFNpeCBTZW5zZXMiXX0seyJuYW1lc3BhY2UiOiJsaWJyYXJ5IHJlc291cmNlIiwia2V5IjoiZmlsdGUgdHlwZSIsIm9wZXJhdG9yIjoiSU4iLCJ2YWx1ZXMiOlsiLkRXRyJdfV0%3D',
+    threeDLink: 'https://aedasme.egnyte.com/navigate/file/6816614d-1bc0-4ff9-b0cd-3343a4d27c87',
+    linkImages : {
+        presentation: 'https://aedasme.egnyte.com/opendocument.do?entryId=f339273d-0467-474d-a996-4e8b7360dc3e&forceDownload=false&thumbNail=true&w=1200&h=1200&type=proportional&preview=true&prefetch=true',
+        visual: 'https://aedasme.egnyte.com/opendocument.do?entryId=d349d403-6b9e-474d-a14a-e224b80bd9e8&forceDownload=false&thumbNail=true&w=1200&h=1200&type=proportional&preview=true&prefetch=true',
+        drawing: 'https://aedasme.egnyte.com/opendocument.do?entryId=d235bc93-b53a-4741-9b80-56a46fdc50f2&forceDownload=false&thumbNail=true&w=1200&h=1200&type=proportional&preview=true&prefetch=true',
+        threeD: 'https://aedasme.egnyte.com/opendocument.do?entryId=73b9cc45-a7c6-422e-aa36-01b3744bb3f1&forceDownload=false&thumbNail=true&w=1200&h=1200&type=proportional&preview=true&prefetch=true'
+    },
+    // New fields for the description section
+    descriptionImage : 'https://aedasme.egnyte.com/opendocument.do?entryId=919217be-2578-47f7-a62c-31159a0dc24a&forceDownload=false&thumbNail=true&w=1200&h=1200&type=proportional&preview=true&prefetch=true', 
+    description: {
+        paragraph1: "Nabr uses technology and productization to increase the production of apartments available for sale in major cities, starting with SOFA One in San Jose which is co-designed by BIG and slated to break ground in late 2022.",
+        paragraph2: "Located at 98 E San Salvador, residents will be at the heart of SOFA, downtown San Jose's arts district, in close proximity to dining and local entertainment. The development is roughly a mile from Diridon Caltrain Station, one block from San Jose State University, and centrally located near all major tech employers, offering residents abundant access to commuting options.",
+        paragraph3: " "
+    },
+    teamMembers: "AFDAFDSFA, AFSDFADFSAF, AFSDFADSFAFD, BOB SMITH, ADRIAN SMITH, BOB SMITH, SKI VILLAGE, AFDAFDSFA, AFSDFADFSAF, AFDAFDSFA, AFSDFADFSAF, AFDAFDSFA, AFSDFADFSAF, AFSDFADSFAFD, BOB SMITH, ADRIAN SMITH, BOB SMITH, SKI VILLAGE, AFDAFDSFA, AFSDFADFSAF, AFDAFDSFA, AFSDFADFSAF",
+
+    galleryImages: [
+        "https://aedasme.egnyte.com/opendocument.do?entryId=f1927683-e408-48c6-9896-7257de1a6517&forceDownload=false&thumbNail=true&w=1200&h=1200&type=proportional&preview=true&prefetch=true",
+        "https://aedasme.egnyte.com/opendocument.do?entryId=ab8b72c4-337d-485a-a324-790c27aab99c&forceDownload=false&thumbNail=true&w=1200&h=1200&type=proportional&preview=true&prefetch=true",
+        "https://aedasme.egnyte.com/opendocument.do?entryId=423b10af-23af-4d25-827b-08cece7d9dd6&forceDownload=false&thumbNail=true&w=1200&h=1200&type=proportional&preview=true&prefetch=true",
+        "https://aedasme.egnyte.com/opendocument.do?entryId=6b798be1-62a6-4ff8-9fee-45db29f366fc&forceDownload=false&thumbNail=true&w=1200&h=1200&type=proportional&preview=true&prefetch=true"
+    ]
+
+},
+{ 
+    id: 36,
+    title: 'JEDDAH RENAISSANCE VM',  
+    abbr: 'Jed', 
+    image: "./ICON/JED.png",
+    coverImage: 'https://aedasme.egnyte.com/opendocument.do?entryId=f8a26cc4-7ec9-4f3a-b992-94e898c9cd19&forceDownload=false&thumbNail=true&w=1200&h=1200&type=proportional&preview=true&prefetch=true',
+    imageUrl : 'https://aedasme.egnyte.com/opendocument.do?entryId=a2186a44-ea11-44f5-9137-0456bda2d923&forceDownload=false&thumbNail=true&w=1200&h=1200&type=proportional&preview=true&prefetch=true',
+    year: 2023, 
+    client: 'ROSHN',
+    program: 'MASTERPLAN', 
+    typology: 'MASTERPLAN', 
+    location: 'KSA, SAUDI ARABIA',
+    scale: 'XL', 
+    epoch: 'PAST', 
+    hoverImage: "./hover/JED.png",
+    presentationLink: 'https://aedasme.egnyte.com/navigate/file/3310a680-8728-48f4-b680-45f4b0c45493',
+    animationLink: 'https://aedasme.egnyte.com/app/index.do#storage/file/4dbb3b25-7afe-4186-a7c4-c56d483e743f',
+    visualLink: 'https://aedasme.egnyte.com/navigate/file/11860c71-7b8d-4a3d-abcc-8920d5a34057 ',
+    threeDLink: 'https://aedasme.egnyte.com/app/index.do#storage/search/?type=file&location=%2FShared%2FDesign%20Index&metadata=W3sibmFtZXNwYWNlIjoibGlicmFyeSByZXNvdXJjZSIsImtleSI6InByb2plY3QgbmFtZSIsIm9wZXJhdG9yIjoiSU4iLCJ2YWx1ZXMiOlsiSmVkZGFoIFJlbmFpc3NhbmNlIl19LHsibmFtZXNwYWNlIjoibGlicmFyeSByZXNvdXJjZSIsImtleSI6ImRhdGEiLCJvcGVyYXRvciI6IklOIiwidmFsdWVzIjpbIjNEIl19XQ%3D%3D',
+    linkImages : {
+        presentation: 'https://aedasme.egnyte.com/opendocument.do?entryId=f339273d-0467-474d-a996-4e8b7360dc3e&forceDownload=false&thumbNail=true&w=1200&h=1200&type=proportional&preview=true&prefetch=true',
+        visual: 'https://aedasme.egnyte.com/opendocument.do?entryId=d349d403-6b9e-474d-a14a-e224b80bd9e8&forceDownload=false&thumbNail=true&w=1200&h=1200&type=proportional&preview=true&prefetch=true',
+        animation: 'https://aedasme.egnyte.com/opendocument.do?entryId=02f7a926-55fc-429b-969c-6365bdc51f59&forceDownload=false&thumbNail=true&w=1200&h=1200&type=proportional&preview=true&prefetch=true',
+        threeD: 'https://aedasme.egnyte.com/opendocument.do?entryId=73b9cc45-a7c6-422e-aa36-01b3744bb3f1&forceDownload=false&thumbNail=true&w=1200&h=1200&type=proportional&preview=true&prefetch=true'
+    },
+    // New fields for the description section
+    descriptionImage : 'https://aedasme.egnyte.com/opendocument.do?entryId=c2436821-b7bb-401a-9e5f-9dbbe81f9a99&forceDownload=false&thumbNail=true&w=1200&h=1200&type=proportional&preview=true&prefetch=true', 
+    description: {
+        paragraph1: "The SLS WOW Hotel Apartment project in Dubai represents a pinnacle of luxury hospitality design. Completed in 2015, this ambitious development seamlessly integrates contemporary architectural elements with the sophistication expected of the SLS brand. The project's location in Dubai, UAE, serves as a strategic point for both business and leisure travelers.",
+        paragraph2: "The architectural design emphasizes vertical elegance while maintaining a strong connection to its urban context. Each apartment is meticulously crafted to meet the high standards of modern luxury living, featuring premium finishes and state-of-the-art amenities. The building's facade incorporates innovative design elements that respond to the local climate while creating a distinctive visual identity.",
+        paragraph3: "Sustainability and user comfort were key considerations throughout the design process. The project incorporates advanced environmental systems and smart building technologies, setting new standards for hospitality developments in the region. The result is a harmonious blend of luxury, functionality, and sustainable design that caters to the demanding requirements of modern urban living."
+    },
+    teamMembers: "AFDAFDSFA, AFSDFADFSAF, AFSDFADSFAFD, BOB SMITH, ADRIAN SMITH, BOB SMITH, SKI VILLAGE, AFDAFDSFA, AFSDFADFSAF, AFDAFDSFA, AFSDFADFSAF, AFDAFDSFA, AFSDFADFSAF, AFSDFADSFAFD, BOB SMITH, ADRIAN SMITH, BOB SMITH, SKI VILLAGE, AFDAFDSFA, AFSDFADFSAF, AFDAFDSFA, AFSDFADFSAF",
+
+    galleryImages: [
+        "https://aedasme.egnyte.com/opendocument.do?entryId=cea04816-feb1-4618-af3a-de1161656f79&forceDownload=false&w=1200&h=1200&type=proportional&preview=true&prefetch=true",
+        "https://aedasme.egnyte.com/opendocument.do?entryId=9a4ff143-70dc-4614-9f84-05cf48c5b5f7&forceDownload=false&thumbNail=true&w=1200&h=1200&type=proportional&preview=true&prefetch=true",
+        "https://aedasme.egnyte.com/opendocument.do?entryId=b294cd64-d426-431e-8c59-b1af174d0355&forceDownload=false&thumbNail=true&w=1200&h=1200&type=proportional&preview=true&prefetch=true",
+        "https://aedasme.egnyte.com/opendocument.do?entryId=5386379d-bf74-42e9-af53-0b36529322a8&forceDownload=false&thumbNail=true&w=1200&h=1200&type=proportional&preview=true&prefetch=true",
+        "https://aedasme.egnyte.com/opendocument.do?entryId=9ff0d548-ef62-485e-9109-6d3b6a14c682&forceDownload=false&thumbNail=true&w=1200&h=1200&type=proportional&preview=true&prefetch=true",
+        "https://aedasme.egnyte.com/opendocument.do?entryId=e42d2a41-d64d-4190-afbd-4b956328fe31&forceDownload=false&thumbNail=true&w=1200&h=1200&type=proportional&preview=true&prefetch=true"
+
+    ]
+
+},
+{ 
+    id: 37,
+    title: 'DGDA CAPELLA',  
+    abbr: 'CAP', 
+    image: "./ICON/CAP.svg",
+    coverImage: 'https://aedasme.egnyte.com/opendocument.do?entryId=cbded34f-bcc4-433e-a2f3-117a2cff9f89&forceDownload=false&thumbNail=true&w=1200&h=1200&type=proportional&preview=true&prefetch=true',
+    imageUrl : 'https://aedasme.egnyte.com/opendocument.do?entryId=5c45dca9-ae55-4732-bfc2-e75c6b28b68f&forceDownload=false&thumbNail=true&w=1200&h=1200&type=proportional&preview=true&prefetch=true',
+    year: 2020, 
+    client: 'DGCL',
+    program: 'HOSPITALITY', 
+    typology: 'HOSPITALITY', 
+    location: 'KSA, SAUDI ARABIA',
+    scale: 'M', 
+    epoch: 'PAST', 
+    hoverImage: "./hover/CAP.png",
+    presentationLink: 'https://aedasme.egnyte.com/app/index.do#storage/file/139fdc72-8288-41cc-92a6-4486b1260607',
+    drawingLink: 'https://aedasme.egnyte.com/app/index.do#storage/search/?type=file&location=%2FShared%2FDesign%20Index%2F2.%20Hospitality&metadata=W3sibmFtZXNwYWNlIjoibGlicmFyeSByZXNvdXJjZSIsImtleSI6InByb2plY3QgbmFtZSIsIm9wZXJhdG9yIjoiSU4iLCJ2YWx1ZXMiOlsiREdEQSBDYXBlbGxhIl19LHsibmFtZXNwYWNlIjoibGlicmFyeSByZXNvdXJjZSIsImtleSI6ImZpbHRlIHR5cGUiLCJvcGVyYXRvciI6IklOIiwidmFsdWVzIjpbIi5EV0ciXX1d',
+    visualLink: 'https://aedasme.egnyte.com/app/index.do#storage/folder/1ba469d8-e138-4cf6-89f4-44eb8473707c',
+    threeDLink: 'https://aedasme.egnyte.com/app/index.do#storage/file/58aa2999-8e13-4b59-befd-ab35ac140fae',
+    linkImages : {
+        presentation: 'https://aedasme.egnyte.com/opendocument.do?entryId=f339273d-0467-474d-a996-4e8b7360dc3e&forceDownload=false&thumbNail=true&w=1200&h=1200&type=proportional&preview=true&prefetch=true',
+        visual: 'https://aedasme.egnyte.com/opendocument.do?entryId=d349d403-6b9e-474d-a14a-e224b80bd9e8&forceDownload=false&thumbNail=true&w=1200&h=1200&type=proportional&preview=true&prefetch=true',
+        drawing: 'https://aedasme.egnyte.com/opendocument.do?entryId=d235bc93-b53a-4741-9b80-56a46fdc50f2&forceDownload=false&thumbNail=true&w=1200&h=1200&type=proportional&preview=true&prefetch=true',
+        threeD: 'https://aedasme.egnyte.com/opendocument.do?entryId=73b9cc45-a7c6-422e-aa36-01b3744bb3f1&forceDownload=false&thumbNail=true&w=1200&h=1200&type=proportional&preview=true&prefetch=true',
+
+    },
+    // New fields for the description section
+    descriptionImage : 'https://aedasme.egnyte.com/opendocument.do?entryId=72abcc10-4ce2-4cc9-8353-16c052dca496&forceDownload=false&thumbNail=true&w=1200&h=1200&type=proportional&preview=true&prefetch=true', 
+    description: {
+        paragraph1: "The SLS WOW Hotel Apartment project in Dubai represents a pinnacle of luxury hospitality design. Completed in 2015, this ambitious development seamlessly integrates contemporary architectural elements with the sophistication expected of the SLS brand. The project's location in Dubai, UAE, serves as a strategic point for both business and leisure travelers.",
+        paragraph2: "The architectural design emphasizes vertical elegance while maintaining a strong connection to its urban context. Each apartment is meticulously crafted to meet the high standards of modern luxury living, featuring premium finishes and state-of-the-art amenities. The building's facade incorporates innovative design elements that respond to the local climate while creating a distinctive visual identity.",
+        paragraph3: "Sustainability and user comfort were key considerations throughout the design process. The project incorporates advanced environmental systems and smart building technologies, setting new standards for hospitality developments in the region. The result is a harmonious blend of luxury, functionality, and sustainable design that caters to the demanding requirements of modern urban living."
+    },
+    teamMembers: "AFDAFDSFA, AFSDFADFSAF, AFSDFADSFAFD, BOB SMITH, ADRIAN SMITH, BOB SMITH, SKI VILLAGE, AFDAFDSFA, AFSDFADFSAF, AFDAFDSFA, AFSDFADFSAF, AFDAFDSFA, AFSDFADFSAF, AFSDFADSFAFD, BOB SMITH, ADRIAN SMITH, BOB SMITH, SKI VILLAGE, AFDAFDSFA, AFSDFADFSAF, AFDAFDSFA, AFSDFADFSAF",
+
+    galleryImages: [
+        "https://aedasme.egnyte.com/opendocument.do?entryId=e2f7aa75-d34f-468d-bbe7-0e2551950224&forceDownload=false&thumbNail=true&w=1200&h=1200&type=proportional&preview=true&prefetch=true",
+        "https://aedasme.egnyte.com/opendocument.do?entryId=d9799ae7-e2f6-4b56-9e7d-895a404aad2d&forceDownload=false&thumbNail=true&w=1200&h=1200&type=proportional&preview=true&prefetch=true",
+        "https://aedasme.egnyte.com/opendocument.do?entryId=3da27d0c-29fe-4b35-a0ab-c00fd9423ddc&forceDownload=false&thumbNail=true&w=1200&h=1200&type=proportional&preview=true&prefetch=true",
+        "https://aedasme.egnyte.com/opendocument.do?entryId=4acf59bc-8ba1-42d7-b71a-3173b1a9cfaf&forceDownload=false&thumbNail=true&w=1200&h=1200&type=proportional&preview=true&prefetch=true"
+
+    ]
+
+},
+{ 
+    id: 38, 
+    title: 'CORINTHIA RESIDENCE',  
+    abbr: 'Cor', 
+    image: "./ICON/COR.svg",
+    coverImage: 'https://aedasme.egnyte.com/opendocument.do?entryId=d430e449-dc16-43b9-98c5-0906da73eb73&forceDownload=false&thumbNail=true&w=1200&h=1200&type=proportional&preview=true&prefetch=true',
+    imageUrl : 'https://aedasme.egnyte.com/opendocument.do?entryId=e81bcf78-cba3-48f5-ab95-d16e72b93fd2&forceDownload=false&thumbNail=true&w=1200&h=1200&type=proportional&preview=true&prefetch=true',
+    year: 2023, 
+    client: 'UNITED DEVELOPMENT CO.',
+    program: 'RESIDENTIAL',
+    typology: 'RESIDENTIAL', 
+    location: 'QATAR',
+    scale: 'M', 
+    epoch: 'PAST', 
+    hoverImage: "./hover/COR.png",
+    presentationLink: 'https://aedasme.egnyte.com/navigate/file/b470d37d-7309-4711-a6d6-a4ec54c61dfd',
+    visualLink: 'https://aedasme.egnyte.com/navigate/file/9ac4fb2b-3f5a-4771-b415-390602bbb25c',
+    drawingLink: 'https://aedasme.egnyte.com/app/index.do#storage/search/?type=file&location=%2FShared%2FDesign%20Index&metadata=W3sibmFtZXNwYWNlIjoibGlicmFyeSByZXNvdXJjZSIsImtleSI6InByb2plY3QgbmFtZSIsIm9wZXJhdG9yIjoiSU4iLCJ2YWx1ZXMiOlsiQ29yaW50aGlhIFJlc2lkZW5jZSJdfSx7Im5hbWVzcGFjZSI6ImxpYnJhcnkgcmVzb3VyY2UiLCJrZXkiOiJmaWx0ZSB0eXBlIiwib3BlcmF0b3IiOiJJTiIsInZhbHVlcyI6WyIuRFdHIl19XQ%3D%3D',
+    threeDLink: 'https://aedasme.egnyte.com/navigate/file/12d2d573-3fcb-4322-ad93-23950fccdedf',
+    linkImages : {
+        presentation: 'https://aedasme.egnyte.com/opendocument.do?entryId=f339273d-0467-474d-a996-4e8b7360dc3e&forceDownload=false&thumbNail=true&w=1200&h=1200&type=proportional&preview=true&prefetch=true',
+        visual: 'https://aedasme.egnyte.com/opendocument.do?entryId=d349d403-6b9e-474d-a14a-e224b80bd9e8&forceDownload=false&thumbNail=true&w=1200&h=1200&type=proportional&preview=true&prefetch=true',
+        drawing: 'https://aedasme.egnyte.com/opendocument.do?entryId=d235bc93-b53a-4741-9b80-56a46fdc50f2&forceDownload=false&thumbNail=true&w=1200&h=1200&type=proportional&preview=true&prefetch=true',
+        threeD: 'https://aedasme.egnyte.com/opendocument.do?entryId=73b9cc45-a7c6-422e-aa36-01b3744bb3f1&forceDownload=false&thumbNail=true&w=1200&h=1200&type=proportional&preview=true&prefetch=true',
+    },
+
+    // New fields for the description section
+    descriptionImage : 'https://aedasme.egnyte.com/opendocument.do?entryId=819c35e6-b531-47c5-9e2a-88e64cba039e&forceDownload=false&thumbNail=true&w=1200&h=1200&type=proportional&preview=true&prefetch=true', 
+    description: {
+        paragraph1: "The SLS WOW Hotel Apartment project in Dubai represents a pinnacle of luxury hospitality design. Completed in 2015, this ambitious development seamlessly integrates contemporary architectural elements with the sophistication expected of the SLS brand. The project's location in Dubai, UAE, serves as a strategic point for both business and leisure travelers.",
+        paragraph2: "The architectural design emphasizes vertical elegance while maintaining a strong connection to its urban context. Each apartment is meticulously crafted to meet the high standards of modern luxury living, featuring premium finishes and state-of-the-art amenities. The building's facade incorporates innovative design elements that respond to the local climate while creating a distinctive visual identity.",
+        paragraph3: "Sustainability and user comfort were key considerations throughout the design process. The project incorporates advanced environmental systems and smart building technologies, setting new standards for hospitality developments in the region. The result is a harmonious blend of luxury, functionality, and sustainable design that caters to the demanding requirements of modern urban living."
+    },
+    teamMembers: "AFDAFDSFA, AFSDFADFSAF, AFSDFADSFAFD, BOB SMITH, ADRIAN SMITH, BOB SMITH, SKI VILLAGE, AFDAFDSFA, AFSDFADFSAF, AFDAFDSFA, AFSDFADFSAF, AFDAFDSFA, AFSDFADFSAF, AFSDFADSFAFD, BOB SMITH, ADRIAN SMITH, BOB SMITH, SKI VILLAGE, AFDAFDSFA, AFSDFADFSAF, AFDAFDSFA, AFSDFADFSAF",
+
+   
+    galleryImages: [
+        "https://aedasme.egnyte.com/opendocument.do?entryId=b01bb5de-e7e3-4751-a4c1-ba5e16da24b9&forceDownload=false&w=1200&h=1200&type=proportional&preview=true&prefetch=true",
+        "https://aedasme.egnyte.com/opendocument.do?entryId=3885ed76-f539-4efa-9398-711717e2bf70&forceDownload=false&thumbNail=true&w=1200&h=1200&type=proportional&preview=true&prefetch=true",
+        "https://aedasme.egnyte.com/opendocument.do?entryId=e369c607-ff4c-458b-9ddc-fdca75c5b49b&forceDownload=false&thumbNail=true&w=1200&h=1200&type=proportional&preview=true&prefetch=true",
+        "https://aedasme.egnyte.com/opendocument.do?entryId=cb31e9a2-e61a-4385-b067-3eb3c3f49df8&forceDownload=false&thumbNail=true&w=1200&h=1200&type=proportional&preview=true&prefetch=true",
+        "https://aedasme.egnyte.com/opendocument.do?entryId=d68d3a97-f577-400d-b431-fb02806142d4&forceDownload=false&thumbNail=true&w=1200&h=1200&type=proportional&preview=true&prefetch=true"
+    ]
 
 
+},
+
+{ 
+    id: 39, 
+    title: 'DGDA FOUR SEASONS',  
+    abbr: '4SN', 
+    image: "./ICON/4SN.svg",
+    coverImage: 'https://aedasme.egnyte.com/opendocument.do?entryId=2066ffea-8780-4aba-be6d-6247c3f1f2a9&forceDownload=false&thumbNail=true&w=1200&h=1200&type=proportional&preview=true&prefetch=true',
+    imageUrl : 'https://aedasme.egnyte.com/opendocument.do?entryId=d4e68a16-7fc1-41b5-99ee-bf6a1e1a6907&forceDownload=false&thumbNail=true&w=1200&h=1200&type=proportional&preview=true&prefetch=true',
+    year: 2021, 
+    client: 'DGCL',
+    program: 'HOSPITALITY',
+    typology: 'HOSPITALITY', 
+    location: 'KSA, SAUDI ARABIA',
+    scale: 'M', 
+    epoch: 'PAST', 
+    hoverImage: "./hover/4SN.png",
+    presentationLink: 'https://aedasme.egnyte.com/app/index.do#storage/file/9b972212-21a0-437b-ad3c-b0d5ab97eda3',
+    visualLink: 'https://aedasme.egnyte.com/app/index.do#storage/folder/24d0beeb-3be3-479f-a4bf-b69ef585975b',
+    drawingLink: 'https://aedasme.egnyte.com/app/index.do#storage/search/?type=file&location=%2FShared%2FDesign%20Index%2F2.%20Hospitality&metadata=W3sibmFtZXNwYWNlIjoibGlicmFyeSByZXNvdXJjZSIsImtleSI6InByb2plY3QgbmFtZSIsIm9wZXJhdG9yIjoiSU4iLCJ2YWx1ZXMiOlsiREdEQSBGb3VyIFNlYXNvbnMiXX0seyJuYW1lc3BhY2UiOiJsaWJyYXJ5IHJlc291cmNlIiwia2V5IjoiZmlsdGUgdHlwZSIsIm9wZXJhdG9yIjoiSU4iLCJ2YWx1ZXMiOlsiLkRXRyJdfV0%3D',
+    threeDLink: 'https://aedasme.egnyte.com/app/index.do#storage/file/34651a21-3d42-412f-9659-df6ba953ebbd',
+    linkImages : {
+        presentation: 'https://aedasme.egnyte.com/opendocument.do?entryId=f339273d-0467-474d-a996-4e8b7360dc3e&forceDownload=false&thumbNail=true&w=1200&h=1200&type=proportional&preview=true&prefetch=true',
+        visual: 'https://aedasme.egnyte.com/opendocument.do?entryId=d349d403-6b9e-474d-a14a-e224b80bd9e8&forceDownload=false&thumbNail=true&w=1200&h=1200&type=proportional&preview=true&prefetch=true',
+        drawing: 'https://aedasme.egnyte.com/opendocument.do?entryId=d235bc93-b53a-4741-9b80-56a46fdc50f2&forceDownload=false&thumbNail=true&w=1200&h=1200&type=proportional&preview=true&prefetch=true',
+        threeD: 'https://aedasme.egnyte.com/opendocument.do?entryId=73b9cc45-a7c6-422e-aa36-01b3744bb3f1&forceDownload=false&thumbNail=true&w=1200&h=1200&type=proportional&preview=true&prefetch=true',
+    },
+
+    // New fields for the description section
+    descriptionImage : 'https://aedasme.egnyte.com/opendocument.do?entryId=e8be0ef9-3d08-4631-aa11-9ab2569b65a3&forceDownload=false&thumbNail=true&w=1200&h=1200&type=proportional&preview=true&prefetch=true', 
+    description: {
+        paragraph1: "The SLS WOW Hotel Apartment project in Dubai represents a pinnacle of luxury hospitality design. Completed in 2015, this ambitious development seamlessly integrates contemporary architectural elements with the sophistication expected of the SLS brand. The project's location in Dubai, UAE, serves as a strategic point for both business and leisure travelers.",
+        paragraph2: "The architectural design emphasizes vertical elegance while maintaining a strong connection to its urban context. Each apartment is meticulously crafted to meet the high standards of modern luxury living, featuring premium finishes and state-of-the-art amenities. The building's facade incorporates innovative design elements that respond to the local climate while creating a distinctive visual identity.",
+        paragraph3: "Sustainability and user comfort were key considerations throughout the design process. The project incorporates advanced environmental systems and smart building technologies, setting new standards for hospitality developments in the region. The result is a harmonious blend of luxury, functionality, and sustainable design that caters to the demanding requirements of modern urban living."
+    },
+    teamMembers: "AFDAFDSFA, AFSDFADFSAF, AFSDFADSFAFD, BOB SMITH, ADRIAN SMITH, BOB SMITH, SKI VILLAGE, AFDAFDSFA, AFSDFADFSAF, AFDAFDSFA, AFSDFADFSAF, AFDAFDSFA, AFSDFADFSAF, AFSDFADSFAFD, BOB SMITH, ADRIAN SMITH, BOB SMITH, SKI VILLAGE, AFDAFDSFA, AFSDFADFSAF, AFDAFDSFA, AFSDFADFSAF",
+
+   
+    galleryImages: [
+        "https://aedasme.egnyte.com/opendocument.do?entryId=4f40a556-a6a9-404d-bb46-69c38b8438c1&forceDownload=false&w=1200&h=1200&type=proportional&preview=true&prefetch=true",
+        "https://aedasme.egnyte.com/opendocument.do?entryId=676e2c72-a271-493e-9d00-e84d705000dd&forceDownload=false&thumbNail=true&w=1200&h=1200&type=proportional&preview=true&prefetch=true",
+        "https://aedasme.egnyte.com/opendocument.do?entryId=7a2effcc-9ff0-4822-9a54-1d7c19c4d0f1&forceDownload=false&thumbNail=true&w=1200&h=1200&type=proportional&preview=true&prefetch=true",
+        "https://aedasme.egnyte.com/opendocument.do?entryId=1eb01e15-f10c-463c-9cfc-e1b60dc64b25&forceDownload=false&thumbNail=true&w=1200&h=1200&type=proportional&preview=true&prefetch=true",
+        "https://aedasme.egnyte.com/opendocument.do?entryId=aa72aa89-382f-4256-88b8-76a8f88b7c4b&forceDownload=false&thumbNail=true&w=1200&h=1200&type=proportional&preview=true&prefetch=true"
+    ]
+},
+{ 
+    id: 40, 
+    title: 'DGDA ORIENT EXPRESS',  
+    abbr: 'OEX', 
+    image: "./ICON/OEX.svg",
+    coverImage: 'https://aedasme.egnyte.com/opendocument.do?entryId=f7418820-dd45-4aa0-887c-1e400a683b20&forceDownload=false&thumbNail=true&w=1200&h=1200&type=proportional&preview=true&prefetch=true',
+    imageUrl : 'https://aedasme.egnyte.com/opendocument.do?entryId=636a90fb-dadf-4db6-9fcb-6e60aed2f1ad&forceDownload=false&thumbNail=true&w=1200&h=1200&type=proportional&preview=true&prefetch=true',
+    year: 2021, 
+    client: 'DGCL',
+    program: 'HOSPITALITY',
+    typology: 'HOSPITALITY', 
+    location: 'KSA, SAUDI ARABIA',
+    scale: 'M', 
+    epoch: 'PAST', 
+    hoverImage: "./hover/OEX.png",
+    presentationLink: 'https://aedasme.egnyte.com/app/index.do#storage/file/903417ec-3e83-4c97-a6b7-a040d9262ad4',
+    visualLink: 'https://aedasme.egnyte.com/app/index.do#storage/file/36e566aa-958f-4a60-8640-143f551f6246',
+    drawingLink: 'https://aedasme.egnyte.com/app/index.do#storage/search/?type=file&location=%2FShared%2FDesign%20Index%2F2.%20Hospitality&metadata=W3sibmFtZXNwYWNlIjoibGlicmFyeSByZXNvdXJjZSIsImtleSI6InByb2plY3QgbmFtZSIsIm9wZXJhdG9yIjoiSU4iLCJ2YWx1ZXMiOlsiREdEQSBPcmllbnQgRXhwcmVzcyJdfSx7Im5hbWVzcGFjZSI6ImxpYnJhcnkgcmVzb3VyY2UiLCJrZXkiOiJmaWx0ZSB0eXBlIiwib3BlcmF0b3IiOiJJTiIsInZhbHVlcyI6WyIuRFdHIl19XQ%3D%3D',
+    threeDLink: 'https://aedasme.egnyte.com/app/index.do#storage/search/?type=file&location=%2FShared%2FDesign%20Index&metadata=W3sibmFtZXNwYWNlIjoibGlicmFyeSByZXNvdXJjZSIsImtleSI6InByb2plY3QgbmFtZSIsIm9wZXJhdG9yIjoiSU4iLCJ2YWx1ZXMiOlsiREdEQSBPcmllbnQgRXhwcmVzcyJdfSx7Im5hbWVzcGFjZSI6ImxpYnJhcnkgcmVzb3VyY2UiLCJrZXkiOiJkYXRhIiwib3BlcmF0b3IiOiJJTiIsInZhbHVlcyI6WyIzRCJdfV0%3D',
+    linkImages : {
+        presentation: 'https://aedasme.egnyte.com/opendocument.do?entryId=f339273d-0467-474d-a996-4e8b7360dc3e&forceDownload=false&thumbNail=true&w=1200&h=1200&type=proportional&preview=true&prefetch=true',
+        visual: 'https://aedasme.egnyte.com/opendocument.do?entryId=d349d403-6b9e-474d-a14a-e224b80bd9e8&forceDownload=false&thumbNail=true&w=1200&h=1200&type=proportional&preview=true&prefetch=true',
+        drawing: 'https://aedasme.egnyte.com/opendocument.do?entryId=d235bc93-b53a-4741-9b80-56a46fdc50f2&forceDownload=false&thumbNail=true&w=1200&h=1200&type=proportional&preview=true&prefetch=true',
+        threeD: 'https://aedasme.egnyte.com/opendocument.do?entryId=73b9cc45-a7c6-422e-aa36-01b3744bb3f1&forceDownload=false&thumbNail=true&w=1200&h=1200&type=proportional&preview=true&prefetch=true',
+    },
+
+    // New fields for the description section
+    descriptionImage : 'https://aedasme.egnyte.com/opendocument.do?entryId=734040e7-7134-4f84-ad77-e91b5a069364&forceDownload=false&thumbNail=true&w=1200&h=1200&type=proportional&preview=true&prefetch=true', 
+    description: {
+        paragraph1: "The SLS WOW Hotel Apartment project in Dubai represents a pinnacle of luxury hospitality design. Completed in 2015, this ambitious development seamlessly integrates contemporary architectural elements with the sophistication expected of the SLS brand. The project's location in Dubai, UAE, serves as a strategic point for both business and leisure travelers.",
+        paragraph2: "The architectural design emphasizes vertical elegance while maintaining a strong connection to its urban context. Each apartment is meticulously crafted to meet the high standards of modern luxury living, featuring premium finishes and state-of-the-art amenities. The building's facade incorporates innovative design elements that respond to the local climate while creating a distinctive visual identity.",
+        paragraph3: "Sustainability and user comfort were key considerations throughout the design process. The project incorporates advanced environmental systems and smart building technologies, setting new standards for hospitality developments in the region. The result is a harmonious blend of luxury, functionality, and sustainable design that caters to the demanding requirements of modern urban living."
+    },
+    teamMembers: "AFDAFDSFA, AFSDFADFSAF, AFSDFADSFAFD, BOB SMITH, ADRIAN SMITH, BOB SMITH, SKI VILLAGE, AFDAFDSFA, AFSDFADFSAF, AFDAFDSFA, AFSDFADFSAF, AFDAFDSFA, AFSDFADFSAF, AFSDFADSFAFD, BOB SMITH, ADRIAN SMITH, BOB SMITH, SKI VILLAGE, AFDAFDSFA, AFSDFADFSAF, AFDAFDSFA, AFSDFADFSAF",
+
+   
+    galleryImages: [
+        "https://aedasme.egnyte.com/opendocument.do?entryId=3966797f-33c0-4b91-af22-d26025246c44&forceDownload=false&thumbNail=true&w=1200&h=1200&type=proportional&preview=true&prefetch=true",
+        "https://aedasme.egnyte.com/opendocument.do?entryId=af7219a6-2bae-45f7-a952-52f3818b35f0&forceDownload=false&thumbNail=true&w=1200&h=1200&type=proportional&preview=true&prefetch=true",
+        "https://aedasme.egnyte.com/opendocument.do?entryId=ee1eefbf-ea5f-48a2-827b-4cd268214e86&forceDownload=false&thumbNail=true&w=1200&h=1200&type=proportional&preview=true&prefetch=true",
+        "https://aedasme.egnyte.com/opendocument.do?entryId=0a6b585d-ab33-41a7-9236-de0b3b4c1b2a&forceDownload=false&thumbNail=true&w=1200&h=1200&type=proportional&preview=true&prefetch=true"
+    ]
+},
+
+{ 
+    id: 41, 
+    title: 'FOUR SEASONS OMAN',  
+    abbr: '4SO', 
+    image: "./ICON/4SO.svg",
+    coverImage: 'https://aedasme.egnyte.com/opendocument.do?entryId=f7418820-dd45-4aa0-887c-1e400a683b20&forceDownload=false&thumbNail=true&w=1200&h=1200&type=proportional&preview=true&prefetch=true',
+    imageUrl : 'https://aedasme.egnyte.com/opendocument.do?entryId=59996ffa-c2a9-429e-a9b6-e29b9dae4170&forceDownload=false&thumbNail=true&w=1200&h=1200&type=proportional&preview=true&prefetch=true',
+    year: 2021, 
+    client: 'OMRAN GROUP',
+    program: 'HOSPITALITY',
+    typology: 'HOSPITALITY', 
+    location: 'MUSCAT',
+    scale: 'M', 
+    epoch: 'PRESENT', 
+    hoverImage: "./hover/4SO.png",
+    presentationLink: 'https://aedasme.egnyte.com/app/index.do#storage/file/c1985eb4-7bac-4144-94bd-373e5ad35ebf',
+    visualLink: 'https://aedasme.egnyte.com/app/index.do#storage/file/65bd6317-2c4d-4833-8db5-5bb8e59c5b3b',
+    drawingLink: 'https://aedasme.egnyte.com/app/index.do#storage/search/?type=file&location=%2FShared%2FDesign%20Index%2F2.%20Hospitality%2F2A.%20Hotel%20%26%20Resort%2FDrawing&metadata=W3sibmFtZXNwYWNlIjoibGlicmFyeSByZXNvdXJjZSIsImtleSI6InByb2plY3QgbmFtZSIsIm9wZXJhdG9yIjoiSU4iLCJ2YWx1ZXMiOlsiRm91ciBTZWFzb25zIE9tYW4iXX0seyJuYW1lc3BhY2UiOiJsaWJyYXJ5IHJlc291cmNlIiwia2V5IjoiZmlsdGUgdHlwZSIsIm9wZXJhdG9yIjoiSU4iLCJ2YWx1ZXMiOlsiLkRXRyJdfV0%3D',
+    threeDLink: 'https://aedasme.egnyte.com/app/index.do#storage/file/bd70a130-f23b-4760-97d0-de12a3594bc5',
+    linkImages : {
+        presentation: 'https://aedasme.egnyte.com/opendocument.do?entryId=f339273d-0467-474d-a996-4e8b7360dc3e&forceDownload=false&thumbNail=true&w=1200&h=1200&type=proportional&preview=true&prefetch=true',
+        visual: 'https://aedasme.egnyte.com/opendocument.do?entryId=d349d403-6b9e-474d-a14a-e224b80bd9e8&forceDownload=false&thumbNail=true&w=1200&h=1200&type=proportional&preview=true&prefetch=true',
+        drawing: 'https://aedasme.egnyte.com/opendocument.do?entryId=d235bc93-b53a-4741-9b80-56a46fdc50f2&forceDownload=false&thumbNail=true&w=1200&h=1200&type=proportional&preview=true&prefetch=true',
+        threeD: 'https://aedasme.egnyte.com/opendocument.do?entryId=73b9cc45-a7c6-422e-aa36-01b3744bb3f1&forceDownload=false&thumbNail=true&w=1200&h=1200&type=proportional&preview=true&prefetch=true',
+    },
+
+    // New fields for the description section
+    descriptionImage : 'https://aedasme.egnyte.com/opendocument.do?entryId=734040e7-7134-4f84-ad77-e91b5a069364&forceDownload=false&thumbNail=true&w=1200&h=1200&type=proportional&preview=true&prefetch=true', 
+    description: {
+        paragraph1: "The SLS WOW Hotel Apartment project in Dubai represents a pinnacle of luxury hospitality design. Completed in 2015, this ambitious development seamlessly integrates contemporary architectural elements with the sophistication expected of the SLS brand. The project's location in Dubai, UAE, serves as a strategic point for both business and leisure travelers.",
+        paragraph2: "The architectural design emphasizes vertical elegance while maintaining a strong connection to its urban context. Each apartment is meticulously crafted to meet the high standards of modern luxury living, featuring premium finishes and state-of-the-art amenities. The building's facade incorporates innovative design elements that respond to the local climate while creating a distinctive visual identity.",
+        paragraph3: "Sustainability and user comfort were key considerations throughout the design process. The project incorporates advanced environmental systems and smart building technologies, setting new standards for hospitality developments in the region. The result is a harmonious blend of luxury, functionality, and sustainable design that caters to the demanding requirements of modern urban living."
+    },
+    teamMembers: "AFDAFDSFA, AFSDFADFSAF, AFSDFADSFAFD, BOB SMITH, ADRIAN SMITH, BOB SMITH, SKI VILLAGE, AFDAFDSFA, AFSDFADFSAF, AFDAFDSFA, AFSDFADFSAF, AFDAFDSFA, AFSDFADFSAF, AFSDFADSFAFD, BOB SMITH, ADRIAN SMITH, BOB SMITH, SKI VILLAGE, AFDAFDSFA, AFSDFADFSAF, AFDAFDSFA, AFSDFADFSAF",
+
+   
+    galleryImages: [
+        "https://aedasme.egnyte.com/opendocument.do?entryId=3966797f-33c0-4b91-af22-d26025246c44&forceDownload=false&thumbNail=true&w=1200&h=1200&type=proportional&preview=true&prefetch=true",
+        "https://aedasme.egnyte.com/opendocument.do?entryId=af7219a6-2bae-45f7-a952-52f3818b35f0&forceDownload=false&thumbNail=true&w=1200&h=1200&type=proportional&preview=true&prefetch=true",
+        "https://aedasme.egnyte.com/opendocument.do?entryId=ee1eefbf-ea5f-48a2-827b-4cd268214e86&forceDownload=false&thumbNail=true&w=1200&h=1200&type=proportional&preview=true&prefetch=true",
+        "https://aedasme.egnyte.com/opendocument.do?entryId=0a6b585d-ab33-41a7-9236-de0b3b4c1b2a&forceDownload=false&thumbNail=true&w=1200&h=1200&type=proportional&preview=true&prefetch=true"
+    ]
+},
+
+{ 
+    id: 42, 
+    title: 'WADI TAYYIB GOA',  
+    abbr: 'WDT', 
+    image: "./ICON/WDT.svg",
+    coverImage: 'https://aedasme.egnyte.com/opendocument.do?entryId=888c523b-5a22-4eb2-b7ad-6edbe1b08a9a&forceDownload=false&thumbNail=true&w=1200&h=1200&type=proportional&preview=true&prefetch=true',
+    imageUrl : 'https://aedasme.egnyte.com/opendocument.do?entryId=fe2785b8-4044-4891-9943-db744cc7cc43&forceDownload=false&thumbNail=true&w=1200&h=1200&type=proportional&preview=true&prefetch=true',
+    year: 2022, 
+    client: 'NEOM',
+    program: 'HOSPITALITY',
+    typology: 'HOSPITALITY', 
+    location: 'KSA, SAUDI ARABIA',
+    scale: 'M', 
+    epoch: 'FUTURE', 
+    hoverImage: "./hover/WDT.png",
+    presentationLink: 'https://aedasme.egnyte.com/navigate/file/21cc6fee-e45d-4b38-ae98-8fb0ed555c46',
+    visualLink: 'https://aedasme.egnyte.com/app/index.do#storage/file/438bcd94-6e52-4316-929d-28cfb6841ddb',
+    threeDLink: 'https://aedasme.egnyte.com/app/index.do#storage/search/?type=file&location=%2FShared%2FDesign%20Index&metadata=W3sibmFtZXNwYWNlIjoibGlicmFyeSByZXNvdXJjZSIsImtleSI6InByb2plY3QgbmFtZSIsIm9wZXJhdG9yIjoiSU4iLCJ2YWx1ZXMiOlsiR09BIFdhZGkgVGF5eWliIl19LHsibmFtZXNwYWNlIjoibGlicmFyeSByZXNvdXJjZSIsImtleSI6ImRhdGEiLCJvcGVyYXRvciI6IklOIiwidmFsdWVzIjpbIjNEIl19XQ%3D%3D',
+    linkImages : {
+        presentation: 'https://aedasme.egnyte.com/opendocument.do?entryId=f339273d-0467-474d-a996-4e8b7360dc3e&forceDownload=false&thumbNail=true&w=1200&h=1200&type=proportional&preview=true&prefetch=true',
+        visual: 'https://aedasme.egnyte.com/opendocument.do?entryId=d349d403-6b9e-474d-a14a-e224b80bd9e8&forceDownload=false&thumbNail=true&w=1200&h=1200&type=proportional&preview=true&prefetch=true',
+        threeD: 'https://aedasme.egnyte.com/opendocument.do?entryId=73b9cc45-a7c6-422e-aa36-01b3744bb3f1&forceDownload=false&thumbNail=true&w=1200&h=1200&type=proportional&preview=true&prefetch=true',
+    },
+
+    // New fields for the description section
+    descriptionImage : 'https://aedasme.egnyte.com/opendocument.do?entryId=08046d11-a41b-4ab3-8a8a-036544344b76&forceDownload=false&thumbNail=true&w=1200&h=1200&type=proportional&preview=true&prefetch=true', 
+    description: {
+        paragraph1: "The SLS WOW Hotel Apartment project in Dubai represents a pinnacle of luxury hospitality design. Completed in 2015, this ambitious development seamlessly integrates contemporary architectural elements with the sophistication expected of the SLS brand. The project's location in Dubai, UAE, serves as a strategic point for both business and leisure travelers.",
+        paragraph2: "The architectural design emphasizes vertical elegance while maintaining a strong connection to its urban context. Each apartment is meticulously crafted to meet the high standards of modern luxury living, featuring premium finishes and state-of-the-art amenities. The building's facade incorporates innovative design elements that respond to the local climate while creating a distinctive visual identity.",
+        paragraph3: "Sustainability and user comfort were key considerations throughout the design process. The project incorporates advanced environmental systems and smart building technologies, setting new standards for hospitality developments in the region. The result is a harmonious blend of luxury, functionality, and sustainable design that caters to the demanding requirements of modern urban living."
+    },
+    teamMembers: "AFDAFDSFA, AFSDFADFSAF, AFSDFADSFAFD, BOB SMITH, ADRIAN SMITH, BOB SMITH, SKI VILLAGE, AFDAFDSFA, AFSDFADFSAF, AFDAFDSFA, AFSDFADFSAF, AFDAFDSFA, AFSDFADFSAF, AFSDFADSFAFD, BOB SMITH, ADRIAN SMITH, BOB SMITH, SKI VILLAGE, AFDAFDSFA, AFSDFADFSAF, AFDAFDSFA, AFSDFADFSAF",
+
+   
+    galleryImages: [
+        "https://aedasme.egnyte.com/opendocument.do?entryId=03f5a5c1-2b4c-4484-a46e-7cd635adb7ba&forceDownload=false&w=1200&h=1200&type=proportional&preview=true&prefetch=true",
+        "https://aedasme.egnyte.com/opendocument.do?entryId=def60ca2-4aed-44e2-b58a-bdebc64c666e&forceDownload=false&w=1200&h=1200&type=proportional&preview=true&prefetch=true",
+        "https://aedasme.egnyte.com/opendocument.do?entryId=e4f2aee9-2774-47fb-b5fa-9947e73b3eb7&forceDownload=false&thumbNail=true&w=1200&h=1200&type=proportional&preview=true&prefetch=true",
+        "https://aedasme.egnyte.com/opendocument.do?entryId=9e8cb034-5514-47a7-9e81-bf5a4dfce3c2&forceDownload=false&thumbNail=true&w=1200&h=1200&type=proportional&preview=true&prefetch=true",
+        "https://aedasme.egnyte.com/opendocument.do?entryId=74aa1dac-18f9-436d-b422-d36b32b49e73&forceDownload=false&thumbNail=true&w=1200&h=1200&type=proportional&preview=true&prefetch=true",
+        "https://aedasme.egnyte.com/opendocument.do?entryId=aa4d31d6-af8d-468e-817b-def14d1e820f&forceDownload=false&thumbNail=true&w=1200&h=1200&type=proportional&preview=true&prefetch=true"
+    ]
+},
 ];
 
 const filterConfigs = {
@@ -2673,3 +3060,316 @@ document.addEventListener("DOMContentLoaded", function () {
     updateGrid('CHRONOLOGICAL');
 });
 });
+function createGlobeVisualization() {
+    function createGlobe(containerId) {
+        const container = document.getElementById(containerId);
+        if (!container) return null;
+
+        // Scene setup
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(75, container.offsetWidth / container.offsetHeight, 0.1, 1000);
+        const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+        
+        renderer.setSize(container.offsetWidth, container.offsetHeight);
+        renderer.setClearColor(0x000000, 0);
+        container.appendChild(renderer.domElement);
+
+        // Globe creation
+        const GLOBE_RADIUS = 5;
+        const sphereGeometry = new THREE.SphereGeometry(GLOBE_RADIUS, 50, 50);
+        const sphereMaterial = new THREE.MeshPhongMaterial({
+            map: new THREE.TextureLoader().load('Map_lighten.png'),
+            transparent: true,
+            opacity: 0.8,
+            bumpScale: 0.05,
+            specular: new THREE.Color('grey')
+        });
+        const globe = new THREE.Mesh(sphereGeometry, sphereMaterial);
+        scene.add(globe);
+
+        // Lighting
+        const ambientLight = new THREE.AmbientLight(0xffffff, 0.6);
+        scene.add(ambientLight);
+
+        const directionalLight = new THREE.DirectionalLight(0xffffff, 0.8);
+        directionalLight.position.set(5, 3, 5);
+        scene.add(directionalLight);
+
+        // Initial camera position
+        camera.position.z = 10;
+
+        // Create tooltip div
+        const tooltip = document.createElement('div');
+        tooltip.style.position = 'absolute';
+        tooltip.style.background = 'rgba(0, 0, 0, 0.8)';
+        tooltip.style.color = 'white';
+        tooltip.style.padding = '10px';
+        tooltip.style.borderRadius = '5px';
+        tooltip.style.display = 'none';
+        tooltip.style.pointerEvents = 'none';
+        tooltip.style.fontFamily = 'Arial, sans-serif';
+        tooltip.style.fontSize = '14px';
+        tooltip.style.zIndex = '1000';
+        container.appendChild(tooltip);
+
+        // Raycaster for hover detection
+        const raycaster = new THREE.Raycaster();
+        const mouse = new THREE.Vector2();
+
+        function createMarker(lat, lng, imagePath, label, size) {
+            const phi = (90 - lat) * (Math.PI / 180);
+            const theta = (lng + 180) * (Math.PI / 180);
+            
+            const markerScale = size / 1000;
+            
+            return new Promise((resolve) => {
+                const loader = new THREE.TextureLoader();
+                loader.load(imagePath, (texture) => {
+                    const spriteMaterial = new THREE.SpriteMaterial({ 
+                        map: texture,
+                        transparent: true,
+                        opacity: 0.9
+                    });
+                    const sprite = new THREE.Sprite(spriteMaterial);
+                    
+                    const x = -(GLOBE_RADIUS * 1.1 * Math.sin(phi) * Math.cos(theta));
+                    const y = GLOBE_RADIUS * 1.1 * Math.cos(phi);
+                    const z = GLOBE_RADIUS * 1.1 * Math.sin(phi) * Math.sin(theta);
+                    
+                    sprite.position.set(x, y, z);
+                    sprite.scale.set(markerScale, markerScale, 1);
+                    
+                    // Store original scale for hover effect
+                    sprite.userData = { 
+                        label,
+                        size,
+                        originalScale: markerScale,
+                        isHovered: false
+                    };
+                    
+                    resolve(sprite);
+                });
+            });
+        }
+
+// Replace the markerDefinitions array in the previous code with this:
+const markerDefinitions = [
+    // Southeast Asia
+    { lat: 13, lng: 122, image: './PH.png', label: 'Philippines', size: 150 },
+    { lat: 15, lng: 101, image: './TH.png', label: 'Thailand', size: 120 },
+    
+    // Middle East & West Asia
+    { lat: 25.276987, lng: 55.296249, image: './UAE.png', label: 'UAE', size: 200 },
+    { lat: 15.369445, lng: 44.191006, image: './YEMEN.png', label: 'Yemen', size: 80 },
+    { lat: 24.713552, lng: 46.675296, image: './SAUDI.png', label: 'KSA', size: 180 },
+    { lat: 33.513807, lng: 42.276528, image: './SYRIA.png', label: 'Syria', size: 75 },
+    { lat: 33.888629, lng: 35.495479, image: './LEBANON.png', label: 'Lebanon', size: 90 },
+    { lat: 35.715298, lng: 51.404343, image: './IRAN.png', label: 'Iran', size: 160 },
+    { lat: 40.409264, lng: 49.867092, image: './AZBJ.png', label: 'Azerbaijan', size: 110 },
+    
+    // South Asia
+    { lat: 28.613939, lng: 77.209021, image: './INDIA.png', label: 'India', size: 250 },
+    
+    // Europe
+    { lat: 51.507351, lng: -0.127758, image: './UK.png', label: 'United Kingdom', size: 180 },
+    { lat: 40.416775, lng: -3.703790, image: './SPAIN.png', label: 'Spain', size: 140 },
+    { lat: 38.722252, lng: -9.139337, image: './Portugal.png', label: 'Portugal', size: 95 },
+    { lat: 41.902784, lng: 12.496366, image: './ITALY.png', label: 'Italy', size: 170 },
+    { lat: 53.349805, lng: -6.260310, image: './IRELAND.png', label: 'Ireland', size: 85 },
+    { lat: 37.983810, lng: 23.727539, image: './GREECE.png', label: 'Greece', size: 100 },
+    
+    // Africa
+    { lat: 30.033333, lng: 31.233334, image: './EGYPT.png', label: 'Egypt', size: 190 },
+    { lat: -25.746111, lng: 28.188056, image: './SOUNTHAFRI.png', label: 'South Africa', size: 160 },
+    
+    // Oceania
+    { lat: -35.280937, lng: 149.130005, image: './AUS.png', label: 'Australia', size: 220 },
+    
+    // North America
+    { lat: 38.907192, lng: -77.036871, image: './US.png', label: 'United States', size: 300 },
+    { lat: 45.424721, lng: -75.695000, image: './CAN.png', label: 'Canada', size: 180 },
+    
+    // South America
+    { lat: -33.448890, lng: -70.669265, image: './CHILE.png', label: 'Chile', size: 130 },
+    { lat: -34.603684, lng: -58.381559, image: './AGTN.png', label: 'Argentina', size: 145 },
+    { lat: -15.826691, lng: -47.921822, image: './BRZ.png', label: 'Brazil', size: 210 }
+];
+
+        // Create and add all markers
+        Promise.all(markerDefinitions.map(def => 
+            createMarker(def.lat, def.lng, def.image, def.label, def.size)
+        )).then(markers => {
+            markers.forEach(marker => globe.add(marker));
+        });
+
+        // Interaction variables
+        let isDragging = false;
+        let previousMousePosition = { x: 0, y: 0 };
+        let rotationSpeed = { x: 0, y: 0 };
+        const dampingFactor = 0.95;
+
+        // Zoom variables
+        let currentZoom = camera.position.z;
+        const minZoom = 8;
+        const maxZoom = 9;
+
+        // Mouse interaction handlers
+        container.addEventListener('mousedown', (e) => {
+            isDragging = true;
+            previousMousePosition = {
+                x: e.clientX,
+                y: e.clientY
+            };
+        });
+
+        document.addEventListener('mousemove', (e) => {
+            // Update mouse position for raycasting
+            const rect = container.getBoundingClientRect();
+            mouse.x = ((e.clientX - rect.left) / container.offsetWidth) * 2 - 1;
+            mouse.y = -((e.clientY - rect.top) / container.offsetHeight) * 2 + 1;
+
+            // Handle dragging
+            if (isDragging) {
+                const deltaMove = {
+                    x: e.clientX - previousMousePosition.x,
+                    y: e.clientY - previousMousePosition.y
+                };
+
+                rotationSpeed.x = deltaMove.y * 0.005;
+                rotationSpeed.y = deltaMove.x * 0.005;
+
+                globe.rotation.x += rotationSpeed.x;
+                globe.rotation.y += rotationSpeed.y;
+
+                previousMousePosition = {
+                    x: e.clientX,
+                    y: e.clientY
+                };
+            }
+
+            // Handle marker hover
+            raycaster.setFromCamera(mouse, camera);
+            const intersects = raycaster.intersectObjects(globe.children);
+
+            // Reset all markers to original scale
+            globe.children.forEach(child => {
+                if (child instanceof THREE.Sprite && child.userData.isHovered) {
+                    const scale = child.userData.originalScale;
+                    child.scale.set(scale, scale, 1);
+                    child.userData.isHovered = false;
+                }
+            });
+
+            // Handle hover effect and tooltip
+            if (intersects.length > 0) {
+                const marker = intersects[0].object;
+                if (marker instanceof THREE.Sprite) {
+                    // Scale up marker
+                    const newScale = marker.userData.originalScale * 1.1;
+                    marker.scale.set(newScale, newScale, 1);
+                    marker.userData.isHovered = true;
+
+                    // Update tooltip
+                    tooltip.innerHTML = `<strong>${marker.userData.label}</strong><br>${marker.userData.size}`;
+                    tooltip.style.display = 'block';
+                    tooltip.style.left = (e.clientX + 10) + 'px';
+                    tooltip.style.top = (e.clientY + 10) + 'px';
+                }
+            } else {
+                tooltip.style.display = 'none';
+            }
+        });
+
+        document.addEventListener('mouseup', () => {
+            isDragging = false;
+        });
+
+        // Zoom handler
+        container.addEventListener('wheel', (e) => {
+            e.preventDefault();
+            const zoomSpeed = 0.5;
+            currentZoom += e.deltaY * 0.01 * zoomSpeed;
+            currentZoom = Math.max(minZoom, Math.min(maxZoom, currentZoom));
+            camera.position.z = currentZoom;
+        }, { passive: false });
+
+        // Animation loop
+        function animate() {
+            requestAnimationFrame(animate);
+
+            // Update marker rotations to face camera
+            globe.children.forEach(child => {
+                if (child instanceof THREE.Sprite) {
+                    child.quaternion.copy(camera.quaternion);
+                }
+            });
+
+            renderer.render(scene, camera);
+        }
+
+        // Handle window resize
+        function handleResize() {
+            camera.aspect = container.offsetWidth / container.offsetHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(container.offsetWidth, container.offsetHeight);
+        }
+
+        window.addEventListener('resize', handleResize);
+
+        // Start animation
+        animate();
+
+        // Return cleanup function
+        return function cleanup() {
+            window.removeEventListener('resize', handleResize);
+            container.removeChild(renderer.domElement);
+            container.removeChild(tooltip);
+            sphereGeometry.dispose();
+            sphereMaterial.dispose();
+            renderer.dispose();
+        };
+    }
+
+    // Initialize globe when WHO WE ARE tab is opened
+    let globeCleanup = null;
+
+    function initGlobe() {
+        const whoWeAreTab = document.querySelector('[data-tab="who-we-are"]');
+        const whoWeAreContent = document.getElementById('who-we-are');
+        
+        if (!document.getElementById('globe-container')) {
+            const container = document.createElement('div');
+            container.id = 'globe-container';
+            container.style.width = '100%';
+            container.style.height = '400px';
+            container.style.marginBottom = '2rem';
+            whoWeAreContent.insertBefore(container, whoWeAreContent.firstChild);
+        }
+
+        whoWeAreTab.addEventListener('click', () => {
+            if (!globeCleanup) {
+                globeCleanup = createGlobe('globe-container');
+            }
+        });
+
+        document.querySelectorAll('.tab-button').forEach(button => {
+            if (button !== whoWeAreTab) {
+                button.addEventListener('click', () => {
+                    if (globeCleanup) {
+                        globeCleanup();
+                        globeCleanup = null;
+                    }
+                });
+            }
+        });
+    }
+
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initGlobe);
+    } else {
+        initGlobe();
+    }
+}
+
+// Start the globe visualization
+createGlobeVisualization();
