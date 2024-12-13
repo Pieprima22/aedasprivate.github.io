@@ -2122,6 +2122,124 @@ const projects = [
         "https://aedasme.egnyte.com/opendocument.do?entryId=aa4d31d6-af8d-468e-817b-def14d1e820f&forceDownload=false&thumbNail=true&w=1200&h=1200&type=proportional&preview=true&prefetch=true"
     ]
 },
+{ 
+    id: 43, 
+    title: 'MAF CCMI',  
+    abbr: 'MIR', 
+    image: "./ICON/MIR.svg",
+    coverImage: 'https://aedasme.egnyte.com/opendocument.do?entryId=92471fc4-1dfa-4125-a11c-e976b3424194&forceDownload=false&thumbNail=true&w=1200&h=1200&type=proportional&preview=true&prefetch=true',
+    imageUrl : 'https://aedasme.egnyte.com/opendocument.do?entryId=40e48dbd-f960-4054-a274-8de9fbd63e49&forceDownload=false&thumbNail=true&w=1200&h=1200&type=proportional&preview=true&prefetch=true',
+    year: 2023, 
+    client: 'MAJID AL FUTTAIM PROPERTIES',
+    program: 'MASTERPLAN', 
+    typology: 'MASTERPLAN', 
+    location: 'DUBAI, UAE',
+    scale: 'L', 
+    epoch: 'PRESENT', 
+    hoverImage: "./hover/MIR.png",
+    presentationLink: 'https://aedasme.egnyte.com/navigate/file/1e4d5a64-86c1-4b5d-9c55-66fa18b2088a',
+    visualLink: 'https://aedasme.egnyte.com/navigate/file/2144a03f-478c-41a3-9c0e-e5e5454c030d',
+    drawingLink: 'https://aedasme.egnyte.com/app/index.do#storage/search/?type=all&location=%2FShared%2FDesign%20Index%2F1.%20Residential%2F1A.%20Apartment%2FDrawing&metadata=W3sibmFtZXNwYWNlIjoibGlicmFyeSByZXNvdXJjZSIsImtleSI6InByb2plY3QgbmFtZSIsIm9wZXJhdG9yIjoiSU4iLCJ2YWx1ZXMiOlsiTUFGIENDTUkiXX0seyJuYW1lc3BhY2UiOiJsaWJyYXJ5IHJlc291cmNlIiwia2V5IjoiZmlsdGUgdHlwZSIsIm9wZXJhdG9yIjoiSU4iLCJ2YWx1ZXMiOlsiLkRXRyJdfV0%3D',
+    linkImages : {
+        presentation: 'https://aedasme.egnyte.com/opendocument.do?entryId=f339273d-0467-474d-a996-4e8b7360dc3e&forceDownload=false&thumbNail=true&w=1200&h=1200&type=proportional&preview=true&prefetch=true',
+        visual: 'https://aedasme.egnyte.com/opendocument.do?entryId=d349d403-6b9e-474d-a14a-e224b80bd9e8&forceDownload=false&thumbNail=true&w=1200&h=1200&type=proportional&preview=true&prefetch=true',
+        animation: 'https://aedasme.egnyte.com/opendocument.do?entryId=02f7a926-55fc-429b-969c-6365bdc51f59&forceDownload=false&thumbNail=true&w=1200&h=1200&type=proportional&preview=true&prefetch=true',
+    },
+    // New fields for the description section
+    descriptionImage : 'https://aedasme.egnyte.com/opendocument.do?entryId=cc5d2f93-1d6e-4040-ad94-dd60fe3cdc56&forceDownload=false&thumbNail=true&w=1200&h=1200&type=proportional&preview=true&prefetch=true', 
+    description: {
+        paragraph1: "With direct access to the Grand Boulevard Anchor, the Hotel provides stunning views of the Opera and Wadi Hanifa. Nestled close to the At Turaif UNESCO World Heritage Site, the development spans 22,000 sqm of GFA and includes a 200-key hotel, a club, a culinary school, a rooftop pool deck, and a signature restaurant.",
+        paragraph2: "The architectural concept emphasizes a duality between formal and organic design elements. The Boulevard-facing façade mirrors the discipline of French urban design, while the plaza-facing façade adopts a natural, wadi-inspired form. The expanded plaza creates an elevated experience, framing the Opera as the centrepiece and cascading into an Urban Amphitheatre, where the hotel rooms provide the best seats for this theatrical arrangement.",
+        paragraph3: "Terraces enriched with over 15 species of local vegetation, sophisticated detailing, and natural materials add depth to the room experience. The inclusion of a vertical garden redefines urban living by offering tranquillity, privacy, and a unique connection to the surrounding environment, ensuring guests feel both at peace and immersed in the city's essence."
+    },
+    teamMembers: "AFDAFDSFA, AFSDFADFSAF, AFSDFADSFAFD, BOB SMITH, ADRIAN SMITH, BOB SMITH, SKI VILLAGE, AFDAFDSFA, AFSDFADFSAF, AFDAFDSFA, AFSDFADFSAF, AFDAFDSFA, AFSDFADFSAF, AFSDFADSFAFD, BOB SMITH, ADRIAN SMITH, BOB SMITH, SKI VILLAGE, AFDAFDSFA, AFSDFADFSAF, AFDAFDSFA, AFSDFADFSAF",
+
+    galleryImages: [
+        "https://aedasme.egnyte.com/opendocument.do?entryId=6e73d33d-b9f0-4f90-8f01-7fad0fa5c25e&forceDownload=false&thumbNail=true&w=1200&h=1200&type=proportional&preview=true&prefetch=true",
+        "https://aedasme.egnyte.com/opendocument.do?entryId=cc02b48c-e152-4a18-8361-335a47c99d3d&forceDownload=false&thumbNail=true&w=1200&h=1200&type=proportional&preview=true&prefetch=true",
+        "https://aedasme.egnyte.com/opendocument.do?entryId=306e7204-759f-4415-a969-c3246ebbc0f8&forceDownload=false&thumbNail=true&w=1200&h=1200&type=proportional&preview=true&prefetch=true"
+    ]
+
+},
+{ 
+    id: 44, 
+    title: 'PIF INNOVATION HUB DESIGN',  
+    abbr: 'Inv', 
+    image: "./ICON/INV.svg",
+    coverImage: 'https://aedasme.egnyte.com/opendocument.do?entryId=ac3a721c-a05b-4320-9cdc-acaae165aca5&forceDownload=false&thumbNail=true&w=1200&h=1200&type=proportional&preview=true&prefetch=true',
+    imageUrl : 'https://aedasme.egnyte.com/opendocument.do?entryId=bd1ade04-a796-4cbc-945f-9a25c1acf9d6&forceDownload=false&thumbNail=true&w=1200&h=1200&type=proportional&preview=true&prefetch=true',
+    year: 2024, 
+    client: 'PUBLIC FUND INVESTMENT',
+    program: 'OFFICE', 
+    typology: 'OFFICE', 
+    location: 'KSA, SAUDI ARABIA',
+    scale: 'M', 
+    epoch: 'FUTURE', 
+    hoverImage: "./hover/INV.png",
+    presentationLink: 'https://aedasme.egnyte.com/navigate/folder/35d18d5e-a557-4ad1-9a4b-c047d86e4c7d',
+    animationLink: 'https://aedasme.egnyte.com/navigate/folder/f4d44ad6-a5c3-4cac-9dab-20cc92141bc5',
+    visualLink: 'https://aedasme.egnyte.com/navigate/folder/603d9b39-1ebe-46ed-aee5-7a699f9d74a2',
+    threeDLink: 'https://aedasme.egnyte.com/app/index.do#storage/search/?type=file&location=%2FShared%2FDesign%20Index&metadata=W3sibmFtZXNwYWNlIjoibGlicmFyeSByZXNvdXJjZSIsImtleSI6InByb2plY3QgbmFtZSIsIm9wZXJhdG9yIjoiSU4iLCJ2YWx1ZXMiOlsiUElGIElubm92YXRpb24gSHViIERlc2lnbiJdfSx7Im5hbWVzcGFjZSI6ImxpYnJhcnkgcmVzb3VyY2UiLCJrZXkiOiJkYXRhIiwib3BlcmF0b3IiOiJJTiIsInZhbHVlcyI6WyIzRCJdfV0%3D',
+    linkImages : {
+        presentation: 'https://aedasme.egnyte.com/opendocument.do?entryId=f339273d-0467-474d-a996-4e8b7360dc3e&forceDownload=false&thumbNail=true&w=1200&h=1200&type=proportional&preview=true&prefetch=true',
+        visual: 'https://aedasme.egnyte.com/opendocument.do?entryId=d349d403-6b9e-474d-a14a-e224b80bd9e8&forceDownload=false&thumbNail=true&w=1200&h=1200&type=proportional&preview=true&prefetch=true',
+        drawing: 'https://aedasme.egnyte.com/opendocument.do?entryId=d235bc93-b53a-4741-9b80-56a46fdc50f2&forceDownload=false&thumbNail=true&w=1200&h=1200&type=proportional&preview=true&prefetch=true',
+        animation: 'https://aedasme.egnyte.com/opendocument.do?entryId=02f7a926-55fc-429b-969c-6365bdc51f59&forceDownload=false&thumbNail=true&w=1200&h=1200&type=proportional&preview=true&prefetch=true',
+        threeD: 'https://aedasme.egnyte.com/opendocument.do?entryId=73b9cc45-a7c6-422e-aa36-01b3744bb3f1&forceDownload=false&thumbNail=true&w=1200&h=1200&type=proportional&preview=true&prefetch=true'
+    },
+    // New fields for the description section
+    descriptionImage : 'https://aedasme.egnyte.com/opendocument.do?entryId=339a74ef-d20c-4867-b126-60e29ed07604&forceDownload=false&thumbNail=true&w=1200&h=1200&type=proportional&preview=true&prefetch=true', 
+    description: {
+        paragraph1: "The PIF Innovation Hub in Saudi Arabia is a groundbreaking architectural marvel designed to redefine the future of work and innovation. Featuring dynamic, moving architecture, the building symbolizes adaptability and progress, with its shifting forms responding to functional and environmental needs. The design integrates advanced technologies, sustainable materials, and a futuristic aesthetic, reflecting Saudi Arabia’s commitment to leading global innovation.",
+        paragraph2: "Inside, the hub offers a collaborative environment tailored for creativity and technological breakthroughs. Open-plan workspaces, state-of-the-art labs, and immersive digital interfaces foster a seamless interaction between people and technology. The moving architecture allows spaces to transform dynamically, accommodating diverse activities and enhancing flexibility for the ever-evolving needs of its users.",
+        paragraph3: "Set amidst a vibrant urban landscape, the PIF Innovation Hub embodies the vision of a sustainable and tech-forward future. With its bold design and cutting-edge functionality, it serves as a beacon for innovation, attracting global talent and shaping the future of industries in Saudi Arabia and beyond."
+    },
+    teamMembers: "AFDAFDSFA, AFSDFADFSAF, AFSDFADSFAFD, BOB SMITH, ADRIAN SMITH, BOB SMITH, SKI VILLAGE, AFDAFDSFA, AFSDFADFSAF, AFDAFDSFA, AFSDFADFSAF, AFDAFDSFA, AFSDFADFSAF, AFSDFADSFAFD, BOB SMITH, ADRIAN SMITH, BOB SMITH, SKI VILLAGE, AFDAFDSFA, AFSDFADFSAF, AFDAFDSFA, AFSDFADFSAF",
+
+    galleryImages: [
+        "https://aedasme.egnyte.com/opendocument.do?entryId=34425893-a96f-4b13-90ed-58ba92dfcac2&forceDownload=false&w=1200&h=1200&type=proportional&preview=true&prefetch=true",
+        "https://aedasme.egnyte.com/opendocument.do?entryId=698cdbe0-cca7-414e-b296-9b4d945fc004&forceDownload=false&w=1200&h=1200&type=proportional&preview=true&prefetch=true",
+        "https://aedasme.egnyte.com/opendocument.do?entryId=559d9b58-3c5e-4a49-91d4-1f4eb982e28b&forceDownload=false&w=1200&h=1200&type=proportional&preview=true&prefetch=true"
+    ]
+
+},
+{ 
+    id: 44, 
+    title: 'THE CUBE',  
+    abbr: 'CUB', 
+    image: "./ICON/CUB.svg",
+    coverImage: 'https://aedasme.egnyte.com/opendocument.do?entryId=d398e4ae-3b3d-405e-833f-ad58ce528705&forceDownload=false&thumbNail=true&w=1200&h=1200&type=proportional&preview=true&prefetch=true',
+    imageUrl : 'https://aedasme.egnyte.com/opendocument.do?entryId=1d9373bc-2f45-48d4-a8d3-be833b4a5167&forceDownload=false&thumbNail=true&w=1200&h=1200&type=proportional&preview=true&prefetch=true',
+    year: 2024, 
+    client: 'NEOM',
+    program: 'HOSPITALITY', 
+    typology: 'HOSPITALITY', 
+    location: 'KSA, SAUDI ARABIA',
+    scale: 'S', 
+    epoch: 'FUTURE', 
+    hoverImage: "./hover/CUB.png",
+    presentationLink: 'https://aedasme.egnyte.com/app/index.do#storage/file/f07e96c3-6a0d-4d7b-b5c6-1229f881e726',
+    visualLink: 'https://aedasme.egnyte.com/app/index.do#storage/folder/6eaee40c-7e7d-45d0-ab01-dc5fc987e307',
+    linkImages : {
+        presentation: 'https://aedasme.egnyte.com/opendocument.do?entryId=f339273d-0467-474d-a996-4e8b7360dc3e&forceDownload=false&thumbNail=true&w=1200&h=1200&type=proportional&preview=true&prefetch=true',
+        visual: 'https://aedasme.egnyte.com/opendocument.do?entryId=d349d403-6b9e-474d-a14a-e224b80bd9e8&forceDownload=false&thumbNail=true&w=1200&h=1200&type=proportional&preview=true&prefetch=true',
+    },
+    // New fields for the description section
+    descriptionImage : 'https://aedasme.egnyte.com/opendocument.do?entryId=087b2be0-0132-44ea-ad7f-337cf38d9185&forceDownload=false&thumbNail=true&w=1200&h=1200&type=proportional&preview=true&prefetch=true', 
+    description: {
+        paragraph1: "The PIF Innovation Hub in Saudi Arabia is a groundbreaking architectural marvel designed to redefine the future of work and innovation. Featuring dynamic, moving architecture, the building symbolizes adaptability and progress, with its shifting forms responding to functional and environmental needs. The design integrates advanced technologies, sustainable materials, and a futuristic aesthetic, reflecting Saudi Arabia’s commitment to leading global innovation.",
+        paragraph2: "Inside, the hub offers a collaborative environment tailored for creativity and technological breakthroughs. Open-plan workspaces, state-of-the-art labs, and immersive digital interfaces foster a seamless interaction between people and technology. The moving architecture allows spaces to transform dynamically, accommodating diverse activities and enhancing flexibility for the ever-evolving needs of its users.",
+        paragraph3: "Set amidst a vibrant urban landscape, the PIF Innovation Hub embodies the vision of a sustainable and tech-forward future. With its bold design and cutting-edge functionality, it serves as a beacon for innovation, attracting global talent and shaping the future of industries in Saudi Arabia and beyond."
+    },
+    teamMembers: "AFDAFDSFA, AFSDFADFSAF, AFSDFADSFAFD, BOB SMITH, ADRIAN SMITH, BOB SMITH, SKI VILLAGE, AFDAFDSFA, AFSDFADFSAF, AFDAFDSFA, AFSDFADFSAF, AFDAFDSFA, AFSDFADFSAF, AFSDFADSFAFD, BOB SMITH, ADRIAN SMITH, BOB SMITH, SKI VILLAGE, AFDAFDSFA, AFSDFADFSAF, AFDAFDSFA, AFSDFADFSAF",
+
+    galleryImages: [
+        "https://aedasme.egnyte.com/opendocument.do?entryId=487f3eac-f51b-4161-8a21-272ec6f6d6b1&forceDownload=false&w=1200&h=1200&type=proportional&preview=true&prefetch=true",
+        "https://aedasme.egnyte.com/opendocument.do?entryId=dbce05ca-46a8-4f2c-92c4-129ceba51598&forceDownload=false&thumbNail=true&w=1200&h=1200&type=proportional&preview=true&prefetch=true",
+        "https://aedasme.egnyte.com/opendocument.do?entryId=4d7c8fc4-ba9e-4d80-a90d-e07146e62b45&forceDownload=false&thumbNail=true&w=1200&h=1200&type=proportional&preview=true&prefetch=true"
+    ]
+
+},
 ];
 
 const filterConfigs = {
@@ -3077,32 +3195,19 @@ function createGlobeVisualization() {
         // Globe creation
         const GLOBE_RADIUS = 5;
         const sphereGeometry = new THREE.SphereGeometry(GLOBE_RADIUS, 50, 50);
-        const sphereMaterial = new THREE.MeshPhongMaterial({
+        const sphereMaterial = new THREE.MeshBasicMaterial({ // Changed to MeshBasicMaterial
             map: new THREE.TextureLoader().load('Map_lighten.png'),
-            transparent: true,
-            opacity: 0.8,
-            bumpScale: 0.05,
-            specular: new THREE.Color('grey')
+            transparent: false, // Changed to false
+            opacity: 1 // Changed to 1
         });
         const globe = new THREE.Mesh(sphereGeometry, sphereMaterial);
         scene.add(globe);
-
-        // Lighting
-        const ambientLight = new THREE.AmbientLight(0xffffff, 0.6);
-        scene.add(ambientLight);
-
-        const directionalLight = new THREE.DirectionalLight(0xffffff, 0.8);
-        directionalLight.position.set(5, 3, 5);
-        scene.add(directionalLight);
-
+        
         // Initial camera position
-        camera.position.z = 10;
-
-        // Create tooltip div
+        camera.position.z = 12;
         const tooltip = document.createElement('div');
-        tooltip.style.position = 'absolute';
-        tooltip.style.background = 'rgba(0, 0, 0, 0.8)';
-        tooltip.style.color = 'white';
+        tooltip.style.position = 'fixed'; // Change to fixed
+        tooltip.style.color = 'black';
         tooltip.style.padding = '10px';
         tooltip.style.borderRadius = '5px';
         tooltip.style.display = 'none';
@@ -3110,17 +3215,19 @@ function createGlobeVisualization() {
         tooltip.style.fontFamily = 'Arial, sans-serif';
         tooltip.style.fontSize = '14px';
         tooltip.style.zIndex = '1000';
+        
+        // Remove any transform property
         container.appendChild(tooltip);
 
         // Raycaster for hover detection
         const raycaster = new THREE.Raycaster();
         const mouse = new THREE.Vector2();
-
         function createMarker(lat, lng, imagePath, label, size) {
             const phi = (90 - lat) * (Math.PI / 180);
             const theta = (lng + 180) * (Math.PI / 180);
             
-            const markerScale = size / 1000;
+            // Set uniform base size for all markers while preserving aspect ratio
+            const BASE_MARKER_SIZE = 0.4;
             
             return new Promise((resolve) => {
                 const loader = new THREE.TextureLoader();
@@ -3132,18 +3239,32 @@ function createGlobeVisualization() {
                     });
                     const sprite = new THREE.Sprite(spriteMaterial);
                     
-                    const x = -(GLOBE_RADIUS * 1.1 * Math.sin(phi) * Math.cos(theta));
-                    const y = GLOBE_RADIUS * 1.1 * Math.cos(phi);
-                    const z = GLOBE_RADIUS * 1.1 * Math.sin(phi) * Math.sin(theta);
+                    // Calculate base position on globe surface
+                    const x = -(GLOBE_RADIUS * Math.sin(phi) * Math.cos(theta));
+                    const y = GLOBE_RADIUS * Math.cos(phi);
+                    const z = GLOBE_RADIUS * Math.sin(phi) * Math.sin(theta);
                     
-                    sprite.position.set(x, y, z);
-                    sprite.scale.set(markerScale, markerScale, 1);
+                    // Calculate the direction from center to marker position
+                    const direction = new THREE.Vector3(x, y, z).normalize();
                     
-                    // Store original scale for hover effect
+                    // Get image aspect ratio
+                    const imageAspect = texture.image.width / texture.image.height;
+                    
+                    // Set scale preserving aspect ratio
+                    const height = BASE_MARKER_SIZE;
+                    const width = height * imageAspect;
+                    
+                    // Position marker so bottom touches globe
+                    const offset = direction.multiplyScalar(GLOBE_RADIUS + height/2);
+                    sprite.position.copy(offset);
+                    
+                    // Apply scale with preserved aspect ratio
+                    sprite.scale.set(width, height, 1);
+                    
                     sprite.userData = { 
                         label,
                         size,
-                        originalScale: markerScale,
+                        originalScale: {width, height},
                         isHovered: false
                     };
                     
@@ -3151,7 +3272,6 @@ function createGlobeVisualization() {
                 });
             });
         }
-
 // Replace the markerDefinitions array in the previous code with this:
 const markerDefinitions = [
     // Southeast Asia
@@ -3210,8 +3330,8 @@ const markerDefinitions = [
 
         // Zoom variables
         let currentZoom = camera.position.z;
-        const minZoom = 8;
-        const maxZoom = 9;
+        const minZoom = 10;
+        const maxZoom = 12;
 
         // Mouse interaction handlers
         container.addEventListener('mousedown', (e) => {
@@ -3222,64 +3342,62 @@ const markerDefinitions = [
             };
         });
 
+        
         document.addEventListener('mousemove', (e) => {
-            // Update mouse position for raycasting
-            const rect = container.getBoundingClientRect();
+            const rect = renderer.domElement.getBoundingClientRect();
             mouse.x = ((e.clientX - rect.left) / container.offsetWidth) * 2 - 1;
             mouse.y = -((e.clientY - rect.top) / container.offsetHeight) * 2 + 1;
-
+        
             // Handle dragging
             if (isDragging) {
                 const deltaMove = {
                     x: e.clientX - previousMousePosition.x,
                     y: e.clientY - previousMousePosition.y
                 };
-
+        
                 rotationSpeed.x = deltaMove.y * 0.005;
                 rotationSpeed.y = deltaMove.x * 0.005;
-
+        
                 globe.rotation.x += rotationSpeed.x;
                 globe.rotation.y += rotationSpeed.y;
-
+        
                 previousMousePosition = {
                     x: e.clientX,
                     y: e.clientY
                 };
             }
-
-            // Handle marker hover
+        
             raycaster.setFromCamera(mouse, camera);
             const intersects = raycaster.intersectObjects(globe.children);
-
+        
             // Reset all markers to original scale
-            globe.children.forEach(child => {
+            globe.children.forEach((child) => {
                 if (child instanceof THREE.Sprite && child.userData.isHovered) {
-                    const scale = child.userData.originalScale;
-                    child.scale.set(scale, scale, 1);
+                    const { width, height } = child.userData.originalScale;
+                    child.scale.set(width, height, 1);
                     child.userData.isHovered = false;
                 }
             });
-
-            // Handle hover effect and tooltip
+        
             if (intersects.length > 0) {
                 const marker = intersects[0].object;
                 if (marker instanceof THREE.Sprite) {
-                    // Scale up marker
-                    const newScale = marker.userData.originalScale * 1.1;
-                    marker.scale.set(newScale, newScale, 1);
+                    // Scale up marker while preserving aspect ratio
+                    const HOVER_SCALE = 2;
+                    const { width, height } = marker.userData.originalScale;
+                    marker.scale.set(width * HOVER_SCALE, height * HOVER_SCALE, 1);
                     marker.userData.isHovered = true;
-
-                    // Update tooltip
+            
+                    // Update tooltip content and position it at mouse cursor
                     tooltip.innerHTML = `<strong>${marker.userData.label}</strong><br>${marker.userData.size}`;
                     tooltip.style.display = 'block';
-                    tooltip.style.left = (e.clientX + 10) + 'px';
-                    tooltip.style.top = (e.clientY + 10) + 'px';
+                    tooltip.style.left = `${e.clientX + 10}px`; // Offset from cursor
+                    tooltip.style.top = `${e.clientY - 10}px`;
                 }
             } else {
                 tooltip.style.display = 'none';
             }
         });
-
         document.addEventListener('mouseup', () => {
             isDragging = false;
         });
@@ -3370,6 +3488,5 @@ const markerDefinitions = [
         initGlobe();
     }
 }
-
 // Start the globe visualization
 createGlobeVisualization();
