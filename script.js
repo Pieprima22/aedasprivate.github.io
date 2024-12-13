@@ -54,8 +54,65 @@ function createGlobe() {
         pointer-events: none;
         z-index: 1000;
         box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        font-family: 'AkkuratStd', sans-serif;
+
     `;
     document.body.appendChild(hoverText);
+
+    // Add these new functions for search functionality
+    function updateMarkersForSearch(query) {
+        const searchQuery = query.toLowerCase();
+        
+        markerObjects.forEach(marker => {
+            const project = marker.userData.project;
+            const matches = project.title.toLowerCase().includes(searchQuery) ||
+                          project.typology?.toLowerCase().includes(searchQuery) ||
+                          project.program?.toLowerCase().includes(searchQuery) ||
+                          project.location?.toLowerCase().includes(searchQuery);
+
+            if (matches) {
+                marker.visible = true;
+                marker.scale.setScalar(1.2);
+                marker.material.opacity = 1;
+            } else {
+                marker.visible = false;
+                marker.scale.setScalar(1);
+                marker.material.opacity = 0.5;
+            }
+            marker.material.needsUpdate = true;
+        });
+    }
+    function resetAllMarkers() {
+        markerObjects.forEach(marker => {
+            marker.visible = true;
+            marker.scale.setScalar(1);
+            marker.material.opacity = 1;
+            marker.material.needsUpdate = true;
+        });
+    }
+
+    function filterMarkersByKeyword(keyword) {
+        markerObjects.forEach(marker => {
+            const project = marker.userData.project;
+            const matches = project.typology === keyword || 
+                          project.program === keyword || 
+                          (keyword === "HIGH-RISE" && project.scale === "XL") ||
+                          (keyword === "INTERIOR" && project.typology === "INTERIOR") ||
+                          (keyword === "BUILT" && project.epoch === "PRESENT");
+
+            if (matches) {
+                marker.visible = true;
+                marker.scale.setScalar(1.2);
+                marker.material.opacity = 1;
+            } else {
+                marker.visible = false;
+                marker.scale.setScalar(1);
+                marker.material.opacity = 0.5;
+            }
+            marker.material.needsUpdate = true;
+        });
+    }
+
 
     function addLocationMarkers() {
         function latLngToVector3(lat, lng, radius) {
@@ -316,8 +373,18 @@ function resetMarkerState(marker) {
         document.body.removeChild(hoverText);
     }
 
-    return { renderer, animate, resizeHandler, cleanup };
+    return {
+        renderer,
+        animate,
+        resizeHandler,
+        cleanup,
+        getMarkerObjects: () => markerObjects,
+        updateMarkersForSearch,
+        resetAllMarkers,
+        filterMarkersByKeyword
+    };
 }
+
 const projects = [
     { 
         id: 1, 
@@ -2003,9 +2070,6 @@ window.addEventListener('resize', () => {
     updateGrid(activeFilter);
 });
 
-// script.js - Add this after your existing projects array
-
-// Initialize search functionality
 document.addEventListener("DOMContentLoaded", function () {
     const mainSearchInput = document.getElementById("mainSearchInput");
     const searchContent = document.getElementById("searchContent");
@@ -2135,6 +2199,233 @@ document.addEventListener("DOMContentLoaded", function () {
         searchContent.style.display = "none";
     }
 
+document.addEventListener("DOMContentLoaded", function () {
+    const mainSearchInput = document.getElementById("mainSearchInput");
+    const searchContent = document.getElementById("searchContent");
+    const searchIcon = document.querySelector(".search-icon");
+    const filterButtons = document.querySelectorAll('.filter-btn');
+    const projectGrid = document.getElementById('projectGrid');
+    let globeInstance = null;
+    let activeHoverArea = null;
+
+    // List of predefined keywords for auto-fill
+    const suggestions = ["HIGH-RISE", "AWARDED", "CULTURAL", "RESIDENTIAL", "HOSPITALITY", "INTERIOR", "BUILT"];
+
+    // Toggle search input visibility when clicking the search icon
+    searchIcon.addEventListener("click", function() {
+        mainSearchInput.classList.toggle("visible");
+        if (mainSearchInput.classList.contains("visible")) {
+            mainSearchInput.focus();
+        } else {
+            searchContent.style.display = "none";
+        }
+    });
+
+    mainSearchInput.addEventListener("input", function() {
+        const query = mainSearchInput.value.toLowerCase();
+        updateSearchResults(query);
+    });
+
+    function updateSearchResults(query) {
+        searchContent.innerHTML = "";
+        searchContent.style.display = query ? "block" : "none";
+
+        if (!query) {
+            const activeFilter = document.querySelector('.filter-btn.active').dataset.filter;
+            if (activeFilter === 'LOCATION' && globeInstance) {
+                // Reset all markers on globe
+                globeInstance.getMarkerObjects().forEach(marker => {
+                    marker.visible = true;
+                    marker.scale.setScalar(1);
+                    marker.material.opacity = 1;
+                });
+            } else {
+                showAllProjects();
+            }
+            return;
+        }
+
+        const displayedResults = new Set();
+        const matchingProjects = new Set();
+
+        // Search through projects
+        projects.forEach(project => {
+            if (project.title.toLowerCase().includes(query) ||
+                project.typology?.toLowerCase().includes(query) ||
+                project.program?.toLowerCase().includes(query) ||
+                project.location?.toLowerCase().includes(query)) {
+
+                matchingProjects.add(project);
+
+                if (!displayedResults.has(project.title)) {
+                    displayedResults.add(project.title);
+                    const result = createSearchResult(project);
+                    searchContent.appendChild(result);
+                }
+            }
+        });
+
+        // Add keyword suggestions
+        suggestions.forEach(keyword => {
+            if (keyword.toLowerCase().includes(query) && !displayedResults.has(keyword)) {
+                displayedResults.add(keyword);
+                const result = createSearchResult(null, keyword);
+                searchContent.appendChild(result);
+            }
+        });
+
+        const activeFilter = document.querySelector('.filter-btn.active').dataset.filter;
+        if (activeFilter === 'LOCATION' && globeInstance) {
+            updateGlobeMarkersVisibility(matchingProjects);
+        } else {
+            updateProjectVisibility(matchingProjects);
+        }
+    }
+
+    function createSearchResult(project, keyword = null) {
+        const result = document.createElement("div");
+        result.classList.add("search-result");
+
+        if (keyword) {
+            result.textContent = keyword;
+            result.addEventListener("click", () => {
+                mainSearchInput.value = keyword;
+                filterProjectsByKeyword(keyword);
+            });
+        } else {
+            result.textContent = project.title;
+            result.addEventListener("click", () => {
+                openProjectModal(project);
+                mainSearchInput.value = "";
+                searchContent.style.display = "none";
+            });
+        }
+
+        return result;
+    }
+
+    function showAllProjects() {
+        document.querySelectorAll('.project-icon').forEach(icon => {
+            icon.style.display = "";
+            icon.style.visibility = "visible";
+            icon.style.position = "relative";
+        });
+    }
+
+    function updateProjectVisibility(matchingProjects) {
+        document.querySelectorAll('.project-icon').forEach(icon => {
+            const projectId = icon.dataset.layoutId.split('-')[1];
+            const project = projects.find(p => p.id === parseInt(projectId));
+            
+            if (matchingProjects.has(project)) {
+                icon.style.display = "";
+                icon.style.visibility = "visible";
+                icon.style.position = "relative";
+            } else {
+                icon.style.display = "none";
+                icon.style.visibility = "hidden";
+                icon.style.position = "absolute";
+            }
+        });
+    }
+
+    function updateGlobeMarkersVisibility(matchingProjects) {
+        if (!globeInstance) return;
+        
+        const markers = globeInstance.getMarkerObjects();
+        markers.forEach(marker => {
+            const project = marker.userData.project;
+            if (matchingProjects.has(project)) {
+                marker.visible = true;
+                marker.scale.setScalar(1.2);
+                marker.material.opacity = 1;
+            } else {
+                marker.visible = false;
+                marker.scale.setScalar(1);
+                marker.material.opacity = 0.5;
+            }
+        });
+    }
+
+    function filterProjectsByKeyword(keyword) {
+        const matchingProjects = new Set();
+        
+        projects.forEach(project => {
+            if (project.typology === keyword || 
+                project.program === keyword || 
+                (keyword === "HIGH-RISE" && project.scale === "XL") ||
+                (keyword === "INTERIOR" && project.typology === "INTERIOR") ||
+                (keyword === "BUILT" && project.epoch === "PRESENT")) {
+                matchingProjects.add(project);
+            }
+        });
+
+        const activeFilter = document.querySelector('.filter-btn.active').dataset.filter;
+        if (activeFilter === 'LOCATION' && globeInstance) {
+            updateGlobeMarkersVisibility(matchingProjects);
+        } else {
+            updateProjectVisibility(matchingProjects);
+        }
+        
+        searchContent.style.display = "none";
+    }
+
+    function updateGrid(activeFilter) {
+        const grid = document.getElementById('projectGrid');
+        const oldIcons = Array.from(grid.querySelectorAll('.project-icon'));
+        const oldPositions = new Map();
+
+        oldIcons.forEach(icon => {
+            const rect = icon.getBoundingClientRect();
+            oldPositions.set(icon.dataset.layoutId, {
+                left: rect.left,
+                top: rect.top,
+                width: rect.width,
+                height: rect.height,
+            });
+        });
+
+        // Clear any existing globe instance
+        if (globeInstance) {
+            globeInstance.cleanup();
+            globeInstance = null;
+        }
+
+        // In the updateGrid function, modify the globe creation part:
+        if (activeFilter === 'LOCATION') {
+            grid.innerHTML = '';
+            grid.style.width = '100%';
+            grid.style.height = '80vh';
+            grid.style.position = 'relative';
+            grid.style.overflow = 'hidden';
+            grid.style.margin = 'auto';
+            grid.style.marginTop = '2rem';
+
+            // Store the globe instance globally
+            globeInstance = createGlobe();
+            grid.appendChild(globeInstance.renderer.domElement);
+            
+            globeInstance.animate();
+            
+            window.addEventListener('resize', globeInstance.resizeHandler);
+            
+            return;
+        }
+
+        // Reset styles for other views
+        grid.style.width = '';
+        grid.style.height = '';
+        grid.style.position = '';
+        grid.style.overflow = '';
+        grid.style.margin = '';
+        grid.style.marginTop = '';
+
+        grid.innerHTML = '';
+
+        // Rest of your existing updateGrid function...
+        // (Include the rest of your grid layout logic here)
+    }
+
     // Close search results when clicking outside
     document.addEventListener("click", function(event) {
         if (!event.target.closest(".search-tab") && !event.target.closest("#searchContent")) {
@@ -2153,4 +2444,17 @@ document.addEventListener("DOMContentLoaded", function () {
             }
         }
     });
+
+    // Add filter button event listeners
+    filterButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            filterButtons.forEach(btn => btn.classList.remove('active'));
+            button.classList.add('active');
+            updateGrid(button.dataset.filter);
+        });
+    });
+
+    // Initialize with default view
+    updateGrid('CHRONOLOGICAL');
+});
 });
